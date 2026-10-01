@@ -1,0 +1,33 @@
+---
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { PageHeader } from "@components/features/page-header";
+import { url } from "@/utils/url-utils";
+interface Props {
+	title: string;
+	description: string;
+	emptyText: string;
+	entries: { id: string; data: { title: string; description: string; kind: string; tags: string[] } }[];
+	basePath: string;
+}
+const { title, description, emptyText, entries, basePath } = Astro.props;
+---
+<MainGridLayout title={title} description={description}>
+	<script>import("../../../scripts/right-sidebar-layout.js");</script>
+	<section class="card-base px-6 sm:px-9 py-8">
+		<PageHeader title={title} subtitle={description} />
+		{entries.length === 0 ? (
+			<p class="text-black/70 dark:text-white/70 py-6">{emptyText}</p>
+		) : (
+			<div class="grid gap-8">
+				{entries.map((entry) => (
+					<article>
+						<p class="text-sm text-black/60 dark:text-white/60 mb-2">{entry.data.kind}</p>
+						<h2 class="text-xl font-bold mb-2"><a class="link-lg" href={url(`${basePath}${entry.id}/`)}>{entry.data.title}</a></h2>
+						<p class="text-black/70 dark:text-white/70">{entry.data.description}</p>
+						{entry.data.tags.length > 0 && <p class="text-sm mt-3 text-black/60 dark:text-white/60">{entry.data.tags.join(" · ")}</p>}
+					</article>
+				))}
+			</div>
+		)}
+	</section>
+</MainGridLayout>

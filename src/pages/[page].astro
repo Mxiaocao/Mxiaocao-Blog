@@ -1,0 +1,16 @@
+---
+import type { GetStaticPaths } from "astro";
+import { PAGE_SIZE } from "@/constants/constants";
+import { getSortedPosts } from "@/utils/content-utils";
+import { writingPagePath } from "@/utils/route-boundaries";
+
+export const getStaticPaths = (async () => {
+	const posts = await getSortedPosts();
+	const count = Math.ceil(posts.length / PAGE_SIZE);
+	return Array.from({ length: Math.max(0, count - 1) }, (_, index) => ({
+		params: { page: String(index + 2) },
+		props: { destination: writingPagePath(index + 2) },
+	}));
+}) satisfies GetStaticPaths;
+return Astro.redirect(Astro.props.destination, 301);
+---

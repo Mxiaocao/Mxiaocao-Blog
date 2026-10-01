@@ -1,0 +1,14 @@
+---
+import { render } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import SectionEntry from "@components/features/sections/SectionEntry.astro";
+import { getNotes } from "@/utils/section-content";
+export const getStaticPaths = (async () =>
+	(await getNotes()).map((entry) => ({ params: { slug: entry.id }, props: { entry } }))
+) satisfies GetStaticPaths;
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+---
+<SectionEntry {...entry.data} headings={headings} section="Notes" basePath="/notes/">
+	<Content />
+</SectionEntry>

@@ -1,0 +1,48 @@
+---
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { PageHeader } from "@components/features/page-header";
+import { FeaturedProjects } from "@components/features/featured-projects";
+import PostCard from "@components/features/posts/PostCard.astro";
+import { getSortedPosts } from "@/utils/content-utils";
+import { getProjects } from "@/utils/section-content";
+import { url } from "@/utils/url-utils";
+import { initPostIdMap } from "@/utils/permalink-utils";
+const allPosts = await getSortedPosts();
+initPostIdMap(allPosts);
+const posts = [...allPosts].sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf()).slice(0, 3);
+const featuredProjects = (await getProjects()).filter((project) => project.featured);
+const sections = [
+	{ title: "项目", path: "/projects/", description: "软件项目与工程实践。" },
+	{ title: "文章", path: "/writing/", description: "算法、软件与开发文章。" },
+	{ title: "笔记", path: "/notes/", description: "小发现、调试记录与参考资料。" },
+];
+---
+<MainGridLayout>
+	<script>import("../scripts/right-sidebar-layout.js");</script>
+	<section class="card-base px-6 sm:px-9 py-8 mb-4">
+		<PageHeader title="Mxiaocao" subtitle="软件项目、计算机科学与工程实践。" />
+		<nav aria-label="Explore the site" class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+			{sections.map((section) => (
+				<div>
+					<h2 class="text-xl font-bold mb-2"><a class="link-lg focus-visible:outline-2 focus-visible:outline-offset-4" href={url(section.path)}>{section.title}</a></h2>
+					<p class="text-black/70 dark:text-white/70">{section.description}</p>
+				</div>
+			))}
+		</nav>
+	</section>
+	<section class="card-base px-6 sm:px-9 py-8 mb-4" aria-labelledby="featured-projects">
+		<div class="flex flex-wrap gap-3 items-center justify-between mb-5">
+			<h2 id="featured-projects" class="text-xl font-bold text-black/90 dark:text-white/90">精选项目</h2>
+			<a href={url("/projects/")} class="link-lg">全部项目</a>
+		</div>
+		<FeaturedProjects projects={featuredProjects} />
+	</section>
+	<section aria-labelledby="recent-writing">
+		<div class="card-base px-6 sm:px-9 py-5 mb-4 flex flex-wrap gap-3 items-center justify-between">
+			<h2 id="recent-writing" class="text-xl font-bold text-black/90 dark:text-white/90">近期文章</h2>
+			<a href={url("/writing/")} class="link-lg">全部文章</a>
+		</div>
+		<div class="grid gap-4">{posts.length ? posts.map((entry) => <PostCard entry={entry} />) : <p class="card-base p-6 text-black/70 dark:text-white/70">暂无已发布文章。</p>}</div>
+	</section>
+</MainGridLayout>
+

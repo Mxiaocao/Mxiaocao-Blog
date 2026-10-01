@@ -1,0 +1,37 @@
+---
+import type { GetStaticPaths } from "astro";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { PageHeader } from "@components/features/page-header";
+import { siteConfig } from "@/config";
+import { getProjects } from "@/utils/section-content";
+import { url } from "@/utils/url-utils";
+export const getStaticPaths = (async () => {
+	if (!siteConfig.featurePages.projects) return [];
+	return (await getProjects()).map((project) => ({
+		params: { slug: project.id }, props: { project },
+	}));
+}) satisfies GetStaticPaths;
+const { project } = Astro.props;
+---
+<MainGridLayout title={project.title} description={project.description}>
+	<script>import("../../scripts/right-sidebar-layout.js");</script>
+	<article class="card-base px-6 sm:px-9 py-8" data-pagefind-body>
+		<a href={url("/projects/")} class="link-lg inline-block mb-6">All projects</a>
+		{project.isDemo && <p class="text-sm text-black/60 dark:text-white/60 mb-4">Mizuki template example. This is not a Mxiaocao project.</p>}
+		<PageHeader title={project.title} subtitle={project.description} />
+		{project.image && project.showImage !== false && <img src={project.image} alt={project.title} width="960" height="540" class="w-full rounded-xl mb-8 object-cover" />}
+		<dl class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-black/80 dark:text-white/80 mb-8">
+			<div><dt class="font-bold mb-1">Status</dt><dd>{project.status}</dd></div>
+			<div><dt class="font-bold mb-1">Category</dt><dd>{project.category}</dd></div>
+			<div><dt class="font-bold mb-1">Started</dt><dd><time datetime={project.startDate}>{project.startDate}</time></dd></div>
+			{project.endDate && <div><dt class="font-bold mb-1">Completed</dt><dd><time datetime={project.endDate}>{project.endDate}</time></dd></div>}
+			<div class="sm:col-span-2"><dt class="font-bold mb-1">Built with</dt><dd>{project.techStack.join(" · ")}</dd></div>
+		</dl>
+		{project.sections.map((section) => <section class="mb-8"><h2 class="text-2xl font-bold mb-3">{section.title}</h2><p class="whitespace-pre-line text-black/80 dark:text-white/80">{section.body}</p></section>)}
+		<div class="flex flex-wrap gap-4">
+			{project.visitUrl && <a class="link-lg" href={project.visitUrl} target="_blank" rel="noopener noreferrer">Visit project</a>}
+			{project.liveDemo && <a class="link-lg" href={project.liveDemo} target="_blank" rel="noopener noreferrer">Live demo</a>}
+			{project.sourceCode && <a class="link-lg" href={project.sourceCode} target="_blank" rel="noopener noreferrer">Source code</a>}
+		</div>
+	</article>
+</MainGridLayout>

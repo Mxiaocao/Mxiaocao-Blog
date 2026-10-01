@@ -1,0 +1,37 @@
+---
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import Markdown from "@components/misc/Markdown.astro";
+import { PageHeader } from "@components/features/page-header";
+import type { MarkdownHeading } from "astro";
+import { url } from "@/utils/url-utils";
+interface Props {
+	title: string;
+	description: string;
+	section: string;
+	basePath: string;
+	published: Date;
+	updated?: Date;
+	headings: MarkdownHeading[];
+	demoUrl?: string;
+	sourceCode?: string;
+	status?: string;
+}
+const { title, description, section, basePath, published, updated, headings, demoUrl, sourceCode, status } = Astro.props;
+---
+<MainGridLayout title={title} description={description} headings={headings}>
+	<script>import("../../../scripts/right-sidebar-layout.js");</script>
+	<article class="card-base px-6 sm:px-9 py-8" data-pagefind-body>
+		<a class="link-lg inline-block mb-6" href={url(basePath)}>Back to {section}</a>
+		<PageHeader title={title} subtitle={description} />
+		<p class="text-sm text-black/60 dark:text-white/60 mb-6">
+			Published <time datetime={published.toISOString()}>{published.toISOString().slice(0, 10)}</time>
+			{updated && <> · Updated <time datetime={updated.toISOString()}>{updated.toISOString().slice(0, 10)}</time></>}
+			{status && <> · {status}</>}
+		</p>
+		{(demoUrl || sourceCode) && <div class="flex flex-wrap gap-4 mb-6">
+			{demoUrl && <a class="link-lg" href={demoUrl}>Open experiment</a>}
+			{sourceCode && <a class="link-lg" href={sourceCode} target="_blank" rel="noopener noreferrer">Source code</a>}
+		</div>}
+		<Markdown class="markdown-content"><slot /></Markdown>
+	</article>
+</MainGridLayout>
