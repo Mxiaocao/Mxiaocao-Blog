@@ -31,7 +31,7 @@ const len = page?.data.length ?? 0;
 
 <MainGridLayout title="文章" description="算法、软件与工程实践文章。">
 	<section class="card-base px-6 sm:px-9 py-8 mb-4"><PageHeader title="文章" subtitle="算法、软件与工程实践文章。" /></section>
-	{showCategoryBar && <CategoryBar />}
+	{showCategoryBar && <CategoryBar mode="writing" />}
 	{page ? (
 		<>
 			<PostPage page={page} />

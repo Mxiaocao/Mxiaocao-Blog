@@ -4,14 +4,17 @@ import { i18n } from "@i18n/translation";
 import { Icon } from "astro-icon/components";
 
 import { getCategoryList, getPostCategoryLabel, getSortedPostsList } from "@/utils/content-utils";
-import { url } from "@/utils/url-utils";
+import { getCategoryUrl, url } from "@/utils/url-utils";
 
+const { mode = "archive" } = Astro.props;
 const categories = await getCategoryList();
 const totalPosts = (await getSortedPostsList()).length;
 const homeUrl = url("/writing/");
 const archiveUrl = url("/archive/");
 const categoryUrl = (category: string) =>
-	url(`/writing/?category=${encodeURIComponent(category.trim())}`);
+	mode === "writing"
+		? url(`/writing/?category=${encodeURIComponent(category.trim())}`)
+		: getCategoryUrl(category);
 ---
 
 <div
