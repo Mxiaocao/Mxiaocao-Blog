@@ -102,7 +102,7 @@
 
 # 当前仓库状态
 
-- 已验证：`origin` 为公开仓库 `https://github.com/Mxiaocao/Mxiaocao-Blog.git`；`main` 已推送并跟踪 `origin/main`。
+- 已验证：`origin` 为公开仓库 `https://github.com/Mxiaocao/Mxiaocao-Blog.git`；`main` 已推送并跟踪 `origin/main`。2026-10-01 已将主分支重建为 Mxiaocao 自己的干净历史，根提交为 `ce6d4ef`；原完整历史保存在本地 `pre-clean-history` 分支，`upstream` 未改变。
 - 已验证：`upstream` 为 Mizuki 官方仓库 `https://github.com/matsuzaka-yuki/Mizuki.git`；当前基线提交为 `14da4262d8aa1d93dc8cff11705f14918ed7369f`。
 - 已验证：旧博客仓库已保留并改名为 `https://github.com/Mxiaocao/Mxiaocao-Blog-Legacy`。
 - 已验证（2026-10-01）：Node 24.21.0、pnpm 11.5.3，依赖已安装；正常自定义字体模式下完整生产流程成功退出，生成 34 个页面，Pagefind 索引 15 个页面和 1,471 个词，样式及字体检查通过。
