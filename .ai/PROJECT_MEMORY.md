@@ -137,7 +137,7 @@
 
 # 当前任务与下一步
 
-- 当前任务：文章迁移已开始。文章目录按 `algorithms`、`engineering`、`devlog` 分组；`algorithms` 下已建立 `stl`、`data-structures`、`dp`、`graph`、`math`、`geometry`、`string`、`contests` 专题目录。首篇样板文章已迁移至 `src/content/posts/algorithms/stl/2-1-8-deque.md`，保留原文核心内容，并使用 `category: STL` 和旧日期 `permalink`。由于当前实现对自定义 permalink 文章仍保留按文件路径生成的兼容文章路径，本篇生成 `/posts/algorithms/stl/2-1-8-deque/` 与旧 `/2026/05/14/2-1-8-deque/`。文章分类来自 frontmatter；当前空分类导航仍保持关闭。About 页面已按旧站信息结构重新整理为简体中文，时间轴内容按用户要求不迁移。独立 Lab 页面仍不作为公开栏目，后续实验内容并入项目详情。
+- 当前任务：文章迁移已开始。文章目录按 `algorithms`、`engineering`、`devlog` 分组；`algorithms` 下已建立 `stl`、`data-structures`、`dp`、`graph`、`math`、`geometry`、`string`、`contests` 专题目录。首篇样板文章已迁移至 `src/content/posts/algorithms/stl/2-1-8-deque.md`，保留原文核心内容，并使用 `category: STL` 和旧日期 `permalink`。由于当前实现对自定义 permalink 文章仍保留按文件路径生成的兼容文章路径，本篇生成 `/posts/algorithms/stl/2-1-8-deque/` 与旧 `/2026/05/14/2-1-8-deque/`。Writing 页面分类筛选条已恢复，筛选项来自文章 frontmatter 的 `category`。About 页面已按旧站信息结构重新整理为简体中文，时间轴内容按用户要求不迁移。独立 Lab 页面仍不作为公开栏目，后续实验内容并入项目详情。
 - 工作仓库：`E:\03-Projects\Mxiaocao-Blog`，分支 `main`，跟踪 `origin/main`；本阶段起点为 `0ddae87`；域名更新提交在其后。两项已有 `.vscode` 删除保持未暂存，不纳入任务提交。
 - 已完成：首页独立并展示三个精选项目，Writing 承担文章分页，旧数字分页兼容跳转；项目统一 schema 与详情页；Notes 的独立模型、空状态、草稿过滤及正文页；导航整理并保留原功能入口。
 - 已完成：临时内容实测 Writing 第二页、旧分页跳转和 Notes/Lab 正文，测试内容已删除并重新构建；六条新页面跳转保持 Swup 单页切换，390–1440 像素视口无水平溢出，明暗主题及长菜单已检查。

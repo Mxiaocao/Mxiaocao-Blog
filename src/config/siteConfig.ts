@@ -89,7 +89,7 @@ export const siteConfig: SiteConfig = {
 		allowSwitch: true,
 		// 文章列表页分类导航条配置
 		categoryBar: {
-			enable: false, // 内容初始化阶段暂不显示空的分类导航条
+			enable: true, // Writing 页面显示按文章 frontmatter 分类生成的筛选条
 		},
 	},
 
