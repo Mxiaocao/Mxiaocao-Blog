@@ -1,10 +1,11 @@
 ---
 const items = [
-	{ label: "编程", value: 70, color: "#ff6b91" },
-	{ label: "健身", value: 15, color: "#60b5e8" },
-	{ label: "阅读", value: 8, color: "#ffc857" },
+	{ label: "编程", value: 60, color: "#ff6b91" },
+	{ label: "阅读", value: 10, color: "#ffc857" },
+	{ label: "码字", value: 10, color: "#f39c69" },
+	{ label: "健身", value: 10, color: "#60b5e8" },
 	{ label: "旅行", value: 5, color: "#59c7c0" },
-	{ label: "游戏", value: 2, color: "#9b7fe8" },
+	{ label: "游戏", value: 5, color: "#9b7fe8" },
 ];
 
 const chartBackground = `conic-gradient(${items
@@ -23,7 +24,7 @@ const chartBackground = `conic-gradient(${items
 
 <div class="about-interest-chart" aria-label="我的日常兴趣时间分配">
 	<div class="about-interest-chart__visual">
-		<div class="about-interest-chart__pie" role="img" aria-label="编程 70%，健身 15%，阅读 8%，旅行 5%，游戏 2%" style={`background: ${chartBackground};`}></div>
+		<div class="about-interest-chart__pie" role="img" aria-label="编程 60%，阅读 10%，码字 10%，健身 10%，旅行 5%，游戏 5%" style={`background: ${chartBackground};`}></div>
 	</div>
 	<ul class="about-interest-chart__legend">
 		{items.map((item) => (
