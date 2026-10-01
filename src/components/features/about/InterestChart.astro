@@ -1,0 +1,100 @@
+---
+const items = [
+	{ label: "编程", value: 70, color: "#ff6b91" },
+	{ label: "健身", value: 15, color: "#60b5e8" },
+	{ label: "阅读", value: 8, color: "#ffc857" },
+	{ label: "旅行", value: 5, color: "#59c7c0" },
+	{ label: "游戏", value: 2, color: "#9b7fe8" },
+];
+
+const chartBackground = `conic-gradient(${items
+	.reduce<{ stops: string[]; current: number }>(
+		(acc, item) => {
+			const start = acc.current;
+			const end = start + item.value;
+			acc.stops.push(`${item.color} ${start}% ${end}%`);
+			acc.current = end;
+			return acc;
+		},
+		{ stops: [], current: 0 },
+	)
+	.stops.join(", ")})`;
+---
+
+<div class="about-interest-chart" aria-label="我的日常兴趣时间分配">
+	<div class="about-interest-chart__visual">
+		<div class="about-interest-chart__pie" role="img" aria-label="编程 70%，健身 15%，阅读 8%，旅行 5%，游戏 2%" style={`background: ${chartBackground};`}></div>
+	</div>
+	<ul class="about-interest-chart__legend">
+		{items.map((item) => (
+			<li>
+				<span class="about-interest-chart__swatch" style={`background-color: ${item.color};`} aria-hidden="true"></span>
+				<span>{item.label}</span>
+				<strong>{item.value}%</strong>
+			</li>
+		))}
+	</ul>
+</div>
+
+<style>
+	.about-interest-chart {
+		align-items: center;
+		display: flex;
+		gap: clamp(2rem, 8vw, 6rem);
+		justify-content: center;
+		margin: 1.5rem auto 2rem;
+		max-width: 48rem;
+		width: 100%;
+	}
+
+	.about-interest-chart__visual {
+		flex: 0 1 18rem;
+		min-width: 12rem;
+	}
+
+	.about-interest-chart__pie {
+		aspect-ratio: 1;
+		border-radius: 50%;
+		box-shadow: 0 0 0 1px color-mix(in srgb, var(--line-divider) 65%, transparent), 0 0.75rem 2rem color-mix(in srgb, var(--primary) 12%, transparent);
+		width: 100%;
+	}
+
+	.about-interest-chart__legend {
+		flex: 0 1 12rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+	}
+
+	.about-interest-chart__legend li {
+		align-items: center;
+		display: grid;
+		gap: 0.65rem;
+		grid-template-columns: 0.85rem 1fr auto;
+		margin: 0.7rem 0;
+	}
+
+	.about-interest-chart__swatch {
+		border-radius: 0.15rem;
+		display: block;
+		height: 0.85rem;
+		width: 0.85rem;
+	}
+
+	.about-interest-chart__legend strong {
+		font-variant-numeric: tabular-nums;
+	}
+
+	@media (width < 640px) {
+		.about-interest-chart {
+			gap: 1.5rem;
+			flex-direction: column;
+		}
+
+		.about-interest-chart__visual,
+		.about-interest-chart__legend {
+			max-width: 20rem;
+		}
+	}
+</style>

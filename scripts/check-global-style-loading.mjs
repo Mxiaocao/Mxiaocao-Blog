@@ -82,7 +82,7 @@ const pages = [
 	{
 		name: "About page",
 		htmlPath: "about/index.html",
-		requiredMarkup: [["mermaid-diagram-container", "rendered About pie chart"]],
+		requiredMarkup: [["about-interest-chart", "rendered About interest chart"]],
 		requiredRules: [
 			[".card-github", "GitHub repository card styles"],
 			[".custom-md .image-grid", "extended Markdown layout styles"],
