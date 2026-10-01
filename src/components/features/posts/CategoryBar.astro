@@ -10,6 +10,11 @@ const categories = await getCategoryList();
 const totalPosts = (await getSortedPostsList()).length;
 const homeUrl = url("/writing/");
 const archiveUrl = url("/archive/");
+const isWritingPage = Astro.url.pathname.replace(/\/$/, "") === "/writing";
+const categoryUrl = (category: string) =>
+	isWritingPage
+		? url(`/writing/?category=${encodeURIComponent(category.trim())}`)
+		: getCategoryUrl(category);
 ---
 
 <div
@@ -44,7 +49,7 @@ const archiveUrl = url("/archive/");
 				{
 					categories.map((cat) => (
 						<a
-							href={getCategoryUrl(cat.name)}
+							href={categoryUrl(cat.name)}
 							class="category-pill text-sm px-3 py-1 rounded-lg whitespace-nowrap
 								   transition-colors duration-200 flex items-center justify-center"
 							data-category-name={cat.name}
@@ -157,6 +162,7 @@ const archiveUrl = url("/archive/");
 						homePath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") +
 						"\\/\\d+$",
 				).test(pathname));
+		const isWriting = isHome || isHomePagination;
 
 		// 在 Writing、Writing 分页和归档页显示
 		if (!isHome && !isHomePagination && !isArchive) {
@@ -174,7 +180,13 @@ const archiveUrl = url("/archive/");
 
 		pills.forEach((pill) => pill.removeAttribute("data-active"));
 
-		if (isHome || isHomePagination) {
+		if (isWriting && activeCategory) {
+			pills.forEach((pill) => {
+				if (pill.getAttribute("data-category-name") === activeCategory) {
+					pill.setAttribute("data-active", "");
+				}
+			});
+		} else if (isHome || isHomePagination) {
 			bar.querySelector<HTMLAnchorElement>(
 				'.category-pill[data-category-name=""]',
 			)?.setAttribute("data-active", "");
@@ -190,6 +202,14 @@ const archiveUrl = url("/archive/");
 			bar.querySelector<HTMLAnchorElement>(
 				'.category-pill[data-category-name="__archive__"]',
 			)?.setAttribute("data-active", "");
+		}
+
+		if (isWriting) {
+			const selected = activeCategory;
+			document.querySelectorAll<HTMLElement>("[data-post-category]").forEach((post) => {
+				const category = post.getAttribute("data-post-category") || "";
+				post.hidden = Boolean(selected && category !== selected);
+			});
 		}
 
 		// 自动滚动到当前高亮的分类
