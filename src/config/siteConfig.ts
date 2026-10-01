@@ -7,7 +7,7 @@ export const siteConfig: SiteConfig = {
 	title: "Mxiaocao",
 	subtitle: "软件项目、计算机科学与工程实践",
 	siteURL: "https://mxiaocaoblog.com/", // 站点正式域名
-	siteStartDate: "2025-01-01", // 站点开始运行日期，用于站点统计组件计算运行天数
+	siteStartDate: "2026-10-01", // 内容初始化日期，用于站点统计组件计算运行天数
 	timeZone: "Asia/Shanghai", // 文章日期使用的 IANA 时区，可改为 Asia/Tokyo、Europe/Berlin 等
 
 	lang: SITE_LANG,
@@ -89,7 +89,7 @@ export const siteConfig: SiteConfig = {
 		allowSwitch: true,
 		// 文章列表页分类导航条配置
 		categoryBar: {
-			enable: true, // 是否在文章列表页显示分类导航条
+			enable: false, // 内容初始化阶段暂不显示空的分类导航条
 		},
 	},
 

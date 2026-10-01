@@ -17,23 +17,34 @@ export const getStaticPaths = (async ({ paginate }) => {
 	const allBlogPosts = await getSortedPosts();
 	// 初始化文章 ID 映射（用于 permalink 功能）
 	initPostIdMap(allBlogPosts);
+	if (allBlogPosts.length === 0) {
+		return [{ params: { page: undefined }, props: { page: null } }];
+	}
 	return paginate(allBlogPosts, { pageSize: PAGE_SIZE });
 }) satisfies GetStaticPaths;
 // https://github.com/withastro/astro/issues/6507#issuecomment-1489916992
 
 const { page } = Astro.props;
 
-const len = page.data.length;
+const len = page?.data.length ?? 0;
 ---
 
 <MainGridLayout title="文章" description="算法、软件与工程实践文章。">
 	<section class="card-base px-6 sm:px-9 py-8 mb-4"><PageHeader title="文章" subtitle="算法、软件与工程实践文章。" /></section>
 	{showCategoryBar && <CategoryBar />}
-	<PostPage page={page} />
-	<Pagination
-		class="mx-auto onload-animation"
-		page={page}
-		basePath="/writing/"
-		style={`animation-delay: calc(var(--content-delay) + ${len * 50}ms)`}
-	/>
+	{page ? (
+		<>
+			<PostPage page={page} />
+			<Pagination
+				class="mx-auto onload-animation"
+				page={page}
+				basePath="/writing/"
+				style={`animation-delay: calc(var(--content-delay) + ${len * 50}ms)`}
+			/>
+		</>
+	) : (
+		<div class="card-base p-6 text-black/70 dark:text-white/70">
+			暂无已发布文章，内容正在准备中。
+		</div>
+	)}
 </MainGridLayout>
