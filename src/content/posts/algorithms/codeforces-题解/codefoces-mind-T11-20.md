@@ -11,7 +11,7 @@ comment: true
 author: "Mxiaocao"
 sourceLink: "https://www.mxiaocaoblog.com/2026/05/14/codefoces-mind-T11-20/index.html"
 licenseName: "CC BY-NC-SA 4.0"
-subcategory: "codeforces-题解"
+subcategory: "题解"
 topic: "算法竞赛"
 ---
 

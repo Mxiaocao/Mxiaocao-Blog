@@ -11,7 +11,7 @@ comment: true
 author: "Mxiaocao"
 sourceLink: "https://www.mxiaocaoblog.com/2026/05/14/2-1-5-priority-queue/index.html"
 licenseName: "CC BY-NC-SA 4.0"
-subcategory: "stl"
+subcategory: "STL"
 topic: "算法竞赛"
 ---
 

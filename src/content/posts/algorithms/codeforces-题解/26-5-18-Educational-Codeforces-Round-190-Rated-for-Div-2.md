@@ -11,7 +11,7 @@ comment: true
 author: "Mxiaocao"
 sourceLink: "https://www.mxiaocaoblog.com/2026/05/20/26-5-18-Educational-Codeforces-Round-190-Rated-for-Div-2/index.html"
 licenseName: "CC BY-NC-SA 4.0"
-subcategory: "codeforces-题解"
+subcategory: "比赛复盘"
 topic: "算法竞赛"
 ---
 

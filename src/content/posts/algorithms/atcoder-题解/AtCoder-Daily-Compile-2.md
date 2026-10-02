@@ -11,7 +11,7 @@ comment: true
 author: "Mxiaocao"
 sourceLink: "https://www.mxiaocaoblog.com/2026/06/05/AtCoder-Daily-Compile-2/index.html"
 licenseName: "CC BY-NC-SA 4.0"
-subcategory: "atcoder-题解"
+subcategory: "比赛复盘"
 topic: "算法竞赛"
 ---
 

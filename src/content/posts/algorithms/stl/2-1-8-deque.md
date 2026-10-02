@@ -4,7 +4,8 @@ published: 2026-05-14
 updated: 2026-05-30
 description: "deque 双端队列的基本概念、初始化方式、两端操作和元素访问。"
 tags: ["deque", "STL"]
-category: "STL"
+category: "ACM-ICPC"
+subcategory: "STL"
 permalink: "2026/05/14/2-1-8-deque"
 draft: false
 comment: true

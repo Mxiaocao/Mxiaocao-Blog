@@ -11,7 +11,7 @@ comment: true
 author: "Mxiaocao"
 sourceLink: "https://www.mxiaocaoblog.com/2026/05/25/9-1-2D-Geometry/index.html"
 licenseName: "CC BY-NC-SA 4.0"
-subcategory: "计算几何"
+subcategory: "基础算法"
 topic: "算法竞赛"
 ---
 

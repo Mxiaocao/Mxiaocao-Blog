@@ -11,7 +11,7 @@ comment: true
 author: "Mxiaocao"
 sourceLink: "https://www.mxiaocaoblog.com/2026/06/02/26-5-30-Codeforces-Round-1101-Div-2/index.html"
 licenseName: "CC BY-NC-SA 4.0"
-subcategory: "codeforces-题解"
+subcategory: "比赛复盘"
 topic: "算法竞赛"
 ---
 

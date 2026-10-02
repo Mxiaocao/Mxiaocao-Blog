@@ -11,7 +11,7 @@ comment: true
 author: "Mxiaocao"
 sourceLink: "https://www.mxiaocaoblog.com/2026/05/14/Linked-List/index.html"
 licenseName: "CC BY-NC-SA 4.0"
-subcategory: "数据结构与题解"
+subcategory: "数据结构"
 topic: "算法竞赛"
 ---
 
