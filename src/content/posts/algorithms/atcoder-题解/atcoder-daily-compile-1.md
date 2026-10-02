@@ -3,7 +3,6 @@ title: "AtCoder Daily Compile 1"
 published: 2026-05-27
 updated: 2026-06-04
 description: "Mxiaocao::Daily_Compile() T1-T101. C - Drop Blocks门钥匙 QuesProblem Statement There are cells arranged in a row from left to right. Initially, no blocks are placed in any cell. You are given queries,"
-image: "/img/2.jpg"
 tags: []
 category: "ACM-ICPC"
 draft: false

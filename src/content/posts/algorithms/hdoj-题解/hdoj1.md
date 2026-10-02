@@ -3,7 +3,6 @@ title: "hdoj1"
 published: 2026-05-14
 updated: 2026-05-14
 description: "5,6,8 -> 2,7 -> 9,1,3 -> 4,10 1005 大户爱的开根题意对于每组数据，给定两个整数N,K，要求输出一个整数，表示⌊K⌋。题目保证 ，组数T≤100。 题解 法一参考讨论区的做法，用long double处理一下题目给的式子，就能AC了 12345void solve(){ long double n,k; cin >> n >&g"
-image: "/img/2.jpg"
 tags: []
 category: "ACM-ICPC"
 draft: false

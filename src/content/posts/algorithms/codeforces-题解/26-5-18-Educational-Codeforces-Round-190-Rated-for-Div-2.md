@@ -3,7 +3,6 @@ title: "26_5_18 Educational Codeforces Round 190 (Rated for Div. 2)"
 published: 2026-05-20
 updated: 2026-05-20
 description: "Educational Codeforces Round 190 (Rated for Div. 2)A. Optimal Purchase（implementation）（math） Ques门钥匙 题意 You have a group of students who need access to an online course. Two types of access keys are"
-image: "/img/2.jpg"
 tags: []
 category: "ACM-ICPC"
 draft: false

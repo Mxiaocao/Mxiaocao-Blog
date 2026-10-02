@@ -3,7 +3,6 @@ title: "5.2.8 Tarjan算法"
 published: 2026-05-22
 updated: 2026-05-22
 description: "5.2.8 Tarjan算法Tarjan算法可用于求解强连通分量以及无向图中的割点和割边（又称桥） 一、连通性概念那么什么叫强连通分量呢，什么叫割点呢，什么又是割边呢？所以接下来我要从两个方面讲解一下相关的概念 无向图的连通性无向图中所有能互通（你能到达我，我能到达你）的点组成了一个”连通分量(Connected Component)”。而在一个连通分量中有一些关键的点，如果删掉它们，会把这个连通"
-image: "/img/2.jpg"
 tags: ["Tarjan", "强连通分量"]
 category: "ACM-ICPC"
 draft: false

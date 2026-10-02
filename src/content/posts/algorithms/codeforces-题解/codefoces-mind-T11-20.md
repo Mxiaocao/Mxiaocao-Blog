@@ -3,7 +3,6 @@ title: "codefoces mind (T11-20)"
 published: 2026-05-14
 updated: 2026-05-14
 description: "codefoces mind (T11-20)11. Beautiful String（1000）（brute force）（constructive algorithms） Ques门钥匙 题意 You are given a binary string of length . Your task is to find any subsequence of such that: The"
-image: "/img/2.jpg"
 tags: []
 category: "ACM-ICPC"
 draft: false

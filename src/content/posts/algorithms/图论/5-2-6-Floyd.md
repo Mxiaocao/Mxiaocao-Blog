@@ -3,7 +3,6 @@ title: "5.2.6 Floyd"
 published: 2026-05-25
 updated: 2026-05-25
 description: "5.2.6 Floyd适用条件：多源最短路（求任意两点间的最短距离）、允许存在负权边。 [注]：由于其时间复杂度高达 ，纯正的“暴力美学”，只适用于图极其微小的情况（通常顶点数 ）。但在小图里，它是最好写、最不容易出错的算法，核心代码只有五行！ Floyd 算法与 Dijkstra、SPFA 最大的不同在于，它不是用来求“单源”（从一个固定起点出发）的，而是一次性把地图上任意两个村庄之间的最短路全"
-image: "/img/2.jpg"
 tags: ["最短路", "Floyd"]
 category: "ACM-ICPC"
 draft: false

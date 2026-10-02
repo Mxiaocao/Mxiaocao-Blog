@@ -3,7 +3,6 @@ title: "26_5_16 Codeforces Round 1098 (Div. 2)"
 published: 2026-05-17
 updated: 2026-05-17
 description: "Codeforces Round 1098 (Div. 2)A. Marisa Steals Reimu’s Takeout门钥匙 Ques题意 The Darkness Brought In by Swallowstone Naturalis Historia — Dateless Bar “Old Adam” Marisa is a girl of integrity who always h"
-image: "/img/2.jpg"
 tags: []
 category: "ACM-ICPC"
 draft: false

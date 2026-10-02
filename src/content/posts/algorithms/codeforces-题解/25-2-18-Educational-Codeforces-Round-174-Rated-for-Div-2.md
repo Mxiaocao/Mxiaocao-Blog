@@ -3,7 +3,6 @@ title: "25_2_18 Educational Codeforces Round 174 (Rated for Div. 2)"
 published: 2026-06-08
 updated: 2026-06-08
 description: "1. A. Was there an Array?门钥匙 口头表述给你一个长度为n的整数数组a，但是这个数组a本身没有告诉你，我们只知道它中间每个位置的相等情况：对于每个位置i，其中2 ≤ i ≤ n-1，如果 a[i-1] == a[i] == a[i+1]，那么 b[i] = 1，反之b[i] = 0。现在题目给你的是数组 b2, b3, ..., b(n-1)，让你判断：是否存在某个整数数组"
-image: "/img/2.jpg"
 tags: []
 category: "ACM-ICPC"
 draft: false

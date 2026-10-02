@@ -3,7 +3,6 @@ title: "5.2.3 Dijkstra 最短路"
 published: 2026-05-14
 updated: 2026-05-14
 description: "5.2.3 Dijkstra 最短路适用条件：单源、边权非负。 负边权 -> Bellman-Ford 1. 邻接矩阵：O(V^2) dijkstra算法是每次都是找距离源点最近的点，所以我们可以维护一个dist数组，来存储v到每个点的最短距离 (1) 初始化首先创建数组dist，存源点v到每个点的最短距离，然后我们自然是要进行初始化的 12345int dist[MAXV]; //存源点"
-image: "/img/2.jpg"
 tags: ["Dijkstra", "最短路"]
 category: "ACM-ICPC"
 draft: false

@@ -3,7 +3,6 @@ title: "hdoj8"
 published: 2026-05-15
 updated: 2026-05-15
 description: "hdoj83,8,5 -> 6,7,9 -> 1,10,4,2 3. 疯狂的自我搜索者Ques题意 Aya 是修车专家，但是有很多彩黑批评她的修车技术还不如劈瓦大师 Amita， Aya 在网上自搜发现有非常多彩黑，她决定将彩黑统统屏蔽。 在接下来 n分钟内，每分钟会出现 条新的彩黑评论， Aya 每分钟至多可以屏蔽 x 条之前未屏蔽过的彩黑评论，在此我们认为，每一分钟都是彩黑评"
-image: "/img/2.jpg"
 tags: []
 category: "ACM-ICPC"
 draft: false

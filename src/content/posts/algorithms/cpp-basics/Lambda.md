@@ -3,7 +3,6 @@ title: "Lambda"
 published: 2026-05-18
 updated: 2026-05-18
 description: "Lambda表达式Lambda 表达式是现代编程语言中一个非常重要的特性，特别是在 Java 8及更高版本、C#、Python、JavaScript 和 c++ 等语言中被广泛使用。 Lambda 表达式还是很常见且重要的，我看机房的一些学长写题解的时候会使用到。下面以 c++ 为例展开讨论。 1. 什么是 Lambda 表达式简单来说，Lambda 表达式是一个匿名函数。它没有函数名，但可以有参"
-image: "/img/2.jpg"
 tags: []
 category: "ACM-ICPC"
 draft: false

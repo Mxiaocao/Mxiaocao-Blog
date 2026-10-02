@@ -3,7 +3,6 @@ title: "2.1.5 priority_queue"
 published: 2026-05-14
 updated: 2026-05-14
 description: "priority_queue优先队列与普通队列不同，总是将优先级最高（或最低）的元素置于队列的前端。默认情况下，priority_queue使用最大堆实现，即优先级最高的元素将最先被移除。 一、结构priority_queue只维护堆顶的元素，即队列的队头(top)，这种数据结构适用于需要快速访问最优先处理项的场景。 小根堆：最小值优先，堆顶top()永远是当前最小元素 ​"
-image: "/img/2.jpg"
 tags: ["stl", "priority_queue"]
 category: "ACM-ICPC"
 draft: false

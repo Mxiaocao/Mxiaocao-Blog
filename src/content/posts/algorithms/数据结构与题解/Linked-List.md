@@ -3,7 +3,6 @@ title: "链表"
 published: 2026-05-14
 updated: 2026-05-14
 description: "链表准备工作链表声明1234567struct ListNode { int val; ListNode *next; ListNode() : val(0), next(nullptr) {} ListNode(int x) : val(x), next(nullptr) {} ListNode(int x, ListNode *next) : val(x), ne"
-image: "/img/2.jpg"
 tags: []
 category: "ACM-ICPC"
 draft: false

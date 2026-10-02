@@ -3,7 +3,6 @@ title: "25-1-12-Codeforces-Round-996-Div-2"
 published: 2026-05-18
 updated: 2026-05-18
 description: "3. Codeforces Round 996 (Div. 2)A. Two Frogs（800）（constructive algorithms）（games）（greedy）（math） Ques门钥匙 题意 Roaming through the alligator-infested Everglades, Florida Man encounters a most peculiar"
-image: "/img/2.jpg"
 tags: []
 category: "ACM-ICPC"
 draft: false

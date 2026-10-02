@@ -3,7 +3,6 @@ title: "4.1 线性dp"
 published: 2026-05-14
 updated: 2026-05-14
 description: "线性 DP大多数教材没有定义什么是线性dp，而是把它归为dp的入门篇目。 那什么是线性DP呢？下面引用gpt的话： “线性 DP 是指把状态按一个线性顺序（通常是下标、时间、位置）依次计算，且每个状态只依赖这个顺序中更早的少量状态的动态规划。 可写成抽象形式：dp[i] = transfer(dp[i-1], dp[i-2], …, input[i]) 核心特征就两点： 1. 有明确的一维推进顺序"
-image: "/img/2.jpg"
 tags: ["线性dp", "dp"]
 category: "ACM-ICPC"
 draft: false

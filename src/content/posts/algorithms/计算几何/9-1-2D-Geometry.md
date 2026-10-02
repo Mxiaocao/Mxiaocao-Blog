@@ -3,7 +3,6 @@ title: "9.1 二维几何"
 published: 2026-05-24
 updated: 2026-05-25
 description: "二维计算几何通常处理平面上的点、向量、线段、多边形、圆等图形。而其核心在于熟练使用向量和叉积 最常用的点/向量结构可以这样理解 123456789101112131415struct point{ double x,y;};point operator+(point a,point b){ return {a.x + b.x,a.y+b.y};}point operator-(poin"
-image: "/img/2.jpg"
 tags: ["计算几何", "二维几何", "叉积", "点积"]
 category: "ACM-ICPC"
 draft: false

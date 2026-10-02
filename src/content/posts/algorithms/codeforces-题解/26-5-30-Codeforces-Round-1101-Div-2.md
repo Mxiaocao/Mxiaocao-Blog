@@ -3,7 +3,6 @@ title: "26_5_30 Codeforces Round 1101 (Div. 2)"
 published: 2026-06-02
 updated: 2026-06-02
 description: "26_5_30 Codeforces Round 1101 (Div. 2)A. ConvergenceQues门钥匙 题意 Alice is inviting her friends to a party to eat cakes. However, each friend may not be at the same place, so everyone has to meet up at t"
-image: "/img/2.jpg"
 tags: []
 category: "ACM-ICPC"
 draft: false

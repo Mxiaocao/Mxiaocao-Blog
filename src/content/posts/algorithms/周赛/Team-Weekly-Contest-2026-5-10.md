@@ -3,7 +3,6 @@ title: "Team Weekly Contest 2026-5-10"
 published: 2026-05-13
 updated: 2026-06-08
 description: "Team Weekly Contest 2026-5-10题目难度：AG -> J -> EBI -> LKHDCF A. Anxiety at the restaurantQues题意 Margot Finch goes out to eat. A lot. Like, way too much. Birthdays, Fridays, random Wednesdays —"
-image: "/img/2.jpg"
 tags: []
 category: "ACM-ICPC"
 draft: false

@@ -3,7 +3,6 @@ title: "AtCoder Daily Compile 2"
 published: 2026-06-05
 updated: 2026-06-05
 description: "Mxiaocao::Daily_Compile() T1111. D - Card Pile Query门钥匙 口头表述有n张牌，n个牌堆，一开始，牌堆i中只有牌i。现在要进行q次操作，每次操作，都会给你c，p两个数，即找到牌c的那一堆，把牌c和它上面的所有牌一起拿起来，保持顺序不变，放到牌p上面。题目保证牌c和牌p不在同一堆，且p在牌堆的最上面。最后要求你输出每个牌堆分别还剩多少牌 题解我们可以"
-image: "/img/2.jpg"
 tags: []
 category: "ACM-ICPC"
 draft: false

@@ -3,7 +3,6 @@ title: "LTT L2"
 published: 2026-05-14
 updated: 2026-05-14
 description: "天梯赛 L2 速通25分L2-001 紧急救援 √考点：dijkstra 1. dist[v]：S -> v 最短距离 2. cnt[v]：最短路条数 3. sum[v]：在最短路前提下可召集的最大救援队数 并用 pre[v] 记录最优前驱，最后回溯路径。 时间复杂度 O(N^2 + M)，在 N<=500 下可通过。 1234567891011121314151617181920"
-image: "/img/2.jpg"
 tags: []
 category: "ACM-ICPC"
 draft: false

@@ -3,7 +3,6 @@ title: "codefoces mind (T1-10)"
 published: 2026-05-14
 updated: 2026-05-14
 description: "codefoces mind (T1-10)1. The 67th XOR Problem（1200）（binary search）（bitmasks）（brute force） Ques门钥匙 题意 You are given an array , initially containing non-negative integers. You perform the following op"
-image: "/img/2.jpg"
 tags: []
 category: "ACM-ICPC"
 draft: false

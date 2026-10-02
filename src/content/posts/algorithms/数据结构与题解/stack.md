@@ -3,7 +3,6 @@ title: "栈"
 published: 2026-05-14
 updated: 2026-05-30
 description: "栈因为c++有标准STL库，所以下面将给出两个cpp和c两种版本的代码 1. 有效的括号（简单）门钥匙 Ques给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。 有效字符串需满足： 左括号必须用相同类型的右括号闭合。 左括号必须以"
-image: "/img/2.jpg"
 tags: []
 category: "ACM-ICPC"
 draft: false

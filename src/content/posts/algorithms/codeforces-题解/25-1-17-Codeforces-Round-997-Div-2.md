@@ -3,7 +3,6 @@ title: "25_1_17 Codeforces Round 997 (Div. 2)"
 published: 2026-05-18
 updated: 2026-05-18
 description: "2. Codeforces Round 997 (Div. 2)A. Shape Perimeter（800）（constructive algorithms）（math） Ques门钥匙 题意 There is an by square stamp on an infinite piece of paper. Initially, the bottom-left corner of the"
-image: "/img/2.jpg"
 tags: []
 category: "ACM-ICPC"
 draft: false

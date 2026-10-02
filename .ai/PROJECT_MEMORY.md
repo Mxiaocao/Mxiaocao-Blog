@@ -137,6 +137,8 @@
 
 # 当前任务与下一步
 
+- 已完成（2026-10-02）：移除迁移文章 Frontmatter 中统一的 `/img/2.jpg` 封面字段，文章页不再显示重复的大图；正文内实际使用的图片引用保留。
+
 - 已修复（2026-10-02）：部分 Legacy 正文包含导出的 MathJax SVG/HTML，导致文章页正文渲染为空；迁移时移除失效的嵌入 SVG 容器，保留 Markdown 正文、标题、题解、代码和图片引用。AtCoder 文章构建后正文可见，Pagefind 索引词数恢复。
 
 - 已完成（2026-10-02）：从 Legacy `recovery/markdown-mizuki` 分支迁移 40 篇 ACM/ICPC 相关 Markdown 文章到 `src/content/posts/algorithms/`，按 STL、图论、动态规划、数学、几何、字符串、数据结构及各竞赛平台分组；补齐 `public/img/` 中文章引用的本地图片并统一反斜杠图片路径。`pnpm run check` 通过，`pnpm build` 通过（42 页被 Pagefind 索引）。

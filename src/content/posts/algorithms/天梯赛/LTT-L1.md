@@ -3,7 +3,6 @@ title: "LTT L1"
 published: 2026-05-14
 updated: 2026-05-14
 description: "天梯赛 L1 速通15分1.L1-003 个位数统计==for(char c : s)== 12345678910111213void solve(){ string s; cin >> s; int cnt[10] = {0}; for(char c : s){ cnt[c-'0']++"
-image: "/img/2.jpg"
 tags: []
 category: "ACM-ICPC"
 draft: false

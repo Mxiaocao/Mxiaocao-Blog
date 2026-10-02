@@ -3,7 +3,6 @@ title: "5.2.4 SPFA (Bellman-Ford)"
 published: 2026-05-23
 updated: 2026-05-24
 description: "适用条件：单源、包含负边权、判断是否存在负环。 [注]：在没有负边权的正权图里，优先使用 Dijkstra，因为 SPFA 容易被特殊构造的数据卡成 的龟速。 Bellman-Ford 算法是单源最短路径算法，求一个起点 到其他所有点的最短路径。一个有 个点的图，给每个点 次机会查询邻居，是否有到起点 的更短的路径，如果有就更新；经过 轮查询和更新，就得到了所有点到起点 的最短路径。"
-image: "/img/2.jpg"
 tags: ["最短路", "SPFA", "负环"]
 category: "ACM-ICPC"
 draft: false
