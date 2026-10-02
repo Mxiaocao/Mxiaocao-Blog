@@ -137,6 +137,8 @@
 
 # 当前任务与下一步
 
+- 已修复（2026-10-02）：部分 Legacy 正文包含导出的 MathJax SVG/HTML，导致文章页正文渲染为空；迁移时移除失效的嵌入 SVG 容器，保留 Markdown 正文、标题、题解、代码和图片引用。AtCoder 文章构建后正文可见，Pagefind 索引词数恢复。
+
 - 已完成（2026-10-02）：从 Legacy `recovery/markdown-mizuki` 分支迁移 40 篇 ACM/ICPC 相关 Markdown 文章到 `src/content/posts/algorithms/`，按 STL、图论、动态规划、数学、几何、字符串、数据结构及各竞赛平台分组；补齐 `public/img/` 中文章引用的本地图片并统一反斜杠图片路径。`pnpm run check` 通过，`pnpm build` 通过（42 页被 Pagefind 索引）。
 
 - 当前任务：文章迁移已开始。文章目录按 `algorithms`、`engineering`、`devlog` 分组；`algorithms` 下已建立 `stl`、`data-structures`、`dp`、`graph`、`math`、`geometry`、`string`、`contests` 专题目录。首篇样板文章已迁移至 `src/content/posts/algorithms/stl/2-1-8-deque.md`，保留原文核心内容，并使用 `category: STL` 和旧日期 `permalink`。由于当前实现对自定义 permalink 文章仍保留按文件路径生成的兼容文章路径，本篇生成 `/posts/algorithms/stl/2-1-8-deque/` 与旧 `/2026/05/14/2-1-8-deque/`。Writing 与 Archive 页面显式传入分类筛选模式：Writing 分类按钮保持 `/writing/?category=...` 并保留文章页头，Archive 分类按钮保持 `/archive/?category=...`。筛选项和统计均来自文章 frontmatter 的 `category`，新增数学、图论等分类文章后会自动出现，无需修改页面代码。About 页面已按旧站信息结构重新整理为简体中文，时间轴内容按用户要求不迁移。独立 Lab 页面仍不作为公开栏目，后续实验内容并入项目详情。
