@@ -137,6 +137,8 @@
 
 # 当前任务与下一步
 
+- 已完成（2026-10-02）：从 Legacy `recovery/markdown-mizuki` 分支迁移 40 篇 ACM/ICPC 相关 Markdown 文章到 `src/content/posts/algorithms/`，按 STL、图论、动态规划、数学、几何、字符串、数据结构及各竞赛平台分组；补齐 `public/img/` 中文章引用的本地图片并统一反斜杠图片路径。`pnpm run check` 通过，`pnpm build` 通过（42 页被 Pagefind 索引）。
+
 - 当前任务：文章迁移已开始。文章目录按 `algorithms`、`engineering`、`devlog` 分组；`algorithms` 下已建立 `stl`、`data-structures`、`dp`、`graph`、`math`、`geometry`、`string`、`contests` 专题目录。首篇样板文章已迁移至 `src/content/posts/algorithms/stl/2-1-8-deque.md`，保留原文核心内容，并使用 `category: STL` 和旧日期 `permalink`。由于当前实现对自定义 permalink 文章仍保留按文件路径生成的兼容文章路径，本篇生成 `/posts/algorithms/stl/2-1-8-deque/` 与旧 `/2026/05/14/2-1-8-deque/`。Writing 与 Archive 页面显式传入分类筛选模式：Writing 分类按钮保持 `/writing/?category=...` 并保留文章页头，Archive 分类按钮保持 `/archive/?category=...`。筛选项和统计均来自文章 frontmatter 的 `category`，新增数学、图论等分类文章后会自动出现，无需修改页面代码。About 页面已按旧站信息结构重新整理为简体中文，时间轴内容按用户要求不迁移。独立 Lab 页面仍不作为公开栏目，后续实验内容并入项目详情。
 - 工作仓库：`E:\03-Projects\Mxiaocao-Blog`，分支 `main`，跟踪 `origin/main`；本阶段起点为 `0ddae87`；域名更新提交在其后。两项已有 `.vscode` 删除保持未暂存，不纳入任务提交。
 - 已完成：首页独立并展示三个精选项目，Writing 承担文章分页，旧数字分页兼容跳转；项目统一 schema 与详情页；Notes 的独立模型、空状态、草稿过滤及正文页；导航整理并保留原功能入口。
