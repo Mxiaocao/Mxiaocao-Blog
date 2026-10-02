@@ -11,7 +11,7 @@ comment: true
 author: "Mxiaocao"
 sourceLink: "https://www.mxiaocaoblog.com/2026/05/25/9-2-Convex-Hull/index.html"
 licenseName: "CC BY-NC-SA 4.0"
-subcategory: "基础算法"
+subcategory: "计算几何"
 topic: "算法竞赛"
 ---
 
