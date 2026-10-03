@@ -1,7 +1,7 @@
 ---
 import I18nKey from "../../../i18n/i18nKey";
 import { i18n } from "../../../i18n/translation";
-import Icon from "../../misc/Icon.astro";
+import { Icon } from "astro-icon/components";
 import type { SkillCardProps } from "./types";
 
 const { skill } = Astro.props as SkillCardProps;
@@ -61,11 +61,9 @@ const formatExperience = (exp: { years: number; months: number }) => {
 				style={`background-color: ${skillColor}20`}
 			>
 				<Icon
-					icon={skill.icon}
+					name={skill.icon}
 					class="text-xl"
 					color={skillColor}
-					fallback={skill.name.charAt(0)}
-					loading="eager"
 				/>
 			</div>
 
@@ -82,9 +80,11 @@ const formatExperience = (exp: { years: number; months: number }) => {
 						{getLevelText(skill.level)}
 					</span>
 				</div>
-				<p class="text-xs text-black/50 dark:text-white/50">
-					{formatExperience(skill.experience)}
-				</p>
+				{skill.experience && (
+					<p class="text-xs text-black/50 dark:text-white/50">
+						{formatExperience(skill.experience)}
+					</p>
+				)}
 			</div>
 		</div>
 

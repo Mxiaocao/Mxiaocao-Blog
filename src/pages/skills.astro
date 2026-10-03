@@ -20,6 +20,10 @@ const getCategoryText = (category: string) => {
 	switch (category) {
 		case "frontend":
 			return i18n(I18nKey.skillsFrontend);
+		case "languages":
+			return i18n(I18nKey.skillsLanguages);
+		case "systems":
+			return i18n(I18nKey.skillsSystems);
 		case "backend":
 			return i18n(I18nKey.skillsBackend);
 		case "database":
@@ -37,6 +41,10 @@ const getCategoryIcon = (category: string) => {
 	switch (category) {
 		case "frontend":
 			return "material-symbols:web";
+		case "languages":
+			return "material-symbols:code";
+		case "systems":
+			return "material-symbols:terminal";
 		case "backend":
 			return "material-symbols:dns";
 		case "database":
