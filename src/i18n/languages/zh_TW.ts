@@ -235,6 +235,7 @@ export const zh_TW: Translation = {
 	[Key.aiToolsCategoryChat]: "對話助手",
 	[Key.aiToolsCategoryCoding]: "編碼協作",
 	[Key.aiToolsCategoryImage]: "圖像生成",
+	[Key.aiToolsCategoryModeling]: "三維建模",
 	[Key.aiToolsCategoryAudio]: "音訊",
 	[Key.aiToolsCategoryVideo]: "影片",
 	[Key.aiToolsCategoryWriting]: "寫作 / 筆記",

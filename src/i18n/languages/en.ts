@@ -281,6 +281,7 @@ export const en: Translation = {
 	[Key.aiToolsCategoryChat]: "Chat Assistants",
 	[Key.aiToolsCategoryCoding]: "Coding",
 	[Key.aiToolsCategoryImage]: "Image",
+	[Key.aiToolsCategoryModeling]: "3D Modeling",
 	[Key.aiToolsCategoryAudio]: "Audio",
 	[Key.aiToolsCategoryVideo]: "Video",
 	[Key.aiToolsCategoryWriting]: "Writing / Notes",

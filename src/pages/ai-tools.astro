@@ -24,6 +24,8 @@ const getCategoryText = (category: string) => {
 			return i18n(I18nKey.aiToolsCategoryCoding);
 		case "image":
 			return i18n(I18nKey.aiToolsCategoryImage);
+		case "modeling":
+			return i18n(I18nKey.aiToolsCategoryModeling);
 		case "audio":
 			return i18n(I18nKey.aiToolsCategoryAudio);
 		case "video":
@@ -47,6 +49,8 @@ const getCategoryIcon = (category: string) => {
 			return "material-symbols:code";
 		case "image":
 			return "material-symbols:image-outline";
+		case "modeling":
+			return "material-symbols:deployed-code-outline";
 		case "audio":
 			return "material-symbols:graphic-eq";
 		case "video":

@@ -283,6 +283,7 @@ export const ja: Translation = {
 	[Key.aiToolsCategoryChat]: "チャットアシスタント",
 	[Key.aiToolsCategoryCoding]: "コーディング",
 	[Key.aiToolsCategoryImage]: "画像生成",
+	[Key.aiToolsCategoryModeling]: "3D モデリング",
 	[Key.aiToolsCategoryAudio]: "音声",
 	[Key.aiToolsCategoryVideo]: "動画",
 	[Key.aiToolsCategoryWriting]: "ライティング / ノート",

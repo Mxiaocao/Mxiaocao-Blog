@@ -197,6 +197,7 @@ export const zh_CN: Translation = {
 	[Key.aiToolsCategoryChat]: "对话助手",
 	[Key.aiToolsCategoryCoding]: "编码协作",
 	[Key.aiToolsCategoryImage]: "图像生成",
+	[Key.aiToolsCategoryModeling]: "三维建模",
 	[Key.aiToolsCategoryAudio]: "音频",
 	[Key.aiToolsCategoryVideo]: "视频",
 	[Key.aiToolsCategoryWriting]: "写作 / 笔记",
