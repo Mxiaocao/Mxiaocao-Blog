@@ -3,6 +3,7 @@ import { onDestroy, onMount } from "svelte";
 
 import type { MusicPlayerState } from "@/stores/musicPlayerStore";
 import { musicPlayerStore } from "@/stores/musicPlayerStore";
+import MusicSourceLinks from "../music-player/molecules/MusicSourceLinks.svelte";
 
 import SidebarControls from "./components/SidebarControls.svelte";
 import SidebarCover from "./components/SidebarCover.svelte";
@@ -101,6 +102,8 @@ function setVolume(volume: number) {
 		onTogglePlay={togglePlay}
 		onTogglePlaylist={togglePlaylistView}
 	/>
+
+	<MusicSourceLinks song={playerState.currentSong} />
 
 	<SidebarPlaylist
 		playlist={playerState.playlist}

@@ -8,6 +8,7 @@ import PlayerControls from "../molecules/PlayerControls.svelte";
 import ProgressControl from "../molecules/ProgressControl.svelte";
 import TrackDisplay from "../molecules/TrackDisplay.svelte";
 import VolumeControl from "../molecules/VolumeControl.svelte";
+import MusicSourceLinks from "../molecules/MusicSourceLinks.svelte";
 import type { RepeatMode, Song } from "../types";
 
 interface Props {
@@ -125,4 +126,5 @@ const {
 			<Icon icon="material-symbols:expand-more" class="text-lg" />
 		</button>
 	</VolumeControl>
+	<MusicSourceLinks {song} />
 </div>
