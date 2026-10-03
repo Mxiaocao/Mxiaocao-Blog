@@ -83,13 +83,17 @@ const subtitle = i18n(I18nKey.timelineSubtitle);
 		<div class="card-base z-10 px-6 sm:px-9 py-6 relative w-full">
 			<PageHeader title={title} subtitle={subtitle} />
 
-			<div class="mb-8">
+			<div class:list={["mb-8", { hidden: timelineData.length === 0 }]}>
 				<FilterTabs tabs={filterTabs} dataAttr="type" />
 			</div>
 
 			<div id="timeline-list" class="timeline-list">
 				{timelineData.map((item) => <TimelineCard item={item} />)}
 			</div>
+
+			{timelineData.length === 0 && (
+				<p class="text-center py-16 text-black/50 dark:text-white/50">暂无时间线记录</p>
+			)}
 
 			<div id="no-results" class="hidden text-center py-16">
 				<Icon

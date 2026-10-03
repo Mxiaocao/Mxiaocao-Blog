@@ -87,13 +87,17 @@ const subtitle = i18n(I18nKey.skillsSubtitle);
 		<div class="card-base z-10 px-6 sm:px-9 py-6 relative w-full">
 			<PageHeader title={title} subtitle={subtitle} />
 
-			<div class="mb-8">
+			<div class:list={["mb-8", { hidden: skillsData.length === 0 }]}>
 				<FilterTabs tabs={filterTabs} dataAttr="category" />
 			</div>
 
 			<div id="skills-grid" class="grid gap-6 items-start">
 				{skillsData.map((skill) => <SkillCard skill={skill} />)}
 			</div>
+
+			{skillsData.length === 0 && (
+				<p class="text-center py-16 text-black/50 dark:text-white/50">暂无技能记录</p>
+			)}
 
 			<div id="no-results" class="hidden text-center py-16">
 				<Icon

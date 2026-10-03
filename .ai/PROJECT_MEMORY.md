@@ -67,7 +67,7 @@
 - 已验证：项目记录包含稳定 id、标题、描述、图片、分类、技术栈、状态、链接、日期、精选状态、标签，以及 isDemo 和可选 sections（标题/正文段落）。ProjectInput 与 Project 从同一 schema 推导，集合加载时检查重复 id；列表保持数据文件顺序。
 - 已验证：Notes/Lab 均需 title、description、published、kind，支持 updated、draft、tags；Lab 额外要求 status，可设置 demoUrl 与 sourceCode。`src/content/notes/template.md` 和 `src/content/lab/template.md` 是不公开的草稿模板，复制后修改字段即可录入内容。
 - 已验证：Notes/Lab 使用共享列表与 Markdown 正文组件，公开详情参与 Pagefind；现有文章 RSS/Atom 和归档仍只处理 posts。
-- 已验证：模板文章已在内容初始化阶段清理；项目、个人资料、相册和其他演示资源仍保留，后续按实际内容逐步替换。
+- 已验证：模板文章已在内容初始化阶段清理，之后逐步导入历史文章；项目与个人资料保留。2026-10-03 已清空友链、追番、随笔、技能、时间线、AI 工具的示例数据，并移除四个示例相册目录（含隐藏与加密示例），保留相册 README 和页面功能。
 - 计划中 Writing：Algorithms、Engineering、Devlog，并以 Archive 作为完整浏览入口。
 - 已完成 Projects：ACM-OS、Dorm Hygiene、Ledgerly 作为一等项目实体；状态均为进行中，能力描述依据各自 README。
 - 计划中 Notes：TIL、调试、API、命令、SQL、Rust、Linux 和工具记录。
@@ -136,6 +136,8 @@
 - 完成 Phase 2 首页/文章分页拆分、项目详情、Notes/Lab 内容集合与导航接入。
 
 # 当前任务与下一步
+
+- 已完成（2026-10-03）：仅初始化“更多”下的友链、追番、随笔、相册、技能展示、时间线、我使用的 AI 工具七页；归档与文章内容不在本次范围内。六个 TypeScript 数据列表置空，七页均有空状态，页面入口和录入机制保留。Astro Check 检查 347 个文件，0 错误/警告/提示；生产构建生成 67 页；样式、字体、Pagefind 和七页生成 HTML 空状态校验通过，示例相册详情不再生成。本次 pnpm 启动因软件源不可访问失败，改用已安装的 Astro CLI（禁用遥测）与本地检查脚本完成验证。
 
 - 已完成（2026-10-02）：按文章目录中的 ACM-ICPC 菜单重分类迁移文章，统一使用 `基础算法`、`STL`、`数据结构`、`图论`、`动态规划`、`数学`、`字符串`、`题解`、`比赛复盘` 九个二级分类；保留原文件路径以避免文章 URL 改变。
 - 已完成（2026-10-03）：已新增 `ACM-ICPC/计算几何`，并将二维几何、凸包两篇文章归入该分类；菜单继续由统一分类树结合文章 Frontmatter 生成。
