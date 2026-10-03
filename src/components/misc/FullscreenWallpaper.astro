@@ -1,5 +1,6 @@
 ---
 import Image from "@components/atoms/Image/Image.astro";
+import WallpaperVideo from "./WallpaperVideo.astro";
 import { siteConfig } from "../../config";
 import type { FullscreenWallpaperConfig } from "../../types/config";
 import { getImageFormats, getImageQuality } from "../../utils/image-utils";
@@ -53,6 +54,8 @@ const getImageSources = async () => {
 const imageSources = await getImageSources();
 const hasDesktopImages = imageSources.desktop.length > 0;
 const hasMobileImages = imageSources.mobile.length > 0;
+const isVideo = (src: string) => /\.(mp4|webm|ogv)(?:$|\?)/i.test(src);
+const hasVideo = isVideo(imageSources.desktop[0] || imageSources.mobile[0] || "");
 
 if (!hasDesktopImages && !hasMobileImages) {
 	return null;
@@ -69,7 +72,7 @@ const wallpaperQuality = getImageQuality();
 // 样式配置
 const position = config.position || "center";
 const zIndex = config.zIndex || -1;
-const opacity = config.opacity || 0.8;
+const opacity = config.opacity ?? 1;
 const blurAmount = config.blur || 0;
 const positionClass = (() => {
 	switch (position) {
@@ -106,11 +109,20 @@ const renderGroups = [
 	style={`z-index: ${zIndex}; transform: translateZ(0); perspective: 1000px; opacity: var(--wallpaper-opacity, ${opacity}); filter: blur(var(--wallpaper-blur, ${blurAmount}px));`}
 	data-fullscreen-wallpaper
 >
-	<script is:inline define:vars={{ wallpaperEnabled: config.enable ?? true, overlaySwitchable: config.overlay?.switchable ?? true }}>
+	<script is:inline define:vars={{ wallpaperEnabled: config.enable ?? true, overlaySwitchable: config.overlay?.switchable ?? true, defaultWallpaperMode: siteConfig.wallpaperMode.defaultMode }}>
 	(function() {
 		const root = document.documentElement;
+		const wallpaperConfigVersion = '3712980239-video-v1';
+		if (localStorage.getItem('wallpaperConfigVersion') !== wallpaperConfigVersion) {
+			localStorage.removeItem('wallpaperMode');
+			localStorage.removeItem('overlayOpacity');
+			localStorage.removeItem('overlayBlur');
+			localStorage.removeItem('fullscreenOpacity');
+			localStorage.removeItem('fullscreenBlur');
+			localStorage.setItem('wallpaperConfigVersion', wallpaperConfigVersion);
+		}
 		const wallpaperEnabledVal = wallpaperEnabled;
-		const mode = wallpaperEnabledVal ? (localStorage.getItem('wallpaperMode') || 'banner') : 'banner';
+		const mode = wallpaperEnabledVal ? (localStorage.getItem('wallpaperMode') || defaultWallpaperMode) : 'banner';
 
 		if (mode === 'overlay') {
 			const isSw = typeof overlaySwitchable === 'object' ? overlaySwitchable : { opacity: !!overlaySwitchable, blur: !!overlaySwitchable, cardOpacity: !!overlaySwitchable };
@@ -136,7 +148,9 @@ const renderGroups = [
 	})();
 	</script>
 
-	{isCarouselEnabled ? (
+	{hasVideo ? (
+		<WallpaperVideo src={imageSources.desktop[0] || imageSources.mobile[0]} />
+	) : isCarouselEnabled ? (
 			renderGroups.map(group => group.hasImages && (
 				<div class={`${group.containerClass} w-full h-full relative`} style="transform: translateZ(0);">
 					{group.images.map((src, index) => (

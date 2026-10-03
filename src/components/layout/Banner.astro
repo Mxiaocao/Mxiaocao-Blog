@@ -6,6 +6,7 @@
  */
 
 import ViewportImage from "@components/atoms/Image/ViewportImage.astro";
+import WallpaperVideo from "@components/misc/WallpaperVideo.astro";
 import TypewriterText from "@components/atoms/typewriter-text/TypewriterText.astro";
 import { Icon } from "astro-icon/components";
 import { siteConfig } from "../../config";
@@ -78,10 +79,13 @@ const bannerFormats = getImageFormats();
 
 <div
 	id="banner-wrapper"
+	data-video={siteConfig.banner.video ? "true" : undefined}
 	class={`absolute z-10 w-full transition duration-700 overflow-hidden ${mobileNonHomeBannerClass}`}
-	style={`top: -${BANNER_HEIGHT_EXTEND}vh`}
+	style={`top: -${BANNER_HEIGHT_EXTEND}vh; ${siteConfig.banner.video ? `--banner-video-height: ${100 * siteConfig.banner.video.height / siteConfig.banner.video.width}vw;` : ""}`}
 >
-	{isCarouselEnabled ? (
+	{siteConfig.banner.video ? (
+		<WallpaperVideo {...siteConfig.banner.video} />
+	) : isCarouselEnabled ? (
 		/* 轮播图模式：Ken Burns + Crossfade */
 		<div
 			id="banner-carousel"

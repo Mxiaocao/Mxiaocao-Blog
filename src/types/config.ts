@@ -113,6 +113,7 @@ export interface SiteConfig {
 	};
 
 	banner: {
+		video?: { src: string; poster?: string; width: number; height: number };
 		src:
 			| string
 			| string[]

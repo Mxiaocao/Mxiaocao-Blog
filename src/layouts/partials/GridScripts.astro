@@ -57,6 +57,15 @@ const {
 		return Number.isFinite(parsed) ? parsed : fallback;
 	}
 
+	function migrateWallpaperConfig() {
+		const version = "3712980239-video-v1";
+		if (localStorage.getItem("wallpaperConfigVersion") === version) return;
+		for (const key of ["wallpaperMode", "overlayOpacity", "overlayBlur", "fullscreenOpacity", "fullscreenBlur"]) {
+			localStorage.removeItem(key);
+		}
+		localStorage.setItem("wallpaperConfigVersion", version);
+	}
+
 	function syncLayoutVariant() {
 		const pageData = document.getElementById("page-overlay-data");
 		let layoutVariant = "default";
@@ -194,6 +203,7 @@ const {
 
 	// 立即执行，在页面渲染前应用壁纸模式和布局模式，避免闪烁
 	(function () {
+		migrateWallpaperConfig();
 		const wallpaperMode =
 			wallpaperEnabled ? (localStorage.getItem("wallpaperMode") || defaultWallpaperMode) : defaultWallpaperMode;
 		const body = document.body;
@@ -292,6 +302,7 @@ const {
 
 	// 根据壁纸模式动态设置 banner 和全屏壁纸的显示
 	function applyWallpaperMode() {
+		migrateWallpaperConfig();
 		const wallpaperMode =
 			wallpaperEnabled ? (localStorage.getItem("wallpaperMode") || defaultWallpaperMode) : defaultWallpaperMode;
 

@@ -1,0 +1,62 @@
+---
+interface Props {
+	src: string;
+	poster?: string;
+}
+
+const { src, poster } = Astro.props;
+---
+
+<wallpaper-video class="absolute inset-0 block bg-black">
+	<video
+		class="h-full w-full"
+		style="object-fit: contain; object-position: center;"
+		src={src}
+		poster={poster}
+		autoplay
+		muted
+		loop
+		playsinline
+		preload="metadata"
+		aria-hidden="true"
+	></video>
+</wallpaper-video>
+
+<script>
+	class WallpaperVideo extends HTMLElement {
+		private observer?: IntersectionObserver;
+		private visible = false;
+
+		private syncPlayback = () => {
+			const video = this.querySelector("video");
+			if (!video) return;
+			video.muted = true;
+			if (this.visible && !document.hidden) {
+				void video.play().catch(() => {
+					// Keep the poster visible if the browser blocks autoplay.
+				});
+			} else {
+				video.pause();
+			}
+		};
+
+		connectedCallback() {
+			this.observer = new IntersectionObserver(([entry]) => {
+				this.visible = entry.isIntersecting;
+				this.syncPlayback();
+			});
+			this.observer.observe(this);
+			document.addEventListener("visibilitychange", this.syncPlayback);
+		}
+
+		disconnectedCallback() {
+			this.observer?.disconnect();
+			document.removeEventListener("visibilitychange", this.syncPlayback);
+			this.querySelector("video")?.pause();
+		}
+	}
+
+	if (!customElements.get("wallpaper-video")) {
+		customElements.define("wallpaper-video", WallpaperVideo);
+	}
+</script>

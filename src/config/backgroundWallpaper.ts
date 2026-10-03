@@ -4,16 +4,10 @@ export const fullscreenWallpaperConfig: FullscreenWallpaperConfig = {
 	enable: true,
 	src: {
 		desktop: [
-			"/assets/desktop-banner/1.webp",
-			"/assets/desktop-banner/2.webp",
-			"/assets/desktop-banner/3.webp",
-			"/assets/desktop-banner/4.webp",
+			"/assets/wallpaper/3712980239.mp4",
 		],
 		mobile: [
-			"/assets/mobile-banner/1.webp",
-			"/assets/mobile-banner/2.webp",
-			"/assets/mobile-banner/3.webp",
-			"/assets/mobile-banner/4.webp",
+			"/assets/wallpaper/3712980239.mp4",
 		],
 	},
 	position: "center",
@@ -22,8 +16,9 @@ export const fullscreenWallpaperConfig: FullscreenWallpaperConfig = {
 		interval: 5,
 	},
 	zIndex: -1,
-	opacity: 0.8,
-	blur: 1,
+	// 全屏动态壁纸保持原画清晰度；透明度和模糊仅由用户在设置面板中调整。
+	opacity: 1,
+	blur: 0,
 	switchable: true,
 	overlay: {
 		opacity: 0.8, // 壁纸不透明度，0-1

@@ -30,6 +30,12 @@
   }
 }
 
+/* Fit the video frame to the viewport width without a screen of empty bars. */
+body.enable-banner.fullscreen-banner #banner-wrapper[data-video="true"]:not(.mobile-hide-banner) {
+  height: min(100svh, var(--banner-video-height)) !important;
+  min-height: 0 !important;
+}
+
 /* ==========================================================================
    无 Banner 模式布局
    ========================================================================== */
