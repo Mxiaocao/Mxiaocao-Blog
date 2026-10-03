@@ -204,7 +204,8 @@ pnpm test
 - 已验证：临时内容构建确认 `/writing/2/`、旧 `/2/` 跳转及 Notes 正文可用；草稿模板无公开页面。最终预览检查新路由及六次 Swup 页面切换；手机/桌面、明暗模式、More 菜单滚动通过。历史清单保持不变。
 - 已知限制：`pnpm dev` 初始化停滞；系统字体模式的 Astro Font 类型检查限制详见上文。不得把生产预览通过描述成开发热更新已修复。
 - 壁纸集成：原始 3840×2160 视频位于 `public/assets/wallpaper/3712980239.mp4`；按 Astro 官方 public 资源说明（https://docs.astro.build/en/basics/project-structure/#public）原样提供，不转码。`fullscreen` 实际使用 `Banner.astro`，`FullscreenWallpaper.astro` 用于 `overlay`，两者复用 `WallpaperVideo.astro`；不能只改后者而声称全屏已播放视频。
-- 壁纸显示：`siteConfig.banner.video` 配置源、占位图和原始宽高；视频使用 `object-fit: contain` 保留完整构图，全屏横幅高度按视频比例随视口宽度缩小，并限制在一屏内，避免窄窗口裁剪放大或大块上下留黑。组件在画面隐藏、离开视口或切换标签页时暂停，重新可见时恢复静音循环播放。
+- 壁纸显示：`siteConfig.banner.video` 配置源、占位图和原始宽高；横幅模式使用 `object-fit: cover` 和 `object-position: center 48%` 铺满两侧、裁掉上下墙面并保留中央桃花；全屏及透明背景模式使用 `object-fit: contain` 保留完整构图，全屏横幅高度按视频比例随视口宽度缩小，并限制在一屏内，避免窄窗口裁剪放大或大块上下留黑。组件在画面隐藏、离开视口或切换标签页时暂停，重新可见时恢复静音循环播放。
+- 已验证（2026-10-03）：横幅裁剪调整后，Chrome 在截图对应文章页的 1996/1440 宽度下确认视频铺满视口宽度、无两侧黑边且正常播放；切换全屏恢复 contain。生产构建 69 页，样式、字体与 Pagefind 检查通过。
 - 壁纸缓存迁移：既有 `wallpaperConfigVersion=3712980239-video-v1` 一次性清理旧模式与视觉参数；本次无需用户粘贴 Console 命令。
 - 已验证（2026-10-03）：Chrome 实测原始视频可解码（3840×2160），播放时间持续递增；1996/1035/390 像素宽度无横向溢出，全屏/透明背景切换及 About 隐藏/恢复视频正常。Astro Check 353 文件无错误/警告/提示；生产构建 69 页，样式、字体与 Pagefind 检查通过。预览截图保留在本地 `.tmp/wallpaper-desktop.png` 与 `.tmp/wallpaper-narrow.png`。
 

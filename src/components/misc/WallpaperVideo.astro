@@ -10,7 +10,7 @@ const { src, poster } = Astro.props;
 <wallpaper-video class="absolute inset-0 block bg-black">
 	<video
 		class="h-full w-full"
-		style="object-fit: contain; object-position: center;"
+		style="object-fit: var(--wallpaper-video-fit, contain); object-position: var(--wallpaper-video-position, center);"
 		src={src}
 		poster={poster}
 		autoplay

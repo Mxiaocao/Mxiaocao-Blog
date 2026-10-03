@@ -30,6 +30,12 @@
   }
 }
 
+/* Banner mode fills the width and crops the walls around the blossom canopy. */
+body.enable-banner:not(.fullscreen-banner) #banner-wrapper[data-video="true"] {
+  --wallpaper-video-fit: cover;
+  --wallpaper-video-position: center 48%;
+}
+
 /* Fit the video frame to the viewport width without a screen of empty bars. */
 body.enable-banner.fullscreen-banner #banner-wrapper[data-video="true"]:not(.mobile-hide-banner) {
   height: min(100svh, var(--banner-video-height)) !important;
