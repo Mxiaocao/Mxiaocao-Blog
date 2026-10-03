@@ -137,7 +137,7 @@
 
 # 当前任务与下一步
 
-- 已完成（2026-10-03）：按用户清单补齐 AI 工具页四类五条记录：聊天 ChatGPT、编程 Codex/WorkBuddy、生图 ChatGPT、三维建模 Tripo3D；保留卡片与分类筛选，补充用途、描述、标签和官方链接。新增 modeling 分类及四种界面语言翻译；使用频率改为可选，未提供时不显示频率徽章与进度条。Chrome 验证筛选数量 5/1/2/1/1、390px 无横向溢出；Astro Check 353 文件无错误/警告/提示，构建 69 页，样式、字体及 Pagefind 检查通过。WorkBuddy 官网与 Tripo3D 用途分别核对 https://cloud.tencent.com/act/pro/workbuddy 和 https://www.tripo3d.ai/tutorials 。
+- 已完成（2026-10-03）：按用户清单补齐 AI 工具页四类五条记录：聊天 ChatGPT、编程 Codex/WorkBuddy、生图 ChatGPT Image、三维建模 Tripo3D；保留卡片与分类筛选，补充用途、描述、标签和官方链接。新增 modeling 分类及四种界面语言翻译；使用频率改为可选，未提供时不显示频率徽章与进度条。Chrome 验证筛选数量 5/1/2/1/1、390px 无横向溢出；Astro Check 353 文件无错误/警告/提示，构建 69 页，样式、字体及 Pagefind 检查通过。WorkBuddy 官网与 Tripo3D 用途分别核对 https://cloud.tencent.com/act/pro/workbuddy 和 https://www.tripo3d.ai/tutorials 。
 
 - 已完成（2026-10-03）：悬浮音乐面板、侧栏播放器和独立展开播放器增加“去网易云听完整版”及“查看歌单”入口；歌曲链接随当前歌曲更新，点击暂停站内播放并在新窗口打开网易云。Meting 响应无 id 时从音频接口 URL 提取歌曲 ID，无法确定歌曲时仅提供歌单链接；本地及其他平台模式不显示网易云入口。保留现有站内播放，不改变会员试听限制。链接解析边界校验通过，Astro Check 351 文件无错误/警告/提示，构建 68 页及样式、字体、Pagefind 检查通过。
 

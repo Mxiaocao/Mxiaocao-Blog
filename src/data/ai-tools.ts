@@ -73,7 +73,7 @@ export const aiToolsData: AITool[] = [
 	},
 	{
 		id: "chatgpt-image",
-		name: "ChatGPT",
+		name: "ChatGPT Image",
 		category: "image",
 		icon: "material-symbols:image-outline",
 		color: "#d779a8",
