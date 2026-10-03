@@ -1,0 +1,45 @@
+---
+import { FilterTabs } from "@components/atoms/filter-tabs";
+import BookCard from "@components/features/books/BookCard.astro";
+import { PageHeader } from "@components/features/page-header";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { Icon } from "astro-icon/components";
+import { siteConfig } from "../config";
+import { booksData, bookStatusLabels, type Book } from "../data/books";
+
+if (!siteConfig.featurePages.books) {
+	return Astro.redirect("/404/");
+}
+
+const statuses = Object.keys(bookStatusLabels) as Book["status"][];
+const filterTabs = [
+	{ value: "all", label: "全部", count: booksData.length, icon: "material-symbols:apps" },
+	...statuses.map((status) => ({
+		value: status,
+		label: bookStatusLabels[status],
+		count: booksData.filter((book) => book.status === status).length,
+	})),
+];
+---
+
+<MainGridLayout title="读书" description="记录在读、已读和想读的书，以及阅读中的想法。">
+	<script>
+		import("../scripts/right-sidebar-layout.js");
+	</script>
+	<script is:inline src="/js/filter-tabs-handler.js"></script>
+	<div class="card-base px-6 sm:px-9 py-6 w-full">
+		<PageHeader title="读书" subtitle="记录在读、已读和想读的书" />
+		<div class="mb-8"><FilterTabs tabs={filterTabs} dataAttr="status" /></div>
+		<div id="books-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+			{booksData.map((book) => <BookCard book={book} />)}
+		</div>
+		{booksData.length === 0 && (
+			<div class="text-center py-16">
+				<Icon name="material-symbols:menu-book" class="text-6xl text-black/15 dark:text-white/15 mb-4" />
+				<h2 class="text-lg font-medium text-black/80 dark:text-white/80 mb-2">暂无书籍记录</h2>
+				<p class="text-black/50 dark:text-white/50">书单和读书感想，会陆续记录在这里。</p>
+			</div>
+		)}
+		<p id="no-results" class="hidden text-center py-16 text-black/50 dark:text-white/50">这个分类下还没有书籍</p>
+	</div>
+</MainGridLayout>

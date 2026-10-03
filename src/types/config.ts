@@ -34,7 +34,7 @@ export interface SiteConfig {
 
 	// 特色页面开关配置
 	featurePages: {
-		anime: boolean; // 番剧页面开关
+		books: boolean; // 读书页面开关
 		diary: boolean; // 日记页面开关
 		friends: boolean; // 友链页面开关
 		projects: boolean; // 项目页面开关
@@ -203,7 +203,7 @@ export enum LinkPreset {
 	Archive = 1,
 	About = 2,
 	Friends = 3,
-	Anime = 4,
+	Books = 4,
 	Diary = 5,
 	Albums = 6,
 	Projects = 7,

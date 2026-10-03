@@ -8,6 +8,7 @@ export const reservedPostRoots = new Set([
 	"friends",
 	"albums",
 	"anime",
+	"books",
 	"diary",
 	"devices",
 	"skills",

@@ -26,7 +26,7 @@
 - 已验证：`/projects/` 与 `/projects/[slug]/` 共用 `projects` 内容集合；数据仍在 `src/data/projects.ts` 编辑，经 schema 校验后渲染。项目数据已替换为 ACM-OS、Dorm Hygiene、Ledgerly；三者均标记为进行中，只提供已核实的源码链接，没有虚构演示地址。项目详情补充了来自 README、构建配置和仓库提交的当前证据说明。
 - 已验证：`/notes/`、`/notes/[...slug]/` 已建立；Lab 内容模型和草稿保留，但暂不生成公开页面，方便后续并入项目详情。
 - 已验证：`/about/` 与 `/friends/` 使用 `spec` 内容集合中的 Markdown/MDX。
-- 已验证：模板还提供相册、追番、日记、设备、技能、时间线、AI 工具、RSS、Atom、站点地图、搜索数据和 API 路由。
+- 已验证：`/books/` 已替代追番入口，导航名称为“读书”，旧 `/anime/` 生成静态跳转至 `/books/`。模板还提供相册、日记、设备、技能、时间线、AI 工具、RSS、Atom、站点地图、搜索数据和 API 路由。
 
 ## 计划中的目标结构
 
@@ -63,7 +63,7 @@
 - 已验证：`src/content.config.ts` 定义 `posts`、`spec`、`projects`、`notes`、`lab` 五个集合；后三者使用 `src/schemas/content.ts` 的统一 schema。
 - 已验证：文章是 `src/content/posts/` 下的 Markdown/MDX。必填字段为 `title` 和 `published`；还支持更新时间、草稿、描述、封面、标签、分类、语言、置顶、评论、署名、许可证、加密、别名和自定义永久链接。
 - 已验证：`spec` 是 `src/content/spec/` 下无固定 schema 的 Markdown/MDX，目前用于 About 和 Friends。
-- 已验证：项目、日记、设备、技能、时间线、追番和 AI 工具等结构化页面使用 `src/data/` 下的 TypeScript 数据。
+- 已验证：项目、日记、设备、技能、时间线、书籍和 AI 工具等结构化页面使用 `src/data/` 下的 TypeScript 数据。书籍在 `src/data/books.ts` 录入，必填 id、书名、作者与在读/已读/想读状态，可选封面、简介/感想、出版社、出版年份、评分、页数进度、阅读日期、标签和详情链接；当前列表为空。
 - 已验证：项目记录包含稳定 id、标题、描述、图片、分类、技术栈、状态、链接、日期、精选状态、标签，以及 isDemo 和可选 sections（标题/正文段落）。ProjectInput 与 Project 从同一 schema 推导，集合加载时检查重复 id；列表保持数据文件顺序。
 - 已验证：Notes/Lab 均需 title、description、published、kind，支持 updated、draft、tags；Lab 额外要求 status，可设置 demoUrl 与 sourceCode。`src/content/notes/template.md` 和 `src/content/lab/template.md` 是不公开的草稿模板，复制后修改字段即可录入内容。
 - 已验证：Notes/Lab 使用共享列表与 Markdown 正文组件，公开详情参与 Pagefind；现有文章 RSS/Atom 和归档仍只处理 posts。
@@ -136,6 +136,8 @@
 - 完成 Phase 2 首页/文章分页拆分、项目详情、Notes/Lab 内容集合与导航接入。
 
 # 当前任务与下一步
+
+- 已完成（2026-10-03）：按用户要求将追番替换为读书，新增书籍卡片与状态筛选，开关为 `featurePages.books`，导航预设为 `LinkPreset.Books`；沿用 Mizuki 布局与筛选组件，旧番剧数据/API 工具不用于书籍。依据 Astro 官方路由文档保留旧地址静态跳转，并将 books 加入文章永久链接保留路径。Astro Check 为 350 个文件、0 错误/警告/提示；最终构建 68 页，样式、字体和 Pagefind 检查通过，生成 HTML 验证书单空状态、三个状态筛选、导航与旧地址跳转通过。
 
 - 已完成（2026-10-03）：仅初始化“更多”下的友链、追番、随笔、相册、技能展示、时间线、我使用的 AI 工具七页；归档与文章内容不在本次范围内。六个 TypeScript 数据列表置空，七页均有空状态，页面入口和录入机制保留。Astro Check 检查 347 个文件，0 错误/警告/提示；生产构建生成 67 页；样式、字体、Pagefind 和七页生成 HTML 空状态校验通过，示例相册详情不再生成。本次 pnpm 启动因软件源不可访问失败，改用已安装的 Astro CLI（禁用遥测）与本地检查脚本完成验证。
 

@@ -24,10 +24,10 @@ export const LinkPresets: Record<LinkPreset, NavBarLink> = {
 		url: "/friends/",
 		icon: "material-symbols:group",
 	},
-	[LinkPreset.Anime]: {
-		name: i18n(I18nKey.anime),
-		url: "/anime/",
-		icon: "material-symbols:movie",
+	[LinkPreset.Books]: {
+		name: "读书",
+		url: "/books/",
+		icon: "material-symbols:menu-book",
 	},
 	[LinkPreset.Diary]: {
 		name: i18n(I18nKey.diary),

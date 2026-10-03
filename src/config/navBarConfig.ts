@@ -17,7 +17,7 @@ import { LinkPreset } from "../types/config";
  *     LinkPreset.Archive    → 归档
  *     LinkPreset.About      → 关于
  *     LinkPreset.Friends    → 友链
- *     LinkPreset.Anime      → 番剧
+ *     LinkPreset.Books      → 读书
  *     LinkPreset.Diary      → 日记
  *     LinkPreset.Albums     → 相册
  *     LinkPreset.Projects   → 项目
@@ -140,7 +140,7 @@ export const navBarConfig: NavBarConfig = {
 			children: [
 				LinkPreset.Archive,
 				LinkPreset.Friends,
-				LinkPreset.Anime,
+				LinkPreset.Books,
 				LinkPreset.Diary,
 				LinkPreset.Albums,
 				{ name: "Devices", url: "/devices/", icon: "material-symbols:devices" },
