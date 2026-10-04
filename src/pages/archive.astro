@@ -1,16 +1,14 @@
 ---
 import ArchivePanel from "@components/features/archive/ArchivePanel.svelte";
-import CategoryBar from "@components/features/posts/CategoryBar.astro";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { getSortedPostsList } from "@utils/content-utils";
 
-import { siteConfig } from "../config";
+import { url } from "../utils/url-utils";
 
 const sortedPostsList = await getSortedPostsList();
 
-const showCategoryBar = siteConfig.postListLayout.categoryBar?.enable ?? false;
 
 // 1. 修复类型兼容性：将 category 的 null 转换为 undefined
 const posts = sortedPostsList.map((post) => ({
@@ -20,6 +18,8 @@ const posts = sortedPostsList.map((post) => ({
 		title: post.data.title,
 		tags: post.data.tags,
 		category: post.data.category === null ? undefined : post.data.category,
+		subcategory: post.data.subcategory || undefined,
+		topic: post.data.topic || undefined,
 		published: post.data.published,
 		_publishedDateOnly: post.data._publishedDateOnly,
 		alias: post.data.alias,
@@ -41,7 +41,7 @@ const categories = [
 ---
 
 <MainGridLayout title={i18n(I18nKey.archive)}>
-	{showCategoryBar && <CategoryBar mode="archive" />}
+	<div class="card-base px-6 py-4 mb-4 flex justify-between items-center"><h1 class="font-bold text-xl text-90">归档</h1><a class="text-sm text-50" href={url("/writing/")}>浏览文章 →</a></div>
 	<!-- 引入右侧边栏布局管理器 -->
 	<script>
 		import("../scripts/right-sidebar-layout.js");

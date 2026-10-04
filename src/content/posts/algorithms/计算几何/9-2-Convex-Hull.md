@@ -56,7 +56,11 @@ Andrew算法地核心思想是维护一个单调栈，分两步求出下凸壳�
    上下凸壳拼接为完整的凸包
 
 
-<iframe frameborder="0" height="600" loading="lazy" src="/algo-vis/convex-hull.html" style="border-radius:12px;margin:20px 0;" width="100%"></iframe>
+<iframe title="Andrew 凸包算法交互模拟" height="900" loading="lazy" src="/algo-vis/convex-hull.html" style="border:0;border-radius:12px;margin:20px 0;" width="100%"></iframe>
+
+[在独立页面打开凸包模拟器](/algo-vis/convex-hull.html)
+
+模拟器支持逐步查看排序、叉积判断、出栈和入栈，也可以编辑点集。与下面的代码一致，重复点会先去重，共线边只保留两个端点；全部共线时，凸包退化为线段。
 
 
 ```cpp
@@ -68,7 +72,7 @@ struct point{
         return y < o.y;
     }
     bool operator==(const point& o) const{
-        return x == other.x && y == other.y;
+        return x == o.x && y == o.y;
     }
 };
 
@@ -77,7 +81,7 @@ point operator-(point a,point b){
 }
 
 ll cross(point a,point b){
-    return a.x*b.y - a.y-b.x;
+    return a.x*b.y - a.y*b.x;
 }
 
 vector<point> convex_hull(vector<point> p){

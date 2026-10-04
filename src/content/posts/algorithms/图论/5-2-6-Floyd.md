@@ -60,7 +60,9 @@ Floyd 算法与 Dijkstra、SPFA 最大的不同在于，它不是用来求“单
   任意两点间的最短距离都已经锁定。
 
 
-<iframe frameborder="0" height="750" loading="lazy" src="/algo-vis/floyd.html" style="border-radius:12px;margin:20px 0;" width="100%"></iframe>
+<iframe title="Floyd 全源最短路交互模拟" height="780" loading="lazy" src="/algo-vis/floyd.html" style="border:0;border-radius:12px;margin:20px 0;" width="100%"></iframe>
+
+[在独立页面打开Floyd 全源最短路模拟器](/algo-vis/floyd.html)
 
 
 ## 代码解析

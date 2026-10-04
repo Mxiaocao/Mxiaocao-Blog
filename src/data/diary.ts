@@ -11,8 +11,19 @@ export interface DiaryItem {
 	tags?: string[];
 }
 
-// 日记数据（待录入）
-const diaryData: DiaryItem[] = [];
+// 日记数据
+const diaryData: DiaryItem[] = [
+	{
+		id: 1,
+		content: "女王生日快乐",
+		date: "2026-05-24",
+		images: ["/img/amit-daruka-xmsIhVEgzMo-unsplash.jpg"],
+	},
+];
+
+export function getDiaryById(id: number) {
+	return diaryData.find((item) => item.id === id);
+}
 
 // 获取日记列表（按时间倒序）
 export const getDiaryList = (limit?: number) => {

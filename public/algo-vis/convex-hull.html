@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Andrew 凸包算法模拟</title>
+  <link rel="stylesheet" href="./simulator.css">
+  <link rel="stylesheet" href="./convex-hull.css">
+</head>
+<body>
+<main>
+  <h1>Andrew 凸包算法模拟</h1>
+  <p class="muted">从点集到边界：观察排序、转向判断与单调栈的变化。</p>
+  <div class="toolbar">
+    <label>示例 <select id="preset"></select></label>
+    <button id="random" type="button">随机点集</button>
+    <button id="clear" type="button">清空点集</button>
+    <label><input id="edit-mode" type="checkbox">点击编辑点集</label>
+  </div>
+  <p class="muted" id="plot-help">开启编辑后，点击空白处添加整数点，点击已有点删除；修改会重新开始。也可在下方输入坐标。</p>
+  <div class="layout">
+    <div class="graph">
+      <svg id="plot" viewBox="0 0 480 480" role="img" aria-label="凸包坐标平面，横轴 x，纵轴 y" aria-describedby="plot-help"></svg>
+      <div class="legend"><span class="done">当前凸壳</span><span class="active">正在检查的转向</span><span class="chosen">最终边界</span></div>
+    </div>
+    <div class="state-panel">
+      <p><strong id="phase"></strong></p>
+      <p class="muted">排序后（按 x、y 去重）</p><div id="sorted" class="point-list"></div>
+      <p class="muted">栈底 → 栈顶</p><div id="stack" class="point-list"></div>
+      <p id="turn" class="formula"></p><p id="metrics" class="muted"></p>
+      <ol id="code" aria-label="Andrew 算法步骤"></ol>
+    </div>
+  </div>
+  <div class="status" id="status" role="status" aria-live="polite" aria-atomic="true"></div>
+  <div class="progress"><input id="progress" type="range" min="0" value="0" aria-label="执行进度"><output id="counter"></output></div>
+  <div class="toolbar">
+    <button id="reset" type="button">重置</button><button id="prev" type="button">上一步</button>
+    <button id="play" class="primary" type="button">播放</button><button id="next" type="button">下一步</button>
+    <label>速度 <select id="speed"><option value="1600">慢速</option><option value="850" selected>正常</option><option value="250">快速</option></select></label>
+  </div>
+  <p id="error" class="error" role="alert"></p>
+  <details id="editor"><summary>输入点坐标</summary>
+    <p class="muted">每行 x y，以空格分隔；坐标为 -10～10 的整数，最多 30 个点。重复点自动去重，共线边仅保留两端点。空点集也可运行。</p>
+    <label for="points">点列表</label><textarea id="points" spellcheck="false"></textarea>
+    <div class="toolbar"><button id="apply" type="button">应用并重新开始</button></div>
+  </details>
+  <noscript>交互模拟需要启用 JavaScript；算法说明与代码可在文章正文阅读。</noscript>
+</main>
+<script type="module" src="./convex-hull.mjs"></script>
+</body>
+</html>

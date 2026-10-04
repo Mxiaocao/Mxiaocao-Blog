@@ -1,37 +1,73 @@
 ---
+import Comment from "@components/comment/index.astro";
 import type { GetStaticPaths } from "astro";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { PageHeader } from "@components/features/page-header";
 import { siteConfig } from "@/config";
 import { getProjects } from "@/utils/section-content";
 import { url } from "@/utils/url-utils";
+import { physicsExperiments } from "@/data/physics-projects";
 export const getStaticPaths = (async () => {
 	if (!siteConfig.featurePages.projects) return [];
-	return (await getProjects()).map((project) => ({
-		params: { slug: project.id }, props: { project },
-	}));
+	return [
+		...(await getProjects()).map((project) => ({
+			params: { slug: project.id }, props: { project, redirect: undefined },
+		})),
+		...physicsExperiments.map((experiment) => ({
+			params: { slug: experiment.id },
+			props: { project: undefined, redirect: `/projects/physics-lab/#${experiment.id}` },
+		})),
+	];
 }) satisfies GetStaticPaths;
 const { project } = Astro.props;
+if (!project) return Astro.redirect(Astro.props.redirect!);
+const statusLabels = { completed: "已完成", "in-progress": "进行中", planned: "计划中" };
+const categoryLabels = { web: "Web 应用", mobile: "移动应用", desktop: "桌面应用", physics: "物理实验", other: "其他" };
 ---
 <MainGridLayout title={project.title} description={project.description}>
 	<script>import("../../scripts/right-sidebar-layout.js");</script>
 	<article class="card-base px-6 sm:px-9 py-8" data-pagefind-body>
-		<a href={url("/projects/")} class="link-lg inline-block mb-6">All projects</a>
+		<a href={url("/projects/")} class="link-lg inline-block mb-6">全部项目</a>
 		{project.isDemo && <p class="text-sm text-black/60 dark:text-white/60 mb-4">Mizuki template example. This is not a Mxiaocao project.</p>}
 		<PageHeader title={project.title} subtitle={project.description} />
+		{project.experiments.length > 0 && <p class="text-sm text-(--primary) mb-6">学习实践 · {project.experiments.length} 个交互实验</p>}
 		{project.image && project.showImage !== false && <img src={project.image} alt={project.title} width="960" height="540" class="w-full rounded-xl mb-8 object-cover" />}
-		<dl class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-black/80 dark:text-white/80 mb-8">
-			<div><dt class="font-bold mb-1">Status</dt><dd>{project.status}</dd></div>
-			<div><dt class="font-bold mb-1">Category</dt><dd>{project.category}</dd></div>
-			<div><dt class="font-bold mb-1">Started</dt><dd><time datetime={project.startDate}>{project.startDate}</time></dd></div>
-			{project.endDate && <div><dt class="font-bold mb-1">Completed</dt><dd><time datetime={project.endDate}>{project.endDate}</time></dd></div>}
-			<div class="sm:col-span-2"><dt class="font-bold mb-1">Built with</dt><dd>{project.techStack.join(" · ")}</dd></div>
-		</dl>
+		{project.experiments.length === 0 && <dl class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-black/80 dark:text-white/80 mb-8">
+			<div><dt class="font-bold mb-1">状态</dt><dd>{statusLabels[project.status]}</dd></div>
+			<div><dt class="font-bold mb-1">分类</dt><dd>{categoryLabels[project.category]}</dd></div>
+			{project.startDate && <div><dt class="font-bold mb-1">开始日期</dt><dd><time datetime={project.startDate}>{project.startDate}</time></dd></div>}
+			{project.endDate && <div><dt class="font-bold mb-1">完成日期</dt><dd><time datetime={project.endDate}>{project.endDate}</time></dd></div>}
+			<div class="sm:col-span-2"><dt class="font-bold mb-1">技术栈</dt><dd>{project.techStack.join(" · ")}</dd></div>
+		</dl>}
+		{project.experiments.length > 0 && <section aria-label="实验合集">
+			<p class="mb-6 text-black/60 dark:text-white/60">选择一个实验直接打开。电场与三维函数演示需要 WebGL 支持及网络连接。</p>
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+				{project.experiments.map((experiment) => <section id={experiment.id} class="flex flex-col min-w-0 rounded-xl border border-black/10 dark:border-white/10 p-5 scroll-mt-28">
+					<h2 class="text-xl font-bold mb-3">{experiment.title}</h2>
+					<p class="text-black/70 dark:text-white/70 mb-4">{experiment.description}</p>
+					<details class="mb-5 text-sm text-black/60 dark:text-white/60">
+						<summary class="cursor-pointer w-fit">操作说明</summary>
+						<p class="mt-2">{experiment.instructions}</p>
+					</details>
+					<div class="flex flex-wrap items-center gap-4 mt-auto">
+						<a href={experiment.liveDemo} target="_blank" rel="noopener noreferrer" aria-label={`打开${experiment.title}（新窗口）`} class="btn-regular rounded-lg px-4 py-2">打开实验 ↗</a>
+					</div>
+				</section>)}
+			</div>
+		</section>}
 		{project.sections.map((section) => <section class="mb-8"><h2 class="text-2xl font-bold mb-3">{section.title}</h2><p class="whitespace-pre-line text-black/80 dark:text-white/80">{section.body}</p></section>)}
 		<div class="flex flex-wrap gap-4">
-			{project.visitUrl && <a class="link-lg" href={project.visitUrl} target="_blank" rel="noopener noreferrer">Visit project</a>}
-			{project.liveDemo && <a class="link-lg" href={project.liveDemo} target="_blank" rel="noopener noreferrer">Live demo</a>}
-			{project.sourceCode && <a class="link-lg" href={project.sourceCode} target="_blank" rel="noopener noreferrer">Source code</a>}
+			{project.visitUrl && <a class="link-lg" href={project.visitUrl} target="_blank" rel="noopener noreferrer">访问项目</a>}
+			{project.liveDemo && <a class="link-lg" href={project.liveDemo} target="_blank" rel="noopener noreferrer">{project.embedDemo ? "在新窗口打开实验 ↗" : "在线演示 ↗"}</a>}
+			{project.sourceCode && <a class="link-lg" href={project.sourceCode} target="_blank" rel="noopener noreferrer">查看源码 ↗</a>}
 		</div>
+		{project.embedDemo && project.liveDemo && <section class="mt-8" aria-label="交互实验">
+			<h2 class="text-2xl font-bold mb-3">交互实验</h2>
+			<p class="mb-4 text-black/60 dark:text-white/60">可直接在下方操作，也可在新窗口中使用完整实验界面。</p>
+			<iframe src={project.liveDemo} title={`${project.title}交互演示`} loading="lazy" allowfullscreen class="w-full h-[760px] rounded-xl border border-black/10 dark:border-white/10" />
+		</section>}
 	</article>
+	<div class="mt-4">
+		<Comment path={Astro.url.pathname} />
+	</div>
 </MainGridLayout>

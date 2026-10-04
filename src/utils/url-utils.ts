@@ -79,7 +79,7 @@ export function getCategoryUrl(category: string | null): string {
 	) {
 		return url("/archive/?uncategorized=true");
 	}
-	return url(`/archive/?category=${encodeURIComponent(category.trim())}`);
+	return url(`/writing/?category=${encodeURIComponent(category.trim())}`);
 }
 
 export function getDir(path: string): string {

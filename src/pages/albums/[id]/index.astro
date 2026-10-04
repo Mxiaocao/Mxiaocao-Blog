@@ -1,4 +1,5 @@
 ---
+import Comment from "@components/comment/index.astro";
 import { PhotoCard } from "@components/features/albums";
 import PasswordProtection from "@components/features/auth/PasswordProtection.astro";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
@@ -209,5 +210,8 @@ if (isEncrypted) {
 				)
 			}
 		</div>
+	</div>
+	<div class="mt-4">
+		<Comment path={Astro.url.pathname} />
 	</div>
 </MainGridLayout>

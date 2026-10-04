@@ -18,6 +18,8 @@ const postsCollection = defineCollection({
 		image: z.string().optional().default(""),
 		tags: z.array(z.string()).optional().default([]),
 		category: z.string().optional().nullable().default(""),
+		subcategory: z.string().optional().nullable().default(""),
+		topic: z.string().optional().nullable().default(""),
 		lang: z.string().optional().default(""),
 		pinned: z.boolean().optional().default(false),
 		comment: z.boolean().optional().default(true),
@@ -46,6 +48,13 @@ const postsCollection = defineCollection({
 		nextSlug: z.string().default(""),
 		_publishedDateOnly: z.boolean(),
 		_updatedDateOnly: z.boolean(),
+	}).superRefine((data, ctx) => {
+		if (data.subcategory?.trim() && !data.category?.trim()) {
+			ctx.addIssue({ code: "custom", path: ["subcategory"], message: "二级分类需要填写 category" });
+		}
+		if (data.topic?.trim() && !data.subcategory?.trim()) {
+			ctx.addIssue({ code: "custom", path: ["topic"], message: "三级分类需要填写 subcategory" });
+		}
 	}),
 });
 const specCollection = defineCollection({

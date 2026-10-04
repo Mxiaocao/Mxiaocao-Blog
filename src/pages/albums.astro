@@ -1,4 +1,5 @@
 ---
+import Comment from "@components/comment/index.astro";
 import { FilterTabs } from "@components/atoms/filter-tabs";
 import { AlbumCard } from "@components/features/albums";
 import { PageHeader } from "@components/features/page-header";
@@ -94,6 +95,9 @@ const subtitle = i18n(I18nKey.albumsSubtitle);
 				)
 			}
 		</div>
+	</div>
+	<div class="mt-4">
+		<Comment path={Astro.url.pathname} />
 	</div>
 </MainGridLayout>
 

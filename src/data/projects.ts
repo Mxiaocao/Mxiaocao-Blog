@@ -1,5 +1,6 @@
 // Verified project records for the Projects page and homepage.
 import type { ProjectInput } from "../schemas/content";
+import { physicsProjects } from "./physics-projects";
 export type { Project } from "../schemas/content";
 
 export const projectsData: ProjectInput[] = [
@@ -42,6 +43,7 @@ export const projectsData: ProjectInput[] = [
 		featured: true,
 		tags: ["Local-first", "Ledger", "Kotlin"],
 	},
+	...physicsProjects,
 ];
 
 export const getProjectStats = () => {

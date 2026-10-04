@@ -1,0 +1,24 @@
+---
+import Comment from "@components/comment/index.astro";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { PageHeader } from "@components/features/page-header";
+import footprints from "../../data/footprints.json";
+---
+<MainGridLayout title="足迹地图" description="记录杭州的散步路线、去过的地方和沿途照片。">
+	<script>import("../../scripts/right-sidebar-layout.js");</script>
+	<section class="footprint-page card-base p-4 sm:p-6" data-pagefind-body>
+		<PageHeader title="足迹地图" subtitle={`${footprints.places.length} 个地点 · ${footprints.routes.length} 条路线，记录走过的杭州。`} />
+		<iframe src="/map/view/" title="杭州足迹地图：地点、路线与照片" class="footprint-frame" loading="lazy"></iframe>
+		<noscript>地图需要 JavaScript。地点包括：{footprints.places.map(place => place.name).join("、")}。</noscript>
+	</section>
+	<div class="mt-4">
+		<Comment path={Astro.url.pathname} />
+	</div>
+</MainGridLayout>
+<style>
+	.footprint-frame { display: block; width: 100%; height: 720px; border: 0; border-radius: 12px; }
+	@media (max-width: 800px) { .footprint-frame { height: 1080px; } }
+	:global(#main-grid:has(.footprint-page) > #swup-container) { grid-column: 1 / -1 !important; grid-row: 1 / 2 !important; }
+	:global(#main-grid:has(.footprint-page) #sidebar),
+	:global(#main-grid:has(.footprint-page) .right-sidebar-container) { display: none !important; }
+</style>

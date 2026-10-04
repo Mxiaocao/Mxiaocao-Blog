@@ -1,0 +1,24 @@
+{
+  "sourceRepository": "https://github.com/Mxiaocao/Mxiaocao-Blog-Legacy",
+  "sourceRevision": "a4edb3d112c0eec10b40778cd9785c87d4992a87",
+  "sourcePaths": [
+    "map/index.html",
+    "map/map.js",
+    "map/map.css"
+  ],
+  "destination": "/map/",
+  "data": "src/data/footprints.json",
+  "counts": {
+    "places": 28,
+    "routes": 3,
+    "photos": 62
+  },
+  "configuration": [
+    "AMAP_JS_KEY",
+    "AMAP_SECURITY_JS_CODE"
+  ],
+  "notes": [
+    "AMap browser configuration is supplied at build time; original values recovered into ignored local .env.",
+    "Legacy site shell excluded; map-specific assets run in an isolated frame within Mizuki."
+  ]
+}

@@ -3,6 +3,7 @@ import { glob } from "astro/loaders";
 import { extractFrontmatter } from "astro/markdown";
 
 import { isDateOnlyFrontmatterField } from "../utils/frontmatter-date";
+import { classificationPath } from "../utils/article-taxonomy";
 
 type GlobOptions = Parameters<typeof glob>[0];
 
@@ -32,6 +33,12 @@ export function postGlob(options: GlobOptions): ReturnType<typeof glob> {
 					const rawFrontmatter = extractFrontmatter(source) ?? "";
 					const data = {
 						...props.data,
+						...(props.data.category === "STL" && !props.data.subcategory && !props.data.topic ? {
+							category: classificationPath({ category: "STL" })[0],
+							subcategory: "编程语言",
+							topic: "C / C++",
+							tags: [...new Set([...(Array.isArray(props.data.tags) ? props.data.tags : []), "STL"])],
+						} : {}),
 						_publishedDateOnly: isDateOnlyFrontmatterField(
 							rawFrontmatter,
 							"published",

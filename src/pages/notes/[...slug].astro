@@ -1,4 +1,5 @@
 ---
+import Comment from "@components/comment/index.astro";
 import { render } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import SectionEntry from "@components/features/sections/SectionEntry.astro";
@@ -11,4 +12,7 @@ const { Content, headings } = await render(entry);
 ---
 <SectionEntry {...entry.data} headings={headings} section="Notes" basePath="/notes/">
 	<Content />
+	<div slot="comments" class="mt-4">
+		<Comment path={Astro.url.pathname} />
+	</div>
 </SectionEntry>

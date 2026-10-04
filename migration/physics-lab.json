@@ -1,0 +1,90 @@
+{
+  "sourceRepository": "https://github.com/Mxiaocao/Mxiaocao-Blog-Legacy",
+  "sourceRevision": "a4edb3d112c0eec10b40778cd9785c87d4992a87",
+  "migratedOn": "2026-10-04",
+  "scope": "Six physics-lab experiments; algorithm visualizations excluded.",
+  "indexRedirect": {
+    "from": "/physics-lab/",
+    "to": "/projects/physics-lab/"
+  },
+  "experiments": [
+    {
+      "title": "模拟示波器",
+      "legacyPath": "/physics-lab/oscilloscope.html",
+      "projectPath": "/projects/physics-lab/#oscilloscope",
+      "asset": "public/physics-lab/oscilloscope.html",
+      "sourceSha256": "1f6994ea565643079c214d3ad56f030debf9ed61751ebc28db826d09536c25b5",
+      "changes": [
+        "Normalize final newline; preserve HTML document."
+      ],
+      "externalDependencies": [],
+      "previousProjectPath": "/projects/oscilloscope/"
+    },
+    {
+      "title": "弦振动实验",
+      "legacyPath": "/physics-lab/String-Vibration-Experiment-1.html",
+      "projectPath": "/projects/physics-lab/#string-vibration",
+      "asset": "public/physics-lab/String-Vibration-Experiment-1.html",
+      "sourceSha256": "fcecd4fefa3f167dcc7152d4dcbcb35784e652ae18a29452ed09d45198cc2530",
+      "changes": [
+        "Remove Markdown heading and enclosing HTML code fence; preserve HTML document."
+      ],
+      "externalDependencies": [],
+      "previousProjectPath": "/projects/string-vibration/"
+    },
+    {
+      "title": "等厚干涉实验",
+      "legacyPath": "/physics-lab/Equal-Thickness-Interference-1.html",
+      "projectPath": "/projects/physics-lab/#equal-thickness-interference",
+      "asset": "public/physics-lab/Equal-Thickness-Interference-1.html",
+      "sourceSha256": "427daeabcd6f0e8fe8bb4be6d1b6cf20aff529a57afef48a7b7e240e8e80ec33",
+      "changes": [
+        "Normalize final newline; preserve HTML document."
+      ],
+      "externalDependencies": [],
+      "previousProjectPath": "/projects/equal-thickness-interference/"
+    },
+    {
+      "title": "电场可视化",
+      "legacyPath": "/physics-lab/E-Field-Simulation.html",
+      "projectPath": "/projects/physics-lab/#electric-field",
+      "asset": "public/physics-lab/E-Field-Simulation.html",
+      "sourceSha256": "bf3240dae53e66ea808ee9bbe5ce31f0932f5eab8519b4033fe50a87ff509cce",
+      "changes": [
+        "Normalize final newline; preserve HTML document."
+      ],
+      "externalDependencies": [
+        "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js"
+      ],
+      "previousProjectPath": "/projects/electric-field/"
+    },
+    {
+      "title": "三维函数图像生成器",
+      "legacyPath": "/physics-lab/3D-Function-Grapher.html",
+      "projectPath": "/projects/physics-lab/#3d-function-grapher",
+      "asset": "public/physics-lab/3D-Function-Grapher.html",
+      "sourceSha256": "3df741ffb36cce1e1b175ff289434ce80806be370ee833402f7d869fe13086a5",
+      "changes": [
+        "Normalize final newline; preserve HTML document."
+      ],
+      "externalDependencies": [
+        "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js"
+      ],
+      "previousProjectPath": "/projects/3d-function-grapher/"
+    },
+    {
+      "title": "电通量：从工程到 AI",
+      "legacyPath": "/physics-lab/Electric-Flux-Engineering-to-AI.html",
+      "projectPath": "/projects/physics-lab/#electric-flux",
+      "asset": "public/physics-lab/Electric-Flux-Engineering-to-AI.html",
+      "sourceSha256": "e5878a6d11d83d95bad71769cfccabb1790d7fcad137a630aaa14493aa41ee21",
+      "changes": [
+        "Normalize final newline; preserve HTML document."
+      ],
+      "externalDependencies": [],
+      "previousProjectPath": "/projects/electric-flux/"
+    }
+  ]
+}

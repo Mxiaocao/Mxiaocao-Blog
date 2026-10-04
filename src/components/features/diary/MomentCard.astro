@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import PublishedDate from "../posts/atoms/PublishedDate.astro";
 
 import { formatRelativeTime } from "../../../utils/timeFormat";
 import type { MomentCardProps } from "./types";
@@ -82,14 +83,14 @@ const relativeTime = formatRelativeTime(
 			class="flex items-center justify-between text-xs text-black/50 dark:text-white/50 flex-wrap gap-2"
 		>
 			<div class="flex items-center gap-1.5">
-				<Icon
-					name="material-symbols:schedule"
-					class="text-xs w-3.5 h-3.5"
-				/>
-				<time datetime={moment.date}>{relativeTime}</time>
+				<PublishedDate date={new Date(moment.date)} />
+				<span class="text-xs">{relativeTime}</span>
 			</div>
 
 			<div class="flex items-center gap-3">
+				<a href={`/diary/${moment.id}/`} class="link text-(--primary)">
+					查看详情
+				</a>
 				{
 					moment.location && (
 						<span class="flex items-center gap-1">

@@ -4,6 +4,7 @@ import { i18n } from "@i18n/translation";
 import { formatDateToYYYYMMDD, getPostDateParts } from "@utils/date-utils";
 import { comparePublishedDatesDescending } from "@utils/post-date-utils";
 import { onMount } from "svelte";
+import { classificationPath, matchesClassification } from "@/utils/article-taxonomy";
 import type { ArchivePanelProps, Group, Post } from "./types";
 
 let {
@@ -40,7 +41,7 @@ onMount(async () => {
 
 	if (categories.length > 0) {
 		filteredPosts = filteredPosts.filter(
-			(post) => post.data.category && categories.includes(post.data.category),
+			(post) => categories.some(category => matchesClassification(classificationPath(post.data), classificationPath({ category, subcategory: params.get("subcategory"), topic: params.get("topic") }))),
 		);
 	}
 
@@ -87,6 +88,7 @@ onMount(async () => {
 </script>
 
 <div class="card-base px-8 py-6">
+	{#if groups.length === 0}<p class="py-8 text-center text-50">暂无匹配的文章。</p>{/if}
 	{#each groups as group (group.year)}
 		<div>
 			<div class="flex flex-row w-full items-center h-15">

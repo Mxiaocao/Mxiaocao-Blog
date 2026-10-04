@@ -1,7 +1,6 @@
 ---
 import { PageHeader } from "@components/features/page-header";
-import Pagination from "@components/control/Pagination.astro";
-import CategoryBar from "@components/features/posts/CategoryBar.astro";
+import WritingPanel from "@components/features/posts/WritingPanel.astro";
 import PostPage from "@components/features/posts/PostPage.astro";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import type { GetStaticPaths } from "astro";
@@ -26,25 +25,16 @@ export const getStaticPaths = (async ({ paginate }) => {
 
 const { page } = Astro.props;
 
-const len = page?.data.length ?? 0;
+const allPosts = await getSortedPosts();
 ---
 
 <MainGridLayout title="文章" description="算法、软件与工程实践文章。">
-	<section class="card-base px-6 sm:px-9 py-8 mb-4"><PageHeader title="文章" subtitle="算法、软件与工程实践文章。" /></section>
-	{showCategoryBar && <CategoryBar mode="writing" />}
-	{page ? (
-		<>
-			<PostPage page={page} />
-			<Pagination
-				class="mx-auto onload-animation"
-				page={page}
-				basePath="/writing/"
-				style={`animation-delay: calc(var(--content-delay) + ${len * 50}ms)`}
-			/>
-		</>
-	) : (
-		<div class="card-base p-6 text-black/70 dark:text-white/70">
-			暂无已发布文章，内容正在准备中。
+	<div class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32">
+		<div class="card-base z-10 px-6 sm:px-9 py-6 relative w-full">
+				<div id="writing-header"><PageHeader title="文章" subtitle="算法、软件与工程实践文章。" /></div>
+			<WritingPanel posts={allPosts} showFilters={showCategoryBar} initialPage={page?.currentPage ?? 1}>
+				{page && <PostPage page={{ ...page, data: allPosts }} />}
+			</WritingPanel>
 		</div>
-	)}
+	</div>
 </MainGridLayout>

@@ -1,5 +1,12 @@
 @reference "tailwindcss";
 
+/* Override Expressive Code's token resets; display literal programming operators. */
+.custom-md code,
+.custom-md code * {
+  font-variant-ligatures: none !important;
+  font-feature-settings: "liga" 0, "calt" 0 !important;
+}
+
 .custom-md {
   h1 {
     @apply text-3xl;

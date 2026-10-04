@@ -1,0 +1,128 @@
+---
+import { Icon } from "astro-icon/components";
+import { getSortedPostsList } from "@/utils/content-utils";
+import { buildArticleMenu } from "@/utils/article-taxonomy";
+import ArticleMenuLevel from "./ArticleMenuLevel.astro";
+const { mobile = false } = Astro.props;
+const nodes = buildArticleMenu((await getSortedPostsList()).map(post => post.data));
+---
+<article-menu class:list={[{ "article-menu-mobile": mobile }]}>
+	<button type="button" data-menu-trigger aria-expanded="false" aria-label="文章菜单" class="btn-plain rounded-lg h-11 font-bold flex items-center gap-2 px-3 lg:px-5">
+		<Icon name="material-symbols:article" class="text-[1.1rem]" />
+		<span class:list={[{ "hidden lg:inline": !mobile }]}>文章</span>
+		<Icon name="material-symbols:keyboard-arrow-down-rounded" />
+	</button>
+	<ArticleMenuLevel nodes={nodes} />
+</article-menu>
+
+<style is:global>
+	article-menu { display: block; position: relative; }
+	article-menu [hidden] { display: none !important; }
+	.article-menu-level { position: absolute; top: 100%; left: 0; width: 12rem; padding: .5rem; border: 1px solid var(--line-divider); border-radius: var(--radius-large); background: color-mix(in srgb, var(--float-panel-bg) 92%, transparent); backdrop-filter: blur(20px); box-shadow: 0 8px 24px #00000014; z-index: 60; }
+	.article-menu-entry { position: relative; }
+	.article-menu-entry > .article-menu-level { top: -.5rem; left: 100%; }
+	.article-menu-row { display: flex; align-items: center; border-radius: .5rem; }
+	.article-menu-link { display: block; flex: 1; min-width: 0; padding: .65rem .75rem; border-radius: .5rem; font-weight: 500; overflow-wrap: anywhere; }
+	.article-menu-link:hover, .article-menu-enter:hover, .article-menu-back:hover { color: var(--primary); background: var(--btn-plain-bg-hover); }
+	.article-menu-enter { align-self: stretch; padding: .5rem .8rem; border-radius: .5rem; }
+	.article-menu-back { display: none; padding: .6rem .75rem; width: 100%; text-align: left; font-weight: bold; }
+	article-menu:not([data-drill]) .article-menu-level:not(:has(.article-menu-level)) { max-height: calc(100dvh - 6rem); overflow-y: auto; }
+	article-menu[data-drill] > .article-menu-level { position: absolute; right: 0; left: auto; max-width: calc(100vw - 2rem); }
+	article-menu[data-drill] .article-menu-level .article-menu-level { position: static; width: 100%; border: 0; box-shadow: none; padding: 0; background: transparent; backdrop-filter: none; }
+	article-menu[data-drill] .article-menu-back { display: block; }
+	article-menu[data-drill] .article-menu-level[data-descending] > a,
+	article-menu[data-drill] .article-menu-level[data-descending] > button,
+	article-menu[data-drill] .article-menu-level[data-descending] > .article-menu-entry:not([data-selected]),
+	article-menu[data-drill] .article-menu-entry[data-selected] > .article-menu-row { display: none; }
+	.article-menu-mobile { width: 100%; }
+	.article-menu-mobile > button { width: 100%; justify-content: flex-start; }
+	.article-menu-mobile[data-drill] > .article-menu-level { position: static; width: 100%; }
+</style>
+
+<script>
+	class ArticlesMenu extends HTMLElement {
+		controller?: AbortController;
+		closeTimer?: ReturnType<typeof setTimeout>;
+		connectedCallback() {
+			this.controller = new AbortController();
+			const options = { signal: this.controller.signal };
+			const drill = this.classList.contains("article-menu-mobile") || matchMedia("(hover: none), (max-width: 1023px)").matches;
+			this.toggleAttribute("data-drill", drill);
+			this.addEventListener("click", this.handleClick, options);
+			this.addEventListener("pointerover", event => {
+				if (this.hasAttribute("data-drill") || event.pointerType !== "mouse") return;
+				clearTimeout(this.closeTimer);
+				this.open(this.querySelector<HTMLElement>(":scope > [data-menu-level]")!);
+				const entry = (event.target as Element).closest<HTMLElement>("[data-menu-entry]");
+				if (entry) {
+					this.closeSiblings(entry);
+					const child = entry.querySelector<HTMLElement>(":scope > [data-menu-level]");
+					if (child) this.open(child);
+				}
+			}, options);
+			this.addEventListener("pointerleave", () => { if (!this.hasAttribute("data-drill")) this.closeTimer = setTimeout(() => this.closeAll(), 200); }, options);
+			this.addEventListener("keydown", event => {
+				if (event.key === "Escape") { this.closeAll(); this.querySelector<HTMLButtonElement>("[data-menu-trigger]")?.focus(); }
+				if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+					const target = event.target as HTMLElement;
+					const button = target.matches("button") ? target : target.closest("[data-menu-entry]")?.querySelector<HTMLButtonElement>("[data-menu-enter]");
+					if (button) {
+						event.preventDefault();
+						const level = button.matches("[data-menu-trigger]") ? this.querySelector<HTMLElement>(":scope > [data-menu-level]") : button.closest("[data-menu-entry]")?.querySelector<HTMLElement>(":scope > [data-menu-level]");
+						if (level) { this.open(level); level.querySelector<HTMLElement>(":scope > a")?.focus(); }
+					}
+				}
+				if (event.key === "ArrowLeft") {
+					const level = (event.target as Element).closest<HTMLElement>("[data-menu-level]");
+					if (level) { event.preventDefault(); this.close(level); level.parentElement?.querySelector<HTMLButtonElement>(":scope > .article-menu-row > button, :scope > [data-menu-trigger]")?.focus(); }
+				}
+			}, options);
+			document.addEventListener("click", event => { if (!this.contains(event.target as Node)) this.closeAll(); }, options);
+			window.addEventListener("resize", () => {
+				this.closeAll();
+				this.toggleAttribute("data-drill", this.classList.contains("article-menu-mobile") || matchMedia("(hover: none), (max-width: 1023px)").matches);
+			}, options);
+		}
+		disconnectedCallback() { this.controller?.abort(); clearTimeout(this.closeTimer); }
+		closeSiblings(entry: HTMLElement) {
+			for (const sibling of entry.parentElement!.children) {
+				if (sibling !== entry) sibling.querySelectorAll<HTMLElement>("[data-menu-level]").forEach(level => this.close(level));
+			}
+		}
+		open(level: HTMLElement) {
+			level.hidden = false;
+			const entry = level.parentElement!;
+			entry.querySelector(":scope > .article-menu-row > button, :scope > [data-menu-trigger]")?.setAttribute("aria-expanded", "true");
+			if (this.hasAttribute("data-drill")) {
+				if (entry.matches("[data-menu-entry]")) { entry.setAttribute("data-selected", ""); entry.parentElement!.setAttribute("data-descending", ""); }
+			} else {
+				level.style.left = ""; level.style.right = "";
+				if (level.getBoundingClientRect().right > innerWidth - 12) { level.style.left = "auto"; level.style.right = entry === this ? "0" : "100%"; }
+			}
+		}
+		close(level: HTMLElement) {
+			level.hidden = true; level.style.left = ""; level.style.right = "";
+			level.removeAttribute("data-descending");
+			const entry = level.parentElement!;
+			entry.removeAttribute("data-selected");
+			entry.parentElement?.removeAttribute("data-descending");
+			entry.querySelector(":scope > .article-menu-row > button, :scope > [data-menu-trigger]")?.setAttribute("aria-expanded", "false");
+		}
+		closeAll() { this.querySelectorAll<HTMLElement>("[data-menu-level]").forEach(level => this.close(level)); }
+		handleClick = (event: MouseEvent) => {
+			const target = event.target as Element;
+			if (target.closest("[data-menu-trigger]")) {
+				const root = this.querySelector<HTMLElement>(":scope > [data-menu-level]")!;
+				if (root.hidden) this.open(root); else this.closeAll();
+			} else if (target.closest("[data-menu-back]")) this.close(target.closest<HTMLElement>("[data-menu-level]")!);
+			else {
+				const entry = target.closest<HTMLElement>("[data-menu-entry]");
+				const level = entry?.querySelector<HTMLElement>(":scope > [data-menu-level]");
+				if (level && target.closest(".article-menu-row") && (target.closest("[data-menu-enter]") || this.hasAttribute("data-drill"))) {
+					event.preventDefault(); event.stopPropagation(); this.closeSiblings(entry!); this.open(level);
+				} else if (target.closest("a")) this.closeAll();
+			}
+		};
+	}
+	if (!customElements.get("article-menu")) customElements.define("article-menu", ArticlesMenu);
+</script>

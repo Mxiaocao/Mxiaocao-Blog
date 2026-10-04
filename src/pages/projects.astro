@@ -1,4 +1,5 @@
 ---
+import Comment from "@components/comment/index.astro";
 import { FilterTabs } from "@components/atoms/filter-tabs";
 import { PageHeader } from "@components/features/page-header";
 import { ProjectCard } from "@components/features/projects";
@@ -28,6 +29,8 @@ const getCategoryText = (category: string) => {
 			return i18n(I18nKey.projectsMobile);
 		case "desktop":
 			return i18n(I18nKey.projectsDesktop);
+		case "physics":
+			return "物理实验";
 		case "other":
 			return i18n(I18nKey.projectsOther);
 		case UNCATEGORIZED:
@@ -45,6 +48,8 @@ const getCategoryIcon = (category: string) => {
 			return "material-symbols:smartphone";
 		case "desktop":
 			return "material-symbols:desktop-windows";
+		case "physics":
+			return "material-symbols:science";
 		case "other":
 			return "material-symbols:widgets";
 		default:
@@ -68,7 +73,7 @@ const filterTabs = [
 ];
 
 const title = i18n(I18nKey.projects);
-const subtitle = "软件项目与工程实践。";
+const subtitle = "软件项目、工程实践与交互式物理实验。";
 ---
 
 <MainGridLayout title={title} description={subtitle}>
@@ -115,5 +120,8 @@ const subtitle = "软件项目与工程实践。";
 				</p>
 			</div>
 		</div>
+	</div>
+	<div class="mt-4">
+		<Comment path={Astro.url.pathname} />
 	</div>
 </MainGridLayout>

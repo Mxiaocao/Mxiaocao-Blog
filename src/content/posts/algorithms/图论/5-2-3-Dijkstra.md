@@ -142,7 +142,9 @@ for(int i = 1;i < n;++i){
 ![10](/img/10.png)
 
 
-<iframe frameborder="0" height="550" loading="lazy" src="/algo-vis/dijkstra.html" style="border-radius:12px;margin:20px 0;" width="100%"></iframe>
+<iframe title="Dijkstra 最短路交互模拟" height="780" loading="lazy" src="/algo-vis/dijkstra.html" style="border:0;border-radius:12px;margin:20px 0;" width="100%"></iframe>
+
+[在独立页面打开Dijkstra 最短路模拟器](/algo-vis/dijkstra.html)
 
 
 ### (3) 最终代码

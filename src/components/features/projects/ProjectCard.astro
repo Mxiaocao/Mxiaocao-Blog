@@ -10,7 +10,8 @@ const { project, maxTechStack = 4 } = Astro.props as ProjectCardProps;
 
 const hasImage = !!project.image;
 const showImageArea = project.showImage !== false && hasImage;
-const hasVisitUrl = !!project.visitUrl;
+const visitUrl = project.visitUrl || project.liveDemo;
+const hasVisitUrl = !!visitUrl;
 const hasSourceCode = !!project.sourceCode;
 
 const getStatusText = (status: string) => {
@@ -73,7 +74,7 @@ const getStatusText = (status: string) => {
 			<span
 				class="shrink-0 ml-3 px-2 py-0.5 text-xs rounded-md bg-(--primary)/10 text-(--primary) font-medium"
 			>
-				{getStatusText(project.status)}
+				{project.experiments.length > 0 ? "学习实践" : getStatusText(project.status)}
 			</span>
 		</div>
 
@@ -105,7 +106,7 @@ const getStatusText = (status: string) => {
 				<div class="flex gap-2">
 					{hasVisitUrl && (
 						<a
-							href={project.visitUrl!}
+							href={visitUrl!}
 							target="_blank"
 							rel="noopener noreferrer"
 							class="btn-regular flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium"
@@ -114,7 +115,7 @@ const getStatusText = (status: string) => {
 								name="material-symbols:open-in-new"
 								class="text-base w-4 h-4"
 							/>
-							{i18n(I18nKey.projectsVisit)}
+							{project.embedDemo ? "打开实验" : i18n(I18nKey.projectsVisit)}
 						</a>
 					)}
 					{hasSourceCode && (

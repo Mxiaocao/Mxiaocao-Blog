@@ -19,6 +19,8 @@ interface Props {
 	updated?: Date;
 	updatedDateOnly?: boolean;
 	category?: string;
+	subcategory?: string;
+	topic?: string;
 	tags?: string[];
 	hideUpdateDate?: boolean;
 	hideTagsForMobile?: boolean;
@@ -39,6 +41,8 @@ const {
 	updated,
 	updatedDateOnly = false,
 	category,
+	subcategory,
+	topic,
 	tags,
 	hideUpdateDate,
 	hideTagsForMobile,
@@ -66,7 +70,7 @@ const {
         </div>
     )}
 
-    <Category category={category} />
+    <Category category={category} subcategory={subcategory} topic={topic} />
 
     {showWordCount && words && (
         <WordCount words={words} />

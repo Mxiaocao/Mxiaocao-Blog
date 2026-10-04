@@ -1,0 +1,41 @@
+---
+import Comment from "@components/comment/index.astro";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import PublishedDate from "../../components/features/posts/atoms/PublishedDate.astro";
+import { getDiaryById, getDiaryList } from "../../data/diary";
+import { formatRelativeTime } from "../../utils/timeFormat";
+
+export function getStaticPaths() {
+	return getDiaryList().map((item) => ({
+		params: { id: String(item.id) },
+		props: { item },
+	}));
+}
+
+const item = Astro.props.item ?? getDiaryById(Number(Astro.params.id));
+if (!item) return Astro.redirect("/diary/");
+
+const relativeTime = formatRelativeTime(item.date, "分钟前", "小时前", "天前");
+---
+
+<MainGridLayout title="随笔详情" description={item.content}>
+	<article class="card-base p-6 sm:p-10">
+		<div class="mb-6 flex flex-wrap items-center justify-between gap-3 text-sm text-black/50 dark:text-white/50">
+			<a href="/diary/" class="link">← 返回随笔</a>
+			<div class="flex items-center gap-2">
+				<PublishedDate date={new Date(item.date)} />
+				<span class="text-xs">{relativeTime}</span>
+			</div>
+		</div>
+		<h1 class="text-3xl font-bold text-black/90 dark:text-white/90 mb-8">{item.content}</h1>
+		{item.images?.map((image) => (
+			<a href={image} data-fancybox="diary-detail" class="mb-8 block overflow-hidden rounded-xl">
+				<img src={image} alt={item.content} class="w-full max-h-[75vh] object-contain" loading="eager" />
+			</a>
+		))}
+		<p class="text-base leading-8 text-black/80 dark:text-white/80">{item.content}</p>
+	</article>
+	<div class="mt-4">
+		<Comment path={Astro.url.pathname} />
+	</div>
+</MainGridLayout>

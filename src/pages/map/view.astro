@@ -1,0 +1,67 @@
+---
+import footprints from "../../data/footprints.json";
+const config = { amapKey: import.meta.env.AMAP_JS_KEY || "", securityJsCode: import.meta.env.AMAP_SECURITY_JS_CODE || "", center: [120.1551, 30.2741], zoom: 12 };
+---
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>杭州足迹地图</title>
+<link rel="stylesheet" href="/footprints/map.css" />
+</head>
+<body>
+<div class="travel-map-shell">
+  <aside class="travel-map-panel">
+    <div class="map-panel-head">
+      <div>
+        <p class="map-eyebrow">Mxiaocao Footprints</p>
+        <h2>杭州足迹地图</h2>
+      </div>
+      <span class="map-count" id="mapPlaceCount">0</span>
+    </div>
+
+    <div class="map-segmented" role="group" aria-label="地图模式">
+      <button class="active" data-map-mode="places" type="button"> 地点</button>
+      <button data-map-mode="routes" type="button"> 路线</button>
+    </div>
+
+    <div class="map-filter-row">
+      <select id="mapTagFilter" aria-label="标签筛选"></select>
+      <select id="mapYearFilter" aria-label="年份筛选"></select>
+    </div>
+
+    <div class="map-section" id="placeSection">
+      <div class="map-section-title">地点</div>
+      <div class="place-list" id="placeList"></div>
+    </div>
+
+    <div class="map-section hidden" id="routeSection">
+      <div class="map-section-title">路线</div>
+      <div class="route-list" id="routeList"></div>
+      <div class="route-player">
+        <button id="routePlayBtn" type="button"> 播放路线</button>
+        <button aria-label="重置路线" id="routeResetBtn" type="button">↺</button>
+      </div>
+    </div>
+  </aside>
+
+  <section class="travel-map-main" aria-label="杭州地图">
+    <div id="amapContainer"></div>
+    <div class="map-empty-state" id="mapEmptyState">
+      <div class="map-empty-icon">&#x1F5FA;</div>
+      <h3>地图正在赶来...</h3>
+      <p>正在加载杭州足迹，请稍候片刻。</p>
+    </div>
+  </section>
+</div>
+
+
+<script is:inline define:vars={{config, footprints}}>
+window.MXIAOCAO_MAP_CONFIG = config;
+window.MXIAOCAO_FOOTPRINTS = footprints;
+</script>
+<script is:inline src="/footprints/map.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,568 @@
+{
+  "places": [
+    {
+      "id": "lingyin",
+      "name": "灵隐寺",
+      "date": "2025-09-21",
+      "coord": [
+        120.101406,
+        30.240826
+      ],
+      "description": "路线西侧的停留点，可以记录寺院、山路和树影。",
+      "photos": [
+        "/img/lingyin-01.jpg",
+        "/img/lingyin-02.jpg",
+        "/img/lingyin-03.jpg",
+        "/img/lingyin-04.jpg",
+        "/img/lingyin-05.jpg",
+        "/img/lingyin-06.jpg",
+        "/img/lingyin-07.jpg",
+        "/img/lingyin-08.jpg"
+      ],
+      "tags": [
+        "杭州",
+        "灵隐",
+        "元旦"
+      ]
+    },
+    {
+      "id": "longxiangqiao-station",
+      "name": "龙翔桥地铁站出入口",
+      "kind": "transit",
+      "coord": [
+        120.164434,
+        30.253826
+      ],
+      "description": "湖滨一带的起点，出站后就能往西湖边走。",
+      "photos": [],
+      "tags": [
+        "杭州",
+        "交通"
+      ]
+    },
+    {
+      "id": "xiaohe",
+      "name": "小河直街",
+      "date": "2026-01-01",
+      "coord": [
+        120.1403,
+        30.3201
+      ],
+      "description": "适合放街区、河道、夜景或者随手拍。",
+      "photos": [
+        "/img/xiaohe-01.jpg",
+        "/img/xiaohe-02.jpg",
+        "/img/xiaohe-03.jpg",
+        "/img/xiaohe-04.jpg",
+        "/img/xiaohe-05.jpg",
+        "/img/xiaohe-06.jpg",
+        "/img/xiaohe-07.jpg"
+      ],
+      "tags": [
+        "杭州",
+        "街区",
+        "元旦"
+      ]
+    },
+    {
+      "id": "dadou-road",
+      "name": "大兜路历史文化街区",
+      "date": "2026-06-06",
+      "coord": [
+        120.148,
+        30.321
+      ],
+      "description": "运河边的文艺街区，咖啡馆与老墙门共存。",
+      "photos": [
+        "/img/dadou-01.jpg",
+        "/img/dadou-02.jpg",
+        "/img/dadou-03.jpg",
+        "/img/dadou-04.jpg",
+        "/img/dadou-05.jpg",
+        "/img/dadou-06.jpg",
+        "/img/dadou-07.jpg",
+        "/img/dadou-08.jpg"
+      ],
+      "tags": [
+        "杭州",
+        "街区",
+        "运河"
+      ]
+    },
+    {
+      "id": "gongchenqiao",
+      "name": "拱宸桥西历史文化街区",
+      "date": "2026-06-06",
+      "coord": [
+        120.138,
+        30.326
+      ],
+      "description": "拱宸桥畔，老杭州的运河记忆。",
+      "photos": [
+        "/img/gongchenqiao-01.jpg",
+        "/img/gongchenqiao-02.jpg",
+        "/img/gongchenqiao-03.jpg",
+        "/img/gongchenqiao-04.jpg",
+        "/img/gongchenqiao-05.jpg",
+        "/img/gongchenqiao-06.jpg",
+        "/img/gongchenqiao-07.jpg",
+        "/img/gongchenqiao-08.jpg",
+        "/img/gongchenqiao-09.jpg",
+        "/img/gongchenqiao-10.jpg",
+        "/img/gongchenqiao-11.jpg",
+        "/img/gongchenqiao-12.jpg"
+      ],
+      "tags": [
+        "杭州",
+        "街区",
+        "运河"
+      ]
+    },
+    {
+      "id": "qiantang",
+      "name": "钱塘江城市阳台",
+      "date": "2026-01-02",
+      "coord": [
+        120.216803,
+        30.241827
+      ],
+      "description": "江景和城市天际线照片可以放在这里。",
+      "photos": [
+        "/img/qiantang-01.jpg",
+        "/img/qiantang-02.jpg"
+      ],
+      "tags": [
+        "杭州",
+        "江景"
+      ]
+    },
+    {
+      "id": "hupao",
+      "name": "虎跑公园",
+      "date": "2026-05-19",
+      "coord": [
+        120.1299,
+        30.208087
+      ],
+      "description": "虎跑泉水清冽，林深苔滑，适合记录山径、石阶与光影。",
+      "photos": [
+        "/img/hupao-01.jpg",
+        "/img/hupao-02.jpg",
+        "/img/hupao-03.jpg",
+        "/img/hupao-04.jpg",
+        "/img/hupao-05.jpg",
+        "/img/hupao-06.jpg",
+        "/img/hupao-07.jpg",
+        "/img/hupao-08.jpg",
+        "/img/hupao-09.jpg",
+        "/img/hupao-10.jpg",
+        "/img/hupao-11.jpg",
+        "/img/hupao-12.jpg"
+      ],
+      "tags": [
+        "杭州",
+        "虎跑",
+        "山林"
+      ]
+    },
+    {
+      "id": "jixian-pavilion",
+      "name": "集贤亭",
+      "date": "2026-01-01",
+      "coord": [
+        120.161722,
+        30.250628
+      ],
+      "description": "湖心小亭，烟雨朦胧时最美。",
+      "photos": [
+        "/img/jixian-01.jpg"
+      ],
+      "tags": [
+        "杭州",
+        "西湖"
+      ]
+    },
+    {
+      "id": "yongjin-park",
+      "name": "涌金公园",
+      "date": "2026-01-01",
+      "coord": [
+        120.160139,
+        30.245915
+      ],
+      "description": "涌金门外柳如烟，西湖东岸的安静角落。",
+      "photos": [],
+      "tags": [
+        "杭州",
+        "西湖",
+        "公园"
+      ]
+    },
+    {
+      "id": "silk-museum",
+      "name": "中国丝绸博物馆",
+      "date": "2026-01-01",
+      "coord": [
+        120.151292,
+        30.22287
+      ],
+      "description": "馆藏丰富，建筑本身也是一件展品。",
+      "photos": [],
+      "tags": [
+        "杭州",
+        "博物馆"
+      ]
+    },
+    {
+      "id": "taiziwan",
+      "name": "太子湾",
+      "date": "2026-01-01",
+      "coord": [
+        120.142177,
+        30.22547
+      ],
+      "description": "春天的郁金香海。",
+      "photos": [
+        "/img/taiziwan-01.jpg",
+        "/img/taiziwan-02.jpg"
+      ],
+      "tags": [
+        "杭州",
+        "公园"
+      ],
+      "visits": [
+        {
+          "date": "2026-04-06",
+          "description": "清明再访，郁金香满园盛放。",
+          "photos": [
+            "/img/taiziwan-20260406-03.jpg",
+            "/img/taiziwan-20260406-04.jpg",
+            "/img/taiziwan-20260406-05.jpg",
+            "/img/taiziwan-20260406-06.jpg",
+            "/img/taiziwan-20260406-07.jpg",
+            "/img/taiziwan-20260406-08.jpg",
+            "/img/taiziwan-20260406-09.jpg",
+            "/img/taiziwan-20260406-10.jpg",
+            "/img/taiziwan-20260406-11.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "huagang-guanyu",
+      "name": "花港观鱼",
+      "date": "2026-01-01",
+      "coord": [
+        120.139095,
+        30.230233
+      ],
+      "description": "红鲤成群，西湖十景之一。",
+      "photos": [],
+      "tags": [
+        "杭州",
+        "西湖",
+        "十景"
+      ]
+    },
+    {
+      "id": "sudi",
+      "name": "苏堤",
+      "date": "2026-01-01",
+      "coord": [
+        120.138156,
+        30.243911
+      ],
+      "description": "六桥烟柳，春晓最动人。",
+      "photos": [],
+      "tags": [
+        "杭州",
+        "西湖",
+        "十景"
+      ]
+    },
+    {
+      "id": "quyuan-fenghe",
+      "name": "曲院风荷",
+      "date": "2026-01-01",
+      "coord": [
+        120.133333,
+        30.249287
+      ],
+      "description": "夏日荷风，西湖十景之一。",
+      "photos": [],
+      "tags": [
+        "杭州",
+        "西湖",
+        "十景"
+      ]
+    },
+    {
+      "id": "best-corner",
+      "name": "西湖最美转角",
+      "date": "2026-01-01",
+      "coord": [
+        120.138814,
+        30.250405
+      ],
+      "description": "北山街转角望湖。",
+      "photos": [],
+      "tags": [
+        "杭州",
+        "西湖"
+      ]
+    },
+    {
+      "id": "pinghu-qiuyue",
+      "name": "平湖秋月",
+      "date": "2026-01-01",
+      "coord": [
+        120.146142,
+        30.252244
+      ],
+      "description": "月夜湖面如镜。",
+      "photos": [],
+      "tags": [
+        "杭州",
+        "西湖",
+        "十景"
+      ]
+    },
+    {
+      "id": "baidi",
+      "name": "白堤",
+      "date": "2026-01-01",
+      "coord": [
+        120.149189,
+        30.255701
+      ],
+      "description": "一株杨柳一株桃。",
+      "photos": [],
+      "tags": [
+        "杭州",
+        "西湖"
+      ]
+    },
+    {
+      "id": "wulin-night",
+      "name": "杭州武林夜市",
+      "date": "2026-06-06",
+      "coord": [
+        120.159572,
+        30.261664
+      ],
+      "description": "人间烟火，小吃与手作交织。",
+      "photos": [],
+      "tags": [
+        "杭州",
+        "夜市"
+      ]
+    },
+    {
+      "id": "guo-zhuang",
+      "name": "郭庄",
+      "date": "2026-01-01",
+      "coord": [
+        120.132267,
+        30.243918
+      ],
+      "description": "西湖边的古典私家园林，一步一景。",
+      "photos": [],
+      "tags": [
+        "杭州",
+        "西湖",
+        "园林"
+      ]
+    },
+    {
+      "id": "jingci-temple",
+      "name": "南屏晚钟（净慈寺）",
+      "date": "2026-01-01",
+      "coord": [
+        120.149165,
+        30.228643
+      ],
+      "description": "南屏晚钟，千年古刹。",
+      "photos": [],
+      "tags": [
+        "杭州",
+        "寺庙",
+        "十景"
+      ]
+    },
+    {
+      "id": "shenzhou-base",
+      "name": "神州基地",
+      "date": "2026-01-01",
+      "coord": [
+        120.133221,
+        30.240751
+      ],
+      "description": "杨公堤畔，日出摄影的隐秘角落。",
+      "photos": [],
+      "tags": [
+        "杭州",
+        "西湖",
+        "日出"
+      ]
+    },
+    {
+      "id": "maojiabu",
+      "name": "茅家埠",
+      "date": "2026-01-01",
+      "coord": [
+        120.125404,
+        30.238325
+      ],
+      "description": "湿地风光，芦苇荡与茶田交错。",
+      "photos": [],
+      "tags": [
+        "杭州",
+        "西湖",
+        "湿地"
+      ]
+    },
+    {
+      "id": "liulang-wenying",
+      "name": "柳浪闻莺",
+      "date": "2026-01-01",
+      "coord": [
+        120.156326,
+        30.240389
+      ],
+      "description": "西湖十景之一，柳丝如浪，莺啼婉转。",
+      "photos": [],
+      "tags": [
+        "杭州",
+        "西湖",
+        "十景"
+      ]
+    },
+    {
+      "id": "xiling-bridge",
+      "name": "西泠桥",
+      "date": "2026-01-01",
+      "coord": [
+        120.138493,
+        30.251888
+      ],
+      "description": "连接孤山与北山街的桥，沿湖路线的重要转折点。",
+      "photos": [],
+      "tags": [
+        "杭州",
+        "西湖",
+        "桥"
+      ]
+    },
+    {
+      "id": "xiling-seal-society",
+      "name": "西泠印社",
+      "date": "2026-01-01",
+      "coord": [
+        120.139948,
+        30.250279
+      ],
+      "description": "孤山上的金石篆刻名社。",
+      "photos": [],
+      "tags": [
+        "杭州",
+        "西湖",
+        "人文"
+      ]
+    },
+    {
+      "id": "guanghua-fudan",
+      "name": "光华复旦",
+      "date": "2026-01-01",
+      "coord": [
+        120.142416,
+        30.25006
+      ],
+      "description": "孤山一带的题刻景观。",
+      "photos": [],
+      "tags": [
+        "杭州",
+        "西湖",
+        "人文"
+      ]
+    },
+    {
+      "id": "xiangji-temple",
+      "name": "香积寺",
+      "date": "2026-01-01",
+      "coord": [
+        120.146556,
+        30.298666
+      ],
+      "description": "运河边的寺院，适合接到拱墅段路线里。",
+      "photos": [],
+      "tags": [
+        "杭州",
+        "寺庙",
+        "运河"
+      ]
+    },
+    {
+      "id": "wo-pa-laopo",
+      "name": "我怕老婆·家烧小排档",
+      "kind": "food",
+      "coord": [
+        120.159994,
+        30.265529
+      ],
+      "description": "藏在武林路巷子里的小排档，温州风味。",
+      "photos": [
+        "/img/paolaopo-01.jpg"
+      ],
+      "tags": [
+        "杭州",
+        "美食",
+        "排档"
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "id": "new-year-hangzhou",
+      "title": "元旦杭州路线",
+      "date": "2026-01-01",
+      "placeIds": [
+        "longxiangqiao-station",
+        "jixian-pavilion",
+        "silk-museum",
+        "jingci-temple",
+        "taiziwan",
+        "huagang-guanyu",
+        "sudi",
+        "quyuan-fenghe",
+        "sudi",
+        "xiling-bridge",
+        "best-corner",
+        "xiling-seal-society",
+        "guanghua-fudan",
+        "pinghu-qiuyue",
+        "baidi",
+        "wulin-night",
+        "xiangji-temple",
+        "dadou-road",
+        "xiaohe",
+        "gongchenqiao"
+      ]
+    },
+    {
+      "id": "river-walk",
+      "title": "钱塘江散步路线",
+      "date": "2026-01-02",
+      "placeIds": [
+        "qiantang"
+      ]
+    },
+    {
+      "id": "mountain-hike",
+      "title": "虎跑公园登山路线",
+      "date": "2026-05-19",
+      "placeIds": [
+        "hupao"
+      ]
+    }
+  ]
+}

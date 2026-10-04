@@ -2,27 +2,28 @@
 import { Icon } from "astro-icon/components";
 
 import { getPostCategoryLabel } from "@/utils/content-utils";
-import { getCategoryUrl } from "@/utils/url-utils";
+import { articleQuery, classificationPath } from "@/utils/article-taxonomy";
+import { url, getCategoryUrl } from "@/utils/url-utils";
 
 interface Props {
 	category?: string;
+	subcategory?: string;
+	topic?: string;
 	class?: string;
 }
 
-const { category, class: className } = Astro.props;
+const { category, subcategory, topic, class: className } = Astro.props;
+const path = classificationPath({ category, subcategory, topic });
 ---
 
 <div class:list={["flex items-center", className]}>
 	<div class="meta-icon">
 		<Icon name="material-symbols:book-2-outline-rounded" class="text-xl" />
 	</div>
-	<div class="flex flex-row flex-nowrap items-center">
-		<a
-			href={getCategoryUrl(category || "")}
-			aria-label={`View all posts in the ${category} category`}
-			class="link-lg transition text-50 text-sm font-medium hover:text-(--primary) dark:hover:text-(--primary) whitespace-nowrap"
-		>
-			{getPostCategoryLabel(category)}
-		</a>
+	<div class="flex flex-wrap items-center gap-x-1 text-sm min-w-0">
+		{path.length ? path.map((name, index) => <>
+			{index > 0 && <span aria-hidden="true" class="text-50">/</span>}
+			<a href={url(articleQuery(path.slice(0, index + 1)))} class="link-lg transition text-50 font-medium hover:text-(--primary)">{name}</a>
+		</>) : <a href={getCategoryUrl("")} class="text-50 text-sm">{getPostCategoryLabel(category)}</a>}
 	</div>
 </div>

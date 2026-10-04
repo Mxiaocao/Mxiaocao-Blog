@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import ArticlesMenu from "./ArticlesMenu.astro";
 
 import { LinkPresets } from "../../../constants/link-presets";
 import I18nKey from "../../../i18n/i18nKey";
@@ -57,7 +58,7 @@ const processedLinks: ProcessedNavBarLink[] = (
 	{
 		processedLinks.map((link) => (
 			<div class="mobile-menu-item">
-				{link.children && link.children.length > 0 ? (
+				{link.url === "/writing/" ? <ArticlesMenu mobile /> : link.children && link.children.length > 0 ? (
 					<div class="mobile-dropdown" data-mobile-dropdown>
 						<button
 							class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-4 w-full text-left

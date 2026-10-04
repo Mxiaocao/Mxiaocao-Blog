@@ -1,6 +1,8 @@
 export const reservedPostRoots = new Set([
 	"writing",
 	"projects",
+	"physics-lab",
+	"map",
 	"notes",
 	"about",
 	"archive",

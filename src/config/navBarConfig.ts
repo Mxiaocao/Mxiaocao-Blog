@@ -129,6 +129,7 @@ import { LinkPreset } from "../types/config";
 export const navBarConfig: NavBarConfig = {
 	links: [
 		{ name: "首页", url: "/", icon: "material-symbols:home" },
+		// /writing/ uses ArticlesMenu; its three-level tree lives in utils/article-taxonomy.ts.
 		{ name: "文章", url: "/writing/", icon: "material-symbols:article" },
 		{ name: "项目", url: "/projects/", icon: "material-symbols:work" },
 		{ name: "笔记", url: "/notes/", icon: "material-symbols:notes" },
@@ -143,28 +144,10 @@ export const navBarConfig: NavBarConfig = {
 				LinkPreset.Books,
 				LinkPreset.Diary,
 				LinkPreset.Albums,
-				{ name: "Devices", url: "/devices/", icon: "material-symbols:devices" },
+				{ name: "足迹地图", url: "/map/", icon: "material-symbols:map" },
 				LinkPreset.Skills,
 				LinkPreset.Timeline,
 				LinkPreset.AITools,
-				{
-					name: "Mizuki on GitHub",
-					url: "https://github.com/LyraVoid/Mizuki",
-					external: true,
-					icon: "fa7-brands:github",
-				},
-				{
-					name: "Bilibili",
-					url: "https://space.bilibili.com/701864046",
-					external: true,
-					icon: "fa7-brands:bilibili",
-				},
-				{
-					name: "Mizuki on Gitee",
-					url: "https://gitee.com/matsuzakayuki/Mizuki",
-					external: true,
-					icon: "mdi:git",
-				},
 			],
 		},
 	],

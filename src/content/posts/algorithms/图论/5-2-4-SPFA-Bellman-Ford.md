@@ -46,7 +46,9 @@ Bellman-Ford 算法是单源最短路径算法，求一个起点   到其他所�
 - **第四步：C 广播** 队列弹出 C。C 发现自己没有别的邻居了。 队列为空，算法结束。 最终距离：`dist[B] = 2`, `dist[C] = -2`。
 
 
-<iframe frameborder="0" height="700" loading="lazy" src="/algo-vis/spfa.html" style="border-radius:12px;margin:20px 0;" width="100%"></iframe>
+<iframe title="SPFA 与 Bellman-Ford 最短路交互模拟" height="780" loading="lazy" src="/algo-vis/spfa.html" style="border:0;border-radius:12px;margin:20px 0;" width="100%"></iframe>
+
+[在独立页面打开SPFA 与 Bellman-Ford 最短路模拟器](/algo-vis/spfa.html)
 
 
 ## 代码解析

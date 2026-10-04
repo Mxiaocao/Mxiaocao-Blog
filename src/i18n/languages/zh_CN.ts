@@ -58,7 +58,7 @@ export const zh_CN: Translation = {
 	[Key.publishedAt]: "发布于",
 	[Key.license]: "许可协议",
 	[Key.anime]: "追番",
-	[Key.diary]: "日记",
+	[Key.diary]: "随笔",
 
 	// 番剧页面
 	[Key.animeTitle]: "我的追番记录",

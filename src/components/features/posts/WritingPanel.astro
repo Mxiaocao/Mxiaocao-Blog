@@ -1,0 +1,116 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { FilterTabs } from "@components/atoms/filter-tabs";
+import { PAGE_SIZE } from "@/constants/constants";
+import { buildArticleMenu, articleQuery, articleFilterGroups } from "@/utils/article-taxonomy";
+import { url } from "@/utils/url-utils";
+
+interface Props {
+	posts: CollectionEntry<"posts">[];
+	showFilters: boolean;
+	initialPage: number;
+}
+const { posts, showFilters, initialPage } = Astro.props;
+const menu = buildArticleMenu(posts.map(post => post.data));
+const groups = articleFilterGroups(menu, posts.length);
+---
+
+<writing-panel data-page-size={PAGE_SIZE} data-initial-page={initialPage}>
+	<nav aria-label="文章分类路径" class="mb-4 flex flex-wrap gap-2 text-sm text-50" data-writing-breadcrumb hidden></nav>
+	{showFilters && groups.map(group => <div class="mb-8" data-filter-group={articleQuery(group.path)} hidden={group.path.length > 0}>
+		<FilterTabs dataAttr="writing" tabs={[
+			{ value: articleQuery(group.path), label: "全部", count: group.count },
+			...group.nodes.map(node => ({ value: articleQuery(node.path), label: node.name, count: node.count })),
+		]} activeValue={articleQuery(group.path)} />
+	</div>)}
+	<div class="flex justify-end mb-4"><a data-writing-archive-link href={url("/archive/")} class="text-sm text-50 hover:text-(--primary)">按时间归档 →</a></div>
+	<div data-writing-posts><slot /></div>
+	<p data-writing-empty hidden class="py-12 text-center text-50">暂无匹配的文章。</p>
+	<nav data-writing-pagination aria-label="文章分页" class="flex items-center justify-center gap-4 mt-6">
+		<button type="button" data-page-step="-1" class="btn-regular rounded-lg px-4 py-2">上一页</button>
+		<span data-writing-page class="text-75" aria-live="polite"></span>
+		<button type="button" data-page-step="1" class="btn-regular rounded-lg px-4 py-2">下一页</button>
+	</nav>
+</writing-panel>
+
+<style>
+	writing-panel { display: block; min-width: 0; }
+	writing-panel :global([hidden]) { display: none !important; }
+	writing-panel :global(#post-list-container > .card-base) { border: 1px solid var(--line-divider); box-shadow: none; }
+	writing-panel :global(#post-list-container > [data-post-category]) { animation: none; opacity: 1; }
+	button:disabled { opacity: 0.4; cursor: default; }
+</style>
+
+<script>
+	import { articleQuery, classificationPath, matchesClassification, articlePageHeading } from "@/utils/article-taxonomy";
+	import { url } from "@/utils/url-utils";
+	class WritingPanel extends HTMLElement {
+		page = 1;
+		selected: string[] = [];
+		connectedCallback() {
+			this.addEventListener("click", this.handleClick);
+			window.addEventListener("popstate", this.readLocation);
+			this.readLocation();
+		}
+		disconnectedCallback() {
+			this.removeEventListener("click", this.handleClick);
+			window.removeEventListener("popstate", this.readLocation);
+		}
+		readLocation = () => {
+			const params = new URLSearchParams(location.search);
+			this.selected = classificationPath({ category: params.get("category"), subcategory: params.get("subcategory"), topic: params.get("topic") });
+			const requestedPage = Number(params.get("page") ?? this.dataset.initialPage);
+			this.page = Number.isInteger(requestedPage) && requestedPage > 0 ? requestedPage : 1;
+			this.update();
+		};
+		handleClick = (event: MouseEvent) => {
+			if (!(event.target instanceof Element)) return;
+			const filter = event.target.closest<HTMLButtonElement>("[data-filter-value]");
+			const step = event.target.closest<HTMLButtonElement>("[data-page-step]");
+			if (!filter && !step) return;
+			const next = new URL(filter ? url(filter.dataset.filterValue!) : location.href, location.origin);
+			next.searchParams.set("page", String(filter ? 1 : this.page + Number(step!.dataset.pageStep)));
+			history.pushState(history.state, "", next);
+			this.readLocation();
+		};
+		update() {
+			const cards = [...this.querySelectorAll<HTMLElement>("[data-post-category]")];
+			const matching = cards.filter(card => matchesClassification(classificationPath({ category: card.dataset.postCategory, subcategory: card.dataset.postSubcategory, topic: card.dataset.postTopic }), this.selected));
+			const size = Number(this.dataset.pageSize);
+			const pages = Math.max(1, Math.ceil(matching.length / size));
+			this.page = Math.min(pages, Math.max(1, this.page));
+			const visible = new Set(matching.slice((this.page - 1) * size, this.page * size));
+			cards.forEach(card => { card.hidden = !visible.has(card); });
+			this.querySelectorAll<HTMLElement>("[data-filter-group]").forEach(group => { group.hidden = group.dataset.filterGroup !== articleQuery(this.selected); });
+			this.querySelectorAll<HTMLButtonElement>("[data-filter-value]").forEach(button => {
+				const active = button.dataset.filterValue === articleQuery(this.selected);
+				button.classList.toggle("active", active);
+				button.setAttribute("aria-pressed", String(active));
+			});
+			const { title, subtitle } = articlePageHeading(this.selected);
+			const header = document.getElementById("writing-header");
+			if (header) { header.querySelector("h1")!.textContent = title; header.querySelector("p")!.textContent = subtitle; }
+			const overlayData = document.getElementById("page-overlay-data");
+			if (overlayData) overlayData.dataset.title = title;
+			const overlayTitle = document.getElementById("page-overlay-title");
+			if (overlayTitle) overlayTitle.textContent = title;
+			const breadcrumb = this.querySelector<HTMLElement>("[data-writing-breadcrumb]")!;
+			breadcrumb.hidden = this.selected.length === 0;
+			breadcrumb.replaceChildren();
+			["全部文章", ...this.selected].forEach((name, index) => {
+				if (index) breadcrumb.append(" / ");
+				const link = document.createElement("a"); link.textContent = name; link.href = url(articleQuery(this.selected.slice(0, index))); breadcrumb.append(link);
+			});
+			const archive = this.querySelector<HTMLAnchorElement>("[data-writing-archive-link]")!;
+			archive.href = url("/archive/") + new URL(articleQuery(this.selected), location.origin).search;
+			const empty = this.querySelector<HTMLElement>("[data-writing-empty]")!;
+			empty.hidden = matching.length > 0;
+			empty.textContent = this.selected.length ? `“${title}”下暂无文章。` : "暂无已发布文章。";
+			this.querySelector<HTMLElement>("[data-writing-pagination]")!.hidden = pages <= 1;
+			this.querySelector<HTMLElement>("[data-writing-page]")!.textContent = `${this.page} / ${pages}`;
+			this.querySelector<HTMLButtonElement>('[data-page-step="-1"]')!.disabled = this.page <= 1;
+			this.querySelector<HTMLButtonElement>('[data-page-step="1"]')!.disabled = this.page >= pages;
+		}
+	}
+	if (!customElements.get("writing-panel")) customElements.define("writing-panel", WritingPanel);
+</script>

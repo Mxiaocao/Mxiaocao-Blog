@@ -11,6 +11,8 @@ export interface Post {
 		title: string;
 		tags: string[];
 		category?: string;
+		subcategory?: string;
+		topic?: string;
 		published: Date;
 		_publishedDateOnly: boolean;
 		alias?: string;

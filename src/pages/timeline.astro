@@ -1,4 +1,5 @@
 ---
+import Comment from "@components/comment/index.astro";
 import { FilterTabs } from "@components/atoms/filter-tabs";
 import { PageHeader } from "@components/features/page-header";
 import { TimelineCard } from "@components/features/timeline";
@@ -105,6 +106,9 @@ const subtitle = i18n(I18nKey.timelineSubtitle);
 				</p>
 			</div>
 		</div>
+	</div>
+	<div class="mt-4">
+		<Comment path={Astro.url.pathname} />
 	</div>
 </MainGridLayout>
 

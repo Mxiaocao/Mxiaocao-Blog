@@ -9,6 +9,7 @@ import ThemeSwitch from "../../control/ThemeSwitch.svelte";
 import SettingsPanel from "../../features/settings/SettingsPanel.svelte";
 import MobileTOC from "../../features/toc/MobileTOC.svelte";
 import DropdownMenu from "./DropdownMenu.astro";
+import ArticlesMenu from "./ArticlesMenu.astro";
 import NavMenuPanel from "./NavMenuPanel.astro";
 import Search from "./Search.svelte";
 
@@ -136,7 +137,7 @@ const iconWebpSrc = hasIconPngFallback
         </a>
         <div id="navbar-links-container" class="hidden md:flex items-center space-x-1 transition-opacity duration-300">
             {links.map((l) => {
-                return <DropdownMenu link={l} />;
+                return l.url === "/writing/" ? <ArticlesMenu /> : <DropdownMenu link={l} />;
             })}
         </div>
         <div class="flex items-center gap-1">

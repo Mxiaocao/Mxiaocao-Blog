@@ -56,6 +56,8 @@ const homeContent = getPostHomeContent(
 	]}
 	style={style}
 	data-post-category={category || ""}
+	data-post-subcategory={entry.data.subcategory || ""}
+	data-post-topic={entry.data.topic || ""}
 >
 	<div
 		class:list={[
@@ -110,6 +112,8 @@ const homeContent = getPostHomeContent(
 			updatedDateOnly={_updatedDateOnly}
 			tags={tags}
 			category={category || ""}
+			subcategory={entry.data.subcategory || undefined}
+			topic={entry.data.topic || undefined}
 			hideTagsForMobile={true}
 			hideUpdateDate={true}
 			className="mb-4"

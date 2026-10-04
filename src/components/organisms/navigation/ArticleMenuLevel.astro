@@ -1,0 +1,19 @@
+---
+import { articleQuery, type ArticleMenuNode } from "@/utils/article-taxonomy";
+import { url } from "@/utils/url-utils";
+interface Props { nodes: ArticleMenuNode[]; path?: string[]; }
+const { nodes, path = [] } = Astro.props;
+---
+<div class="article-menu-level text-75" data-menu-level data-depth={path.length} hidden>
+	<button type="button" class="article-menu-back" data-menu-back>← {path.at(-1) || "文章"}</button>
+	<a href={url(articleQuery(path))} class="article-menu-link">{path.length ? `全部${path.at(-1)}文章` : "全部文章"}</a>
+	{nodes.map(node => (
+		<div class="article-menu-entry" data-menu-entry>
+			<div class="article-menu-row">
+				<a class="article-menu-link" href={url(articleQuery(node.path))}>{node.name}</a>
+				{node.children.length > 0 && <button type="button" data-menu-enter aria-expanded="false" aria-label={`展开${node.name}`} class="article-menu-enter">›</button>}
+			</div>
+			{node.children.length > 0 && <Astro.self nodes={node.children} path={node.path} />}
+		</div>
+	))}
+</div>

@@ -4,15 +4,15 @@ published: 2026-05-14
 updated: 2026-05-14
 description: "链表准备工作链表声明1234567struct ListNode { int val; ListNode *next; ListNode() : val(0), next(nullptr) {} ListNode(int x) : val(x), next(nullptr) {} ListNode(int x, ListNode *next) : val(x), ne"
 tags: []
-category: "ACM-ICPC"
+category: "技术学习"
 draft: false
 pinned: false
 comment: true
 author: "Mxiaocao"
 sourceLink: "https://www.mxiaocaoblog.com/2026/05/14/Linked-List/index.html"
 licenseName: "CC BY-NC-SA 4.0"
-subcategory: "数据结构"
-topic: "算法竞赛"
+subcategory: "计算机基础"
+topic: "数据结构"
 ---
 
 # 链表

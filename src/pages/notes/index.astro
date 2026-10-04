@@ -1,6 +1,11 @@
 ---
+import Comment from "@components/comment/index.astro";
 import SectionIndex from "@components/features/sections/SectionIndex.astro";
 import { getNotes } from "@/utils/section-content";
 const entries = await getNotes();
 ---
-<SectionIndex title="笔记" description="小发现、调试记录与实用参考。" emptyText="暂未发布笔记。" entries={entries} basePath="/notes/" />
+<SectionIndex title="笔记" description="小发现、调试记录与实用参考。" emptyText="暂未发布笔记。" entries={entries} basePath="/notes/">
+	<div slot="comments" class="mt-4">
+		<Comment path={Astro.url.pathname} />
+	</div>
+</SectionIndex>

@@ -1,0 +1,21 @@
+.layout { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
+.state-panel { min-width: 0; }
+.point-list { display: flex; flex-wrap: wrap; gap: 4px; min-height: 32px; }
+.point-chip { padding: 2px 6px; border: 1px solid var(--border); border-radius: 4px; font-size: 12px; font-variant-numeric: tabular-nums; }
+.point-chip.current { border-color: var(--active); background: var(--soft); font-weight: 700; }
+.formula { overflow-wrap: anywhere; font: 13px/1.8 ui-monospace, monospace; min-height: 48px; }
+.grid-line { stroke: var(--border); stroke-width: .6; }
+.axis { stroke: var(--muted); stroke-width: 1.2; }
+#plot .tick { fill: var(--muted); font-size: 11px; }
+.hull-line { stroke: var(--accent); stroke-width: 3; fill: none; stroke-linejoin: round; }
+.finished-hull { fill: var(--soft); fill-opacity: .65; stroke: var(--selected); stroke-width: 3; }
+.lower-line { stroke: var(--muted); stroke-width: 2; fill: none; stroke-dasharray: 5 4; }
+.turn-line { fill: none; stroke: var(--active); stroke-width: 3; stroke-dasharray: 6 4; animation: flow 1s linear infinite; }
+.plot-point { fill: var(--bg); stroke: var(--muted); stroke-width: 2; }
+.plot-point.on-hull { fill: var(--soft); stroke: var(--accent); }
+.plot-point.current { fill: var(--active); stroke: var(--active); }
+.removed-mark { stroke: var(--active); stroke-width: 2; }
+#plot .point-label { font-size: 12px; paint-order: stroke; stroke: var(--panel); stroke-width: 3px; stroke-linejoin: round; }
+#plot.editable { cursor: crosshair; }
+#plot.editable [data-id] { cursor: pointer; }
+@media (max-width: 600px) { .layout { grid-template-columns: 1fr; } }
