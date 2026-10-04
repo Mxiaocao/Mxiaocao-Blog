@@ -150,6 +150,8 @@
 
 - 当前阶段（2026-10-04）：用户明确开始域名与网站上线工作。已核对正式域名配置为 `https://mxiaocaoblog.com/`，页脚已有备案号；域名注册商、DNS 托管商、当前线上托管平台与本次部署目标仍未知，需补齐后确定接入方案。仓库同时存在 Vercel 配置与发布至 `pages` 分支的 GitHub Actions，不能据此认定实际部署平台。上线前需检查 Actions 的 Node 20 与当前工具链兼容性、地图构建环境变量，以及 Vercel 全局 `X-Frame-Options: DENY` 对站内地图和算法 iframe 的影响。继续遵守未经明确要求不提交或推送的约束。
 
+- 已完成（2026-10-04）：修正文章底部许可证卡片显示旧站网址的问题。`src/components/misc/License.astro` 现在始终使用当前文章的 `Astro.url`，不再被迁移文章遗留的 `sourceLink` 覆盖；生产构建生成的文章 URL 已核对为 `/posts/.../` 当前路径。Astro Check 357 个文件通过，0 错误/警告/提示。旧 `sourceLink` 字段暂保留用于兼容内容 schema，但不再决定页面底部网址。
+
 - 已完成（2026-10-04）：用户要求将交互式物理实验室加入首页精选项目，`src/data/physics-projects.ts` 设为 `featured: true`；首页现展示四个精选项目，沿用两列卡片布局。构建 79 页通过，并核对生成首页精选区域包含物理实验室标题与详情链接。此项取代此前首页仅展示三个软件项目的安排，未提交或推送。
 
 - 已调整（2026-10-04）：按用户提供的月亮海面图片更换作者头像，原图复制至 `src/assets/images/avatar-moon.jpg`，`src/config/profileConfig.ts` 的 avatar 指向该图片，供个人资料与文章分享头像共用。未提交或推送。

@@ -9,7 +9,6 @@ draft: false
 pinned: false
 comment: true
 author: "Mxiaocao"
-sourceLink: "https://www.mxiaocaoblog.com/2026/05/14/stack/index.html"
 licenseName: "CC BY-NC-SA 4.0"
 subcategory: "计算机基础"
 topic: "数据结构"

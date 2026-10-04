@@ -9,7 +9,6 @@ draft: false
 pinned: false
 comment: true
 author: "Mxiaocao"
-sourceLink: "https://www.mxiaocaoblog.com/2026/05/15/hdoj8/index.html"
 licenseName: "CC BY-NC-SA 4.0"
 subcategory: "题解"
 topic: "算法竞赛"

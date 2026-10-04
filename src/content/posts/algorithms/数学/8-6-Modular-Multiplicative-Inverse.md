@@ -9,7 +9,6 @@ draft: false
 pinned: false
 comment: true
 author: "Mxiaocao"
-sourceLink: "https://www.mxiaocaoblog.com/2026/05/14/8-6-Modular-Multiplicative-Inverse/index.html"
 licenseName: "CC BY-NC-SA 4.0"
 subcategory: "数学"
 topic: "算法竞赛"

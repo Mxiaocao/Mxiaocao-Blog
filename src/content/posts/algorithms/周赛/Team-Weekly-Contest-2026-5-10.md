@@ -9,7 +9,6 @@ draft: false
 pinned: false
 comment: true
 author: "Mxiaocao"
-sourceLink: "https://www.mxiaocaoblog.com/2026/05/13/Team-Weekly-Contest-2026-5-10/index.html"
 licenseName: "CC BY-NC-SA 4.0"
 subcategory: "比赛复盘"
 topic: "算法竞赛"

@@ -23,14 +23,16 @@ const {
 	pubDate,
 	pubDateOnly = false,
 	author,
-	sourceLink,
 	licenseName,
 	licenseUrl,
 } = Astro.props;
 const className = Astro.props.class;
 const profileConf = profileConfig;
 const licenseConf = licenseConfig;
-const postUrl = sourceLink || decodeURIComponent(Astro.url.toString());
+// The license card links to the page currently being viewed. Older migrated
+// posts may still carry a legacy `sourceLink`, which points at the old site's
+// date-based URL and must not override the current article route.
+const postUrl = decodeURIComponent(Astro.url.toString());
 ---
 
 <div

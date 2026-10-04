@@ -9,7 +9,6 @@ draft: false
 pinned: false
 comment: true
 author: "Mxiaocao"
-sourceLink: "https://www.mxiaocaoblog.com/2026/05/18/Lambda/index.html"
 licenseName: "CC BY-NC-SA 4.0"
 subcategory: "基础算法"
 topic: "算法竞赛"

@@ -9,7 +9,6 @@ draft: false
 pinned: false
 comment: true
 author: "Mxiaocao"
-sourceLink: "https://www.mxiaocaoblog.com/2026/05/25/5-2-6-Floyd/index.html"
 licenseName: "CC BY-NC-SA 4.0"
 subcategory: "图论"
 topic: "算法竞赛"
