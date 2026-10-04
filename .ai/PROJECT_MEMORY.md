@@ -138,7 +138,9 @@
 
 # 当前任务与下一步
 
-- 推送准备（2026-10-04）：用户已明确授权本次提交与推送到仓库。类型检查 357 文件无错误/警告/提示，Astro 构建 79 页、样式/字体检查与 Pagefind（45 页）通过，物理/地图/图论/凸包 19 项测试通过；物理合集 featured 测试已按用户此前要求改为 true。扫描 Git 可收录文件未发现本地两个高德配置值，`.env`、构建产物与本地工具均被忽略；两项 `.vscode` 删除仍须排除。当前尚未提交或推送：普通 `git fetch origin` 因 `.git/FETCH_HEAD` 无写权限失败，提权因自动审批模型 codex-auto-review 不可用（404）未执行。按现有远程跟踪信息 main 已领先 28 个提交，远程实时状态尚未核对。
+- Zeabur 启动修复（2026-10-04）：新版服务 `mxiaocao-blog-astro` 已创建，用户提供运行日志确认 Caddy 的 zeaburextension 因 `parse headers: invalid header line: ! Cache-Control` 启动失败。已修改 `public/_headers`，移除不支持的删除指令和全站通配缓存规则；仅指纹资源 `/_astro/*` 使用一年 immutable，固定路径 assets/pio/images 改为一小时并重新验证，移除可能与目录规则叠加的 woff2 通配规则；RSS/Atom 跨域头保留。依据是平台实际解析错误与 HTTP 缓存规则，未改 Astro 配置。79 页构建、生成文件与源文件一致性、响应头基本语法、样式/字体及 Pagefind 检查通过；云端启动仍待用户推送后验证。本地 Git 权限/自动审批服务限制仍未解决，修复尚未提交推送。
+
+- 推送准备（2026-10-04）：用户已明确授权本次提交与推送到仓库。类型检查 357 文件无错误/警告/提示，Astro 构建 79 页、样式/字体检查与 Pagefind（45 页）通过，物理/地图/图论/凸包 19 项测试通过；物理合集 featured 测试已按用户此前要求改为 true。扫描 Git 可收录文件未发现本地两个高德配置值，`.env`、构建产物与本地工具均被忽略；两项 `.vscode` 删除仍须排除。用户随后在本地终端完成提交与推送：`26cd138`（152 个文件）及此前 28 个提交已推送至 `origin/main`，终端确认 `b534f25..26cd138 main -> main`。GitHub 提示壁纸视频 57.93 MB 超过建议的 50 MB，但推送成功；后续可单独优化媒体存储。此前代理 Git 提权因自动审批模型不可用（404）受阻。
 - 已确认上线环境（用户说明及 Zeabur 截图）：域名注册商为阿里云；旧服务 `mxiaocao-blog` 位于 Zeabur 腾讯云香港 2C 2GB，来源 `Mxiaocao/Mxiaocao-Blog-Legacy` 的 main，根目录 `/`，Running 1/1；正式域名 `mxiaocaoblog.com` 与 `mxiaocao.zeabur.app` 均显示 PROVISIONED。DNS 托管商尚未独立确认。计划在同一项目新增新版服务、临时域名验收后切换正式域名，尚未创建或切换。
 
 - 当前阶段（2026-10-04）：用户明确开始域名与网站上线工作。已核对正式域名配置为 `https://mxiaocaoblog.com/`，页脚已有备案号；域名注册商、DNS 托管商、当前线上托管平台与本次部署目标仍未知，需补齐后确定接入方案。仓库同时存在 Vercel 配置与发布至 `pages` 分支的 GitHub Actions，不能据此认定实际部署平台。上线前需检查 Actions 的 Node 20 与当前工具链兼容性、地图构建环境变量，以及 Vercel 全局 `X-Frame-Options: DENY` 对站内地图和算法 iframe 的影响。继续遵守未经明确要求不提交或推送的约束。
