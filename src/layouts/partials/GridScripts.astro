@@ -7,6 +7,7 @@
 interface Props {
 	navbarTransparentMode?: string;
 	defaultWallpaperMode?: string;
+	mobileDefaultWallpaperMode?: string;
 	defaultPostListLayout?: string;
 	BANNER_HEIGHT?: number;
 	BANNER_HEIGHT_FULLSCREEN?: number;
@@ -19,6 +20,7 @@ interface Props {
 const {
 	navbarTransparentMode = "semi",
 	defaultWallpaperMode = "banner",
+	mobileDefaultWallpaperMode = defaultWallpaperMode,
 	defaultPostListLayout = "list",
 	BANNER_HEIGHT = 35,
 	BANNER_HEIGHT_FULLSCREEN = 100,
@@ -35,6 +37,7 @@ const {
 	define:vars={{
 		navbarTransparentMode,
 		defaultWallpaperMode,
+		mobileDefaultWallpaperMode,
 		defaultPostListLayout,
 		BANNER_HEIGHT,
 		BANNER_HEIGHT_FULLSCREEN,
@@ -58,12 +61,17 @@ const {
 	}
 
 	function migrateWallpaperConfig() {
-		const version = "3712980239-video-v1";
+		const version = "3712980239-responsive-v2";
 		if (localStorage.getItem("wallpaperConfigVersion") === version) return;
 		for (const key of ["wallpaperMode", "overlayOpacity", "overlayBlur", "fullscreenOpacity", "fullscreenBlur"]) {
 			localStorage.removeItem(key);
 		}
 		localStorage.setItem("wallpaperConfigVersion", version);
+	}
+
+	function getDefaultWallpaperMode() {
+		return window.matchMedia("(max-width: 768px)").matches
+			? mobileDefaultWallpaperMode : defaultWallpaperMode;
 	}
 
 	function syncLayoutVariant() {
@@ -205,7 +213,7 @@ const {
 	(function () {
 		migrateWallpaperConfig();
 		const wallpaperMode =
-			wallpaperEnabled ? (localStorage.getItem("wallpaperMode") || defaultWallpaperMode) : defaultWallpaperMode;
+			wallpaperEnabled ? (localStorage.getItem("wallpaperMode") || getDefaultWallpaperMode()) : getDefaultWallpaperMode();
 		const body = document.body;
 		applyWallpaperVisualSettings(wallpaperMode);
 
@@ -304,7 +312,7 @@ const {
 	function applyWallpaperMode() {
 		migrateWallpaperConfig();
 		const wallpaperMode =
-			wallpaperEnabled ? (localStorage.getItem("wallpaperMode") || defaultWallpaperMode) : defaultWallpaperMode;
+			wallpaperEnabled ? (localStorage.getItem("wallpaperMode") || getDefaultWallpaperMode()) : getDefaultWallpaperMode();
 
 		// 同步波浪状态：配置 enable 优先，其次 localStorage
 		if (!wavesEnabled) {
@@ -496,6 +504,7 @@ const {
 	}
 
 	// 监听壁纸模式变化，立即应用（不重载页面）
+	window.matchMedia("(max-width: 768px)").addEventListener("change", applyWallpaperMode);
 	window.addEventListener("wallpaper-mode-change", function (_event) {
 		applyWallpaperMode();
 	});

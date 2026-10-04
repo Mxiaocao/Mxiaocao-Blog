@@ -120,12 +120,18 @@ export function getStoredTheme(): LIGHT_DARK_MODE {
 	return (localStorage.getItem("theme") as LIGHT_DARK_MODE) || DEFAULT_THEME;
 }
 
+export function getDefaultWallpaperMode(): WALLPAPER_MODE {
+	return typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches
+		? (siteConfig.wallpaperMode.mobileDefaultMode ?? siteConfig.wallpaperMode.defaultMode)
+		: siteConfig.wallpaperMode.defaultMode;
+}
+
 export function getStoredWallpaperMode(): WALLPAPER_MODE {
 	if (!fullscreenWallpaperConfig.enable)
-		return siteConfig.wallpaperMode.defaultMode as WALLPAPER_MODE;
+		return getDefaultWallpaperMode();
 	return (
 		(localStorage.getItem("wallpaperMode") as WALLPAPER_MODE) ||
-		siteConfig.wallpaperMode.defaultMode
+		getDefaultWallpaperMode()
 	);
 }
 

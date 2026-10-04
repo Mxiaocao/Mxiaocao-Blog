@@ -109,6 +109,7 @@ export interface SiteConfig {
 	// 壁纸模式配置
 	wallpaperMode: {
 		defaultMode: "banner" | "fullscreen" | "overlay" | "none";
+		mobileDefaultMode?: "banner" | "fullscreen" | "overlay" | "none";
 		showModeSwitchOnMobile?: "off" | "mobile" | "desktop" | "both";
 	};
 

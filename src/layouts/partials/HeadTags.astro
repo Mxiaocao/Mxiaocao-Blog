@@ -140,6 +140,10 @@ const favicons: Favicon[] =
 	}
 
 	// Load the hue from local storage
+	if (localStorage.getItem("themeHueConfigVersion") !== "hue-360-v1") {
+		if (localStorage.getItem("hue") === "240") localStorage.removeItem("hue");
+		localStorage.setItem("themeHueConfigVersion", "hue-360-v1");
+	}
 	const hue = themeColorFixed ? configHue : (localStorage.getItem("hue") || configHue);
 	document.documentElement.style.setProperty("--hue", hue);
 

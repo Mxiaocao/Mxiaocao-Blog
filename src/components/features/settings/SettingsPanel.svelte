@@ -11,6 +11,7 @@ import Icon from "@iconify/svelte";
 import {
 	getDefaultBannerTitleEnabled,
 	getDefaultHue,
+	getDefaultWallpaperMode,
 	getDefaultOverlayBlur,
 	getDefaultOverlayCardOpacity,
 	getDefaultOverlayOpacity,
@@ -50,7 +51,7 @@ const allowLayoutSwitch =
 	(siteConfig.postListLayout.enable ?? false) &&
 	siteConfig.postListLayout.allowSwitch;
 const defaultLayout = siteConfig.postListLayout.defaultMode as LayoutMode;
-const defaultWallpaperMode = siteConfig.wallpaperMode.defaultMode;
+let defaultWallpaperMode = $state(getDefaultWallpaperMode());
 
 const overlaySwitchable =
 	fullscreenWallpaperConfig.overlay?.switchable ?? false;
@@ -145,7 +146,8 @@ function resetHue() {
 
 function resetWallpaperMode() {
 	wallpaperMode = defaultWallpaperMode as WALLPAPER_MODE;
-	setWallpaperMode(defaultWallpaperMode as WALLPAPER_MODE);
+	localStorage.removeItem("wallpaperMode");
+	window.dispatchEvent(new CustomEvent("wallpaper-mode-change"));
 }
 
 function resetLayout() {
@@ -251,6 +253,8 @@ function refreshAllRangeProgress() {
 
 function checkMobile() {
 	isMobile = window.innerWidth <= 768;
+	defaultWallpaperMode = getDefaultWallpaperMode();
+	wallpaperMode = getStoredWallpaperMode();
 }
 
 onMount(() => {

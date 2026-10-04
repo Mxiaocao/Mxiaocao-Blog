@@ -138,6 +138,9 @@
 
 # 当前任务与下一步
 
+- 默认外观调整（2026-10-04）：用户要求电脑默认色相 360、横幅模式，手机默认全屏。`siteConfig.themeColor.hue=360`，wallpaperMode 默认 banner，新增 mobileDefaultMode=fullscreen；按设置面板现有 768px 分界，同步壁纸内联初始化、GridScripts、设置读取和恢复默认，断点变化时更新默认模式。版本 responsive-v2 一次性清理旧壁纸缓存，后续保留手动选择；色相迁移仅清除旧值 240，其他自选值保留。参考本地 Mizuki 组件架构文档并沿用既有 define:vars 方式；Astro 在线脚本文档本次网络读取失败。79 页构建通过，Edge 实测 1400/769px 横幅、390/768px 全屏，默认色相均 360，手动选择无壁纸后刷新保留。尚未提交或推送。
+- 上线进展（2026-10-04）：用户已反馈修复后新版服务 Running，截图确认 `mxiaocaoblog.com` 绿色绑定至 `mxiaocao-blog-astro:8080`。真实页面的完整上线验收尚未完成。
+
 - Zeabur 启动修复（2026-10-04）：新版服务 `mxiaocao-blog-astro` 已创建，用户提供运行日志确认 Caddy 的 zeaburextension 因 `parse headers: invalid header line: ! Cache-Control` 启动失败。已修改 `public/_headers`，移除不支持的删除指令和全站通配缓存规则；仅指纹资源 `/_astro/*` 使用一年 immutable，固定路径 assets/pio/images 改为一小时并重新验证，移除可能与目录规则叠加的 woff2 通配规则；RSS/Atom 跨域头保留。依据是平台实际解析错误与 HTTP 缓存规则，未改 Astro 配置。79 页构建、生成文件与源文件一致性、响应头基本语法、样式/字体及 Pagefind 检查通过；云端启动仍待用户推送后验证。本地 Git 权限/自动审批服务限制仍未解决，修复尚未提交推送。
 
 - 推送准备（2026-10-04）：用户已明确授权本次提交与推送到仓库。类型检查 357 文件无错误/警告/提示，Astro 构建 79 页、样式/字体检查与 Pagefind（45 页）通过，物理/地图/图论/凸包 19 项测试通过；物理合集 featured 测试已按用户此前要求改为 true。扫描 Git 可收录文件未发现本地两个高德配置值，`.env`、构建产物与本地工具均被忽略；两项 `.vscode` 删除仍须排除。用户随后在本地终端完成提交与推送：`26cd138`（152 个文件）及此前 28 个提交已推送至 `origin/main`，终端确认 `b534f25..26cd138 main -> main`。GitHub 提示壁纸视频 57.93 MB 超过建议的 50 MB，但推送成功；后续可单独优化媒体存储。此前代理 Git 提权因自动审批模型不可用（404）受阻。
