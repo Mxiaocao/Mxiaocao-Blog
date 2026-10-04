@@ -112,7 +112,7 @@ const renderGroups = [
 	<script is:inline define:vars={{ wallpaperEnabled: config.enable ?? true, overlaySwitchable: config.overlay?.switchable ?? true, defaultWallpaperMode: siteConfig.wallpaperMode.defaultMode, mobileDefaultWallpaperMode: siteConfig.wallpaperMode.mobileDefaultMode ?? siteConfig.wallpaperMode.defaultMode }}>
 	(function() {
 		const root = document.documentElement;
-		const wallpaperConfigVersion = '3712980239-responsive-v2';
+		const wallpaperConfigVersion = '3712980239-responsive-v3';
 		if (localStorage.getItem('wallpaperConfigVersion') !== wallpaperConfigVersion) {
 			localStorage.removeItem('wallpaperMode');
 			localStorage.removeItem('overlayOpacity');

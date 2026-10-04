@@ -138,6 +138,8 @@
 
 # 当前任务与下一步
 
+- 默认外观微调（2026-10-04）：用户随后决定手机端默认壁纸也使用横幅模式。`mobileDefaultMode` 已改为 `banner`，壁纸配置版本升级为 responsive-v3 以清除此前 responsive-v2 产生的缓存默认值；手动选择仍保留。
+
 - 默认外观调整（2026-10-04）：用户要求电脑默认色相 360、横幅模式，手机默认全屏。`siteConfig.themeColor.hue=360`，wallpaperMode 默认 banner，新增 mobileDefaultMode=fullscreen；按设置面板现有 768px 分界，同步壁纸内联初始化、GridScripts、设置读取和恢复默认，断点变化时更新默认模式。版本 responsive-v2 一次性清理旧壁纸缓存，后续保留手动选择；色相迁移仅清除旧值 240，其他自选值保留。参考本地 Mizuki 组件架构文档并沿用既有 define:vars 方式；Astro 在线脚本文档本次网络读取失败。79 页构建通过，Edge 实测 1400/769px 横幅、390/768px 全屏，默认色相均 360，手动选择无壁纸后刷新保留。尚未提交或推送。
 - 上线进展（2026-10-04）：用户已反馈修复后新版服务 Running，截图确认 `mxiaocaoblog.com` 绿色绑定至 `mxiaocao-blog-astro:8080`。真实页面的完整上线验收尚未完成。
 

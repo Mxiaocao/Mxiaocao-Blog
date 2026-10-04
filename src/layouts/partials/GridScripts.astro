@@ -61,7 +61,7 @@ const {
 	}
 
 	function migrateWallpaperConfig() {
-		const version = "3712980239-responsive-v2";
+		const version = "3712980239-responsive-v3";
 		if (localStorage.getItem("wallpaperConfigVersion") === version) return;
 		for (const key of ["wallpaperMode", "overlayOpacity", "overlayBlur", "fullscreenOpacity", "fullscreenBlur"]) {
 			localStorage.removeItem(key);
