@@ -63,8 +63,11 @@ const formatDate = (dateString: string) => {
 const getDuration = (startDate: string, endDate?: string) => {
 	const start = new Date(startDate);
 	const end = endDate ? new Date(endDate) : new Date();
-	const diffTime = Math.abs(end.getTime() - start.getTime());
-	const diffMonths = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 30));
+	const diffMonths = Math.max(
+		0,
+		(end.getUTCFullYear() - start.getUTCFullYear()) * 12 +
+			end.getUTCMonth() - start.getUTCMonth(),
+	);
 
 	if (diffMonths < 12) {
 		return `${diffMonths} ${i18n(I18nKey.timelineMonths)}`;
@@ -97,7 +100,7 @@ const hasLinks = item.links && item.links.length > 0;
 		class="timeline-card group relative rounded-xl border border-black/10 dark:border-white/10 overflow-hidden transition-all duration-300 hover:shadow-lg"
 	>
 		<div class="p-5 sm:p-6">
-			<div class="flex items-start gap-3 mb-3">
+			<div class="flex flex-wrap items-start gap-3 mb-3">
 				<div
 					class="w-10 h-10 shrink-0 rounded-lg flex items-center justify-center bg-(--btn-regular-bg)"
 				>
@@ -190,7 +193,7 @@ const hasLinks = item.links && item.links.length > 0;
 			}
 
 			<div
-				class="flex items-center gap-4 text-xs text-black/50 dark:text-white/50 mb-1 pt-3 border-t border-black/5 dark:border-white/5"
+				class="flex flex-wrap items-center gap-4 text-xs text-black/50 dark:text-white/50 mb-1 pt-3 border-t border-black/5 dark:border-white/5"
 			>
 				<span class="flex items-center gap-1">
 					<Icon
