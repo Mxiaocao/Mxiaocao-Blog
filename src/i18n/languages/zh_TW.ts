@@ -298,6 +298,7 @@ export const zh_TW: Translation = {
 	[Key.passwordHint]: "提示",
 
 	//最後編輯時間卡片
+	[Key.lastModifiedDate]: "上次編輯：",
 	[Key.lastModifiedPrefix]: "距離上次編輯: ",
 	[Key.lastModifiedOutdated]: "部分資訊可能已經過時",
 	[Key.year]: "年",

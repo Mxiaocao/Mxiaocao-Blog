@@ -343,6 +343,7 @@ export const en: Translation = {
 	[Key.passwordHint]: "Hint",
 
 	// Last Modified Time Card
+	[Key.lastModifiedDate]: "Last edited:",
 	[Key.lastModifiedPrefix]: "Time since last edit: ",
 	[Key.lastModifiedOutdated]: "Some information may be outdated",
 	[Key.year]: "y",

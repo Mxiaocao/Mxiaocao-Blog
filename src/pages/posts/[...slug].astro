@@ -393,6 +393,7 @@ const jsonLd = {
 		siteConfig.showLastModified && (
 			<LastModified
 				updatedDate={entry.data.updated || entry.data.published}
+				dateOnly={entry.data.updated ? entry.data._updatedDateOnly : entry.data._publishedDateOnly}
 			/>
 		)
 	}

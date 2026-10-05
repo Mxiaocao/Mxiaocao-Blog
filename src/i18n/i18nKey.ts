@@ -253,6 +253,7 @@ enum I18nKey {
 	decryptionError = "decryptionError",
 
 	//最后编辑时间卡片
+	lastModifiedDate = "lastModifiedDate",
 	lastModifiedPrefix = "lastModifiedPrefix",
 	lastModifiedOutdated = "lastModifiedOutdated",
 	year = "year",

@@ -257,6 +257,7 @@ export const zh_CN: Translation = {
 	[Key.passwordHint]: "提示",
 
 	//最后编辑时间卡片
+	[Key.lastModifiedDate]: "上次编辑：",
 	[Key.lastModifiedPrefix]: "距离上次编辑: ",
 	[Key.lastModifiedOutdated]: "部分信息可能已经过时",
 	[Key.year]: "年",

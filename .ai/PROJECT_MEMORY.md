@@ -138,6 +138,10 @@
 
 # 当前任务与下一步
 
+- 编辑时间精度修复（2026-10-05）：用户截图确认 Lab03 已上线，但刚发布显示“12 小时 52 分”。原因是 Frontmatter updated 只有 2026-10-05，解析为 UTC 零点（北京时间 08:00），LastModified 错当精确时刻计时。两条文章路由现传入对应 _updatedDateOnly/_publishedDateOnly；只含日期时服务端显示“上次编辑：YYYY-MM-DD”且不启动秒级计时，精确时间仍使用 ISO 时间戳，未来时刻差值限制为零。补齐四种语言的日期标签。未虚构或修改文章实际发布时间。构建 81 页、Astro Check 357 文件零错误/警告、15 项布局与时间回归测试、样式/字体检查通过；生成 Lab03 已核对为日期标签。未提交或部署，保留此前壁纸加载优化。
+
+- 线上文章加载优化（2026-10-05）：用户反馈 mxiaocaoblog.com 加载慢。已确认共享壁纸视频为 60,739,598 字节（约 58 MiB），原组件直接输出 src/autoplay，隐藏的壁纸实例也可能发起请求；本次改为 data-src/preload=none，DOM 就绪后延迟 1.5 秒并等空闲时段，仅可见且页面未隐藏的实例才赋 src/播放；卸载时取消回调、释放视频资源，透明背景模式补上原壁纸占位图。保留原始视频、壁纸模式、字体及其他功能。依据本地 Mizuki 组件架构文档沿用现有 Astro 自定义元素。构建 81 页、Astro Check 357 文件零错误/警告、样式与字体检查通过。Edge 文章页实测：无壁纸模式两个实例均无 src、零 MP4 请求；横幅模式仅可见实例加载并播放，视频请求晚于 DOM 就绪约 1.36 秒；离开视口暂停。390px 手机文章页沿用 MainGridLayout 的 mobile-hide-banner，无横向溢出且视频无 src，不下载不可见视频。自定义字体合计约 6.2 MiB，现有 font-display:swap，未修改。线上域名 DNS 返回 Cloudflare 地址，但当前环境连接被拒，未获得线上 TTFB 或实际提速数据；需部署后在用户网络复测，不能断言 CDN/服务器根因。未提交或推送。
+
 - 文章发布准备（2026-10-05）：用户要求发布 Lab03 并放入计算机系统原理；已录入 `src/content/posts/engineering/computer-systems/lab03.md`，标题“实验三：数据的机器表示”，分类为“技术学习 / 计算机基础 / 计算机系统原理”，发布日期 2026-10-05。依本地 Mizuki 内容编写指南补充 Frontmatter，迁入两张原图至 `public/images/posts/computer-systems/lab03/`，将原稿 LaTeX 括号分隔符适配为站点支持的美元分隔符，保留正文措辞。使用本地 Node 22.22.2 与 ASTRO_TELEMETRY_DISABLED=1 构建 81 页，样式/字体检查及 Pagefind（47 页）通过；文章 211 处 KaTeX、正文结尾、图片与源文件一致性、Writing/RSS/站点地图均通过检查。正式路径 `/posts/engineering/computer-systems/lab03/`；提交推送受阻：沙箱拒绝写入 `.git/index.lock`，Git 暂存的提权请求又因自动审批模型 `codex-auto-review` 不可用（404）未执行；因此尚未提交、推送或确认线上发布，需用户在本地终端执行明确路径的 git add/commit/push。系统 pnpm 在本环境无输出，本地 Node 22 CLI 可用；Git 读取远端使用单次 `-c http.sslBackend=openssl` 成功。
 
 - 文章录入（2026-10-04）：用户要求部署课程笔记 Lab01-02.md，已原文导入 `src/content/posts/engineering/computer-systems/lab01-02.md`，标题为“实验一、二：实验环境搭建与 Linux 基础”，发布日为本次录入日，归入“技术学习 / 计算机基础 / 计算机系统原理”。依据 Mizuki 本地 `docs/CONTENT_AUTHORING.zh.md` 补充 Frontmatter；正文与源文件逐字一致，无外部图片附件。生产构建 80 页、样式/字体检查及 Pagefind（46 页）通过；新文章正文结尾、17 张表格、分类、Writing/RSS/站点地图均已核对。正式地址为 `/posts/engineering/computer-systems/lab01-02/`；上线仍需成功提交推送并由 Zeabur 部署。

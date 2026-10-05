@@ -346,6 +346,7 @@ export const ja: Translation = {
 	[Key.passwordHint]: "ヒント",
 
 	// 最終更新時間カード
+	[Key.lastModifiedDate]: "最終更新：",
 	[Key.lastModifiedPrefix]: "最終編集からの時間: ",
 	[Key.lastModifiedOutdated]: "一部の情報は古い可能性があります",
 	[Key.year]: "年",

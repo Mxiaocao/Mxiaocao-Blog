@@ -11,13 +11,12 @@ const { src, poster } = Astro.props;
 	<video
 		class="h-full w-full"
 		style="object-fit: var(--wallpaper-video-fit, contain); object-position: var(--wallpaper-video-position, center);"
-		src={src}
+		data-src={src}
 		poster={poster}
-		autoplay
 		muted
 		loop
 		playsinline
-		preload="metadata"
+		preload="none"
 		aria-hidden="true"
 	></video>
 </wallpaper-video>
@@ -26,12 +25,34 @@ const { src, poster } = Astro.props;
 	class WallpaperVideo extends HTMLElement {
 		private observer?: IntersectionObserver;
 		private visible = false;
+		private ready = false;
+		private idleId?: number;
+		private timer?: number;
+
+		private allowPlayback = () => {
+			this.ready = true;
+			this.syncPlayback();
+		};
+
+		private schedulePlayback = () => {
+			// Give the article a head start without waiting for slow third-party widgets.
+			this.timer = window.setTimeout(() => {
+				if ("requestIdleCallback" in window) {
+					this.idleId = window.requestIdleCallback(this.allowPlayback, { timeout: 2000 });
+				} else {
+					this.allowPlayback();
+				}
+			}, 1500);
+		};
 
 		private syncPlayback = () => {
 			const video = this.querySelector("video");
 			if (!video) return;
 			video.muted = true;
-			if (this.visible && !document.hidden) {
+			if (this.ready && this.visible && !document.hidden && this.isConnected) {
+				if (!video.hasAttribute("src") && video.dataset.src) {
+					video.src = video.dataset.src;
+				}
 				void video.play().catch(() => {
 					// Keep the poster visible if the browser blocks autoplay.
 				});
@@ -41,6 +62,8 @@ const { src, poster } = Astro.props;
 		};
 
 		connectedCallback() {
+			if (document.readyState !== "loading") this.schedulePlayback();
+			else document.addEventListener("DOMContentLoaded", this.schedulePlayback, { once: true });
 			this.observer = new IntersectionObserver(([entry]) => {
 				this.visible = entry.isIntersecting;
 				this.syncPlayback();
@@ -50,9 +73,19 @@ const { src, poster } = Astro.props;
 		}
 
 		disconnectedCallback() {
+			document.removeEventListener("DOMContentLoaded", this.schedulePlayback);
+			if (this.idleId !== undefined) window.cancelIdleCallback(this.idleId);
+			window.clearTimeout(this.timer);
+			this.ready = false;
+			this.visible = false;
 			this.observer?.disconnect();
 			document.removeEventListener("visibilitychange", this.syncPlayback);
-			this.querySelector("video")?.pause();
+			const video = this.querySelector("video");
+			if (video?.hasAttribute("src")) {
+				video.pause();
+				video.removeAttribute("src");
+				video.load();
+			}
 		}
 	}
 

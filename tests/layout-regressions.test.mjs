@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { runInNewContext } from "node:vm";
 import { readFile } from "node:fs/promises";
 import { describe, it } from "node:test";
 import { remarkMarkSectionized } from "../src/plugins/remark-mark-sectionized.mjs";
@@ -237,6 +238,24 @@ describe("Markdown layout regressions", () => {
 });
 
 describe("Last modified time regressions", () => {
+	it("does not invent elapsed hours for date-only metadata", () => {
+		const script = lastModifiedSource.match(/<script is:inline>([\s\S]*?)<\/script>/)[1];
+		function render(dateOnly, timestamp) {
+			const output = { textContent: "上次编辑：2026-10-05" };
+			const metadata = { dataset: { dateOnly, lastModified: timestamp, prefix: "距离上次编辑:", year: "年", month: "月", day: "天", hour: "小时", minute: "分", second: "秒" } };
+			let timers = 0;
+			runInNewContext(script, {
+				document: { getElementById: (id) => id === "last-modified" ? metadata : output },
+				Date: class extends Date { constructor(value) { super(value ?? "2026-10-05T20:52:23+08:00"); } },
+				setInterval: () => { timers++; },
+			});
+			return { text: output.textContent, timers };
+		}
+		assert.deepEqual(render("true", "2026-10-05T00:00:00Z"), { text: "上次编辑：2026-10-05", timers: 0 });
+		assert.deepEqual(render("false", "2026-10-05T20:50:00+08:00"), { text: "距离上次编辑: 0 小时 02 分 23 秒", timers: 1 });
+		assert.deepEqual(render("false", "2026-10-06T00:00:00+08:00"), { text: "距离上次编辑: 0 小时 00 分 00 秒", timers: 1 });
+	});
+
 	it("preserves the updated instant across visitor time zones", () => {
 		assert.match(
 			lastModifiedSource,
