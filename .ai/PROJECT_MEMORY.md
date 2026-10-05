@@ -138,6 +138,8 @@
 
 # 当前任务与下一步
 
+- 文章发布准备（2026-10-05）：用户要求发布 Lab03 并放入计算机系统原理；已录入 `src/content/posts/engineering/computer-systems/lab03.md`，标题“实验三：数据的机器表示”，分类为“技术学习 / 计算机基础 / 计算机系统原理”，发布日期 2026-10-05。依本地 Mizuki 内容编写指南补充 Frontmatter，迁入两张原图至 `public/images/posts/computer-systems/lab03/`，将原稿 LaTeX 括号分隔符适配为站点支持的美元分隔符，保留正文措辞。使用本地 Node 22.22.2 与 ASTRO_TELEMETRY_DISABLED=1 构建 81 页，样式/字体检查及 Pagefind（47 页）通过；文章 211 处 KaTeX、正文结尾、图片与源文件一致性、Writing/RSS/站点地图均通过检查。正式路径 `/posts/engineering/computer-systems/lab03/`；提交推送受阻：沙箱拒绝写入 `.git/index.lock`，Git 暂存的提权请求又因自动审批模型 `codex-auto-review` 不可用（404）未执行；因此尚未提交、推送或确认线上发布，需用户在本地终端执行明确路径的 git add/commit/push。系统 pnpm 在本环境无输出，本地 Node 22 CLI 可用；Git 读取远端使用单次 `-c http.sslBackend=openssl` 成功。
+
 - 文章录入（2026-10-04）：用户要求部署课程笔记 Lab01-02.md，已原文导入 `src/content/posts/engineering/computer-systems/lab01-02.md`，标题为“实验一、二：实验环境搭建与 Linux 基础”，发布日为本次录入日，归入“技术学习 / 计算机基础 / 计算机系统原理”。依据 Mizuki 本地 `docs/CONTENT_AUTHORING.zh.md` 补充 Frontmatter；正文与源文件逐字一致，无外部图片附件。生产构建 80 页、样式/字体检查及 Pagefind（46 页）通过；新文章正文结尾、17 张表格、分类、Writing/RSS/站点地图均已核对。正式地址为 `/posts/engineering/computer-systems/lab01-02/`；上线仍需成功提交推送并由 Zeabur 部署。
 
 - 默认外观微调（2026-10-04）：用户随后决定手机端默认壁纸也使用横幅模式。`mobileDefaultMode` 已改为 `banner`，壁纸配置版本升级为 responsive-v3 以清除此前 responsive-v2 产生的缓存默认值；手动选择仍保留。
