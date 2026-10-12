@@ -64,6 +64,7 @@ export const physicsExperiments = experiments.map((experiment) => ({
 
 export const physicsProjects: ProjectInput[] = [{
 	id: "physics-lab",
+	development: { label: "AI 生成", description: "合集中的交互实验代码由 AI 生成，作为大学物理学习实践展示。" },
 	title: "交互式物理实验室",
 	description: "大学物理学习中的浏览器仿真实验合集，包含示波器、弦振动、光学干涉、电场与电通量演示，以及三维函数绘图工具。",
 	category: "physics",

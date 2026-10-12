@@ -28,6 +28,12 @@ export const projectSchema = z.object({
 	tags: z.array(text).optional(),
 	showImage: z.boolean().optional(),
 	isDemo: z.boolean().default(false),
+	development: z.object({
+		label: text,
+		description: text,
+		humanContribution: text.optional(),
+		tools: z.array(text).optional(),
+	}).optional(),
 	sections: z.array(z.object({ title: text, body: text })).default([]),
 	experiments: z.array(z.object({
 		id: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),

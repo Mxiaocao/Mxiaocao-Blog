@@ -83,6 +83,13 @@ const getStatusText = (status: string) => {
 		>
 			{project.description}
 		</p>
+		{project.development && (
+			<div class="mb-3">
+				<span class="inline-block px-2 py-1 text-xs rounded-md bg-(--btn-regular-bg) text-black/70 dark:text-white/70 font-medium">
+					{project.development.label}
+				</span>
+			</div>
+		)}
 
 		{
 			project.techStack && project.techStack.length > 0 && (

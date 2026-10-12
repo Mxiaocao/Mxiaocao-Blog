@@ -6,6 +6,7 @@ export type { Project } from "../schemas/content";
 export const projectsData: ProjectInput[] = [
 	{
 		id: "acm-os",
+		development: { label: "AI 生成", description: "本项目的代码由 AI 生成。" },
 		title: "ACM-OS",
 		description: "用于竞赛训练、题目笔记与知识管理的桌面工作区，仓库正在按 M0–B0.3 逐步开发。",
 		category: "desktop",
@@ -19,6 +20,7 @@ export const projectsData: ProjectInput[] = [
 	},
 	{
 		id: "dorm-hygiene",
+		development: { label: "AI 生成", description: "本项目的代码由 AI 生成。" },
 		title: "Dorm Hygiene",
 		description: "用于宿舍健康流程的小型服务与 React 前端概念验证，目前处于 P4-B0 脚手架阶段。",
 		category: "web",
@@ -32,6 +34,7 @@ export const projectsData: ProjectInput[] = [
 	},
 	{
 		id: "ledgerly",
+		development: { label: "AI 生成", description: "本项目的代码由 AI 生成。" },
 		title: "Ledgerly",
 		description: "使用 Kotlin Multiplatform 构建的本地优先个人账本，仓库处于 Phase 4 实现与 P4-0 引导阶段。",
 		category: "desktop",
