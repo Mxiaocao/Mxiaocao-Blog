@@ -8,13 +8,17 @@ export const projectsData: ProjectInput[] = [
 		id: "acm-os",
 		development: { label: "AI 生成", description: "本项目的代码由 AI 生成。" },
 		title: "ACM-OS",
-		description: "用于竞赛训练、题目笔记与知识管理的桌面工作区，仓库正在按 M0–B0.3 逐步开发。",
+		description: "面向算法竞赛学习的本地桌面工作区，v0.1.0 已发布 Windows 版，支持比赛整理、题库管理与学习月历。",
 		category: "desktop",
 		techStack: ["TypeScript", "React", "Rust", "Tauri", "SQLite"],
-		status: "in-progress",
+		status: "released",
+		release: { version: "v0.1.0", url: "https://github.com/Mxiaocao/acm-os/releases/tag/v0.1.0" },
 		sourceCode: "https://github.com/Mxiaocao/acm-os",
 		startDate: "2026-09-23",
-		sections: [{ title: "当前证据", body: "README 记录了 M0–B0.3 的渐进式开发内容：SQLite 启动与迁移门、Active Vault / Problem Notes Root / Knowledge Root 配置，以及 B0.4 Recovery、Setup 或 Normal 启动壳层。仓库还提供锁定的边界检查、构建检查和 Rust 检查。" }],
+		sections: [
+			{ title: "v0.1.0 发布", body: "首个 Windows 产品版本，提供 x64 安装包、免安装 ZIP 和 SHA-256 校验文件。首次运行时按提示设置工作区，数据保存在本地。" },
+			{ title: "当前功能", body: "比赛书架随窗口宽度调整每层容量，各分类共用年份。支持 Codeforces 单题链接导入和手动录入题目，题库提供关键词搜索与 LaTeX 题面预览。独立学习月历用于查看学习记录和下一次复习安排。" },
+		],
 		featured: true,
 		tags: ["Desktop", "Tauri", "Computer Science"],
 	},
@@ -54,7 +58,8 @@ export const getProjectStats = () => {
 	const completed = projectsData.filter((p) => p.status === "completed").length;
 	const inProgress = projectsData.filter((p) => p.status === "in-progress").length;
 	const planned = projectsData.filter((p) => p.status === "planned").length;
-	return { total, byStatus: { completed, inProgress, planned } };
+	const released = projectsData.filter((p) => p.status === "released").length;
+	return { total, byStatus: { completed, inProgress, planned, released } };
 };
 export const getProjectsByCategory = (category?: string) => !category || category === "all" ? projectsData : projectsData.filter((p) => p.category === category);
 export const getFeaturedProjects = () => projectsData.filter((p) => p.featured);

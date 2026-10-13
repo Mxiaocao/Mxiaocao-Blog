@@ -16,6 +16,8 @@ const hasSourceCode = !!project.sourceCode;
 
 const getStatusText = (status: string) => {
 	switch (status) {
+		case "released":
+			return project.release ? `已发布 ${project.release.version}` : "已发布";
 		case "completed":
 			return i18n(I18nKey.projectsCompleted);
 		case "in-progress":
@@ -109,8 +111,14 @@ const getStatusText = (status: string) => {
 		}
 
 		{
-			(hasVisitUrl || hasSourceCode) && (
+			(project.release || hasVisitUrl || hasSourceCode) && (
 				<div class="flex gap-2">
+					{project.release && (
+						<a href={project.release.url} target="_blank" rel="noopener noreferrer" aria-label={`下载 ${project.title} ${project.release.version}（新窗口）`} class="btn-regular flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium">
+							<Icon name="material-symbols:download-rounded" class="text-base w-4 h-4" />
+							下载版本
+						</a>
+					)}
 					{hasVisitUrl && (
 						<a
 							href={visitUrl!}

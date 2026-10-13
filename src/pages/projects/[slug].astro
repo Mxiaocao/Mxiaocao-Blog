@@ -21,7 +21,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 const { project } = Astro.props;
 if (!project) return Astro.redirect(Astro.props.redirect!);
-const statusLabels = { completed: "已完成", "in-progress": "进行中", planned: "计划中" };
+const statusLabels = { completed: "已完成", "in-progress": "进行中", planned: "计划中", released: "已发布" };
 const categoryLabels = { web: "Web 应用", mobile: "移动应用", desktop: "桌面应用", physics: "物理实验", other: "其他" };
 ---
 <MainGridLayout title={project.title} description={project.description}>
@@ -34,6 +34,7 @@ const categoryLabels = { web: "Web 应用", mobile: "移动应用", desktop: "�
 		{project.image && project.showImage !== false && <img src={project.image} alt={project.title} width="960" height="540" class="w-full rounded-xl mb-8 object-cover" />}
 		{project.experiments.length === 0 && <dl class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-black/80 dark:text-white/80 mb-8">
 			<div><dt class="font-bold mb-1">状态</dt><dd>{statusLabels[project.status]}</dd></div>
+			{project.release && <div><dt class="font-bold mb-1">发布版本</dt><dd>{project.release.version}</dd></div>}
 			<div><dt class="font-bold mb-1">分类</dt><dd>{categoryLabels[project.category]}</dd></div>
 			{project.startDate && <div><dt class="font-bold mb-1">开始日期</dt><dd><time datetime={project.startDate}>{project.startDate}</time></dd></div>}
 			{project.endDate && <div><dt class="font-bold mb-1">完成日期</dt><dd><time datetime={project.endDate}>{project.endDate}</time></dd></div>}
@@ -64,6 +65,7 @@ const categoryLabels = { web: "Web 应用", mobile: "移动应用", desktop: "�
 		</section>}
 		{project.sections.map((section) => <section class="mb-8"><h2 class="text-2xl font-bold mb-3">{section.title}</h2><p class="whitespace-pre-line text-black/80 dark:text-white/80">{section.body}</p></section>)}
 		<div class="flex flex-wrap gap-4">
+			{project.release && <a class="link-lg" href={project.release.url} target="_blank" rel="noopener noreferrer">下载 {project.release.version} / 查看发布说明 ↗</a>}
 			{project.visitUrl && <a class="link-lg" href={project.visitUrl} target="_blank" rel="noopener noreferrer">访问项目</a>}
 			{project.liveDemo && <a class="link-lg" href={project.liveDemo} target="_blank" rel="noopener noreferrer">{project.embedDemo ? "在新窗口打开实验 ↗" : "在线演示 ↗"}</a>}
 			{project.sourceCode && <a class="link-lg" href={project.sourceCode} target="_blank" rel="noopener noreferrer">查看源码 ↗</a>}
