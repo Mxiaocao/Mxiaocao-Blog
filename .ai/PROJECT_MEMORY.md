@@ -24,7 +24,7 @@
 - 已验证：可选的自定义或全局永久链接由 `src/pages/[...permalink].astro` 生成在根路径。
 - 已验证：`/archive/` 是可筛选的文章时间归档。
 - 已验证：`/map/` 为“更多”中的足迹地图；`/map/view/` 是嵌入地图及独立展开入口，标记 noindex，地图数据在 `src/data/footprints.json`。
-- 已验证：`/projects/` 与 `/projects/[slug]/` 共用 `projects` 内容集合；`src/data/projects.ts` 保留 ACM-OS、Dorm Hygiene、Ledgerly 三个精选软件项目（ACM-OS 已发布 v0.1.0，另外两个进行中），并导入 `src/data/physics-projects.ts` 中的“交互式物理实验室”合集项目（共 4 个项目）。合集标注“学习实践”，详情集中展示六个实验，点击直接打开实验；六个旧单项详情地址跳转到合集相应锚点。原有三个软件项目没有虚构演示地址。
+- 已验证：`/projects/` 与 `/projects/[slug]/` 共用 `projects` 内容集合；`src/data/projects.ts` 保留 ACM-OS、Dorm Hygiene、Ledgerly 三个精选软件项目（ACM-OS 已发布 v0.1.1，另外两个进行中），并导入 `src/data/physics-projects.ts` 中的“交互式物理实验室”合集项目（共 4 个项目）。合集标注“学习实践”，详情集中展示六个实验，点击直接打开实验；六个旧单项详情地址跳转到合集相应锚点。原有三个软件项目没有虚构演示地址。
 - 已验证：`/notes/`、`/notes/[...slug]/` 已建立；Lab 内容模型和草稿保留，但暂不生成公开页面，方便后续并入项目详情。
 - 已验证：`/about/` 与 `/friends/` 使用 `spec` 内容集合中的 Markdown/MDX。
 - 已验证：`/books/` 已替代追番入口，导航名称为“读书”，旧 `/anime/` 生成静态跳转至 `/books/`。模板还提供相册、日记、设备、技能、时间线、AI 工具、RSS、Atom、站点地图、搜索数据和 API 路由。
@@ -70,7 +70,7 @@
 - 已验证：Notes/Lab 使用共享列表与 Markdown 正文组件，公开详情参与 Pagefind；现有文章 RSS/Atom 和归档仍只处理 posts。
 - 已验证：模板文章已在内容初始化阶段清理，之后逐步导入历史文章；项目与个人资料保留。2026-10-03 已清空友链、追番、随笔、技能、时间线、AI 工具的示例数据，并移除四个示例相册目录（含隐藏与加密示例），保留相册 README 和页面功能。
 - 计划中 Writing：Algorithms、Engineering、Devlog，并以 Archive 作为完整浏览入口。
-- 已完成 Projects：ACM-OS、Dorm Hygiene、Ledgerly 作为一等项目实体；ACM-OS 已发布 Windows v0.1.0，另外两个项目进行中；能力描述依据 README 或已发布版本说明。
+- 已完成 Projects：ACM-OS、Dorm Hygiene、Ledgerly 作为一等项目实体；ACM-OS 已发布 Windows v0.1.1，另外两个项目进行中；能力描述依据 README 或已发布版本说明。
 - 计划中 Notes：TIL、调试、API、命令、SQL、Rust、Linux 和工具记录。
 - 已完成（2026-10-04）：旧站 Lab 的六个物理实验已合并为“交互式物理实验室”，原 `/physics-lab/` 索引跳转至 `/projects/physics-lab/`。用户最终限定本次范围为物理实验；算法演示保留在原文章中。
 - 已完成 About：个人介绍、算法与数据结构学习方向、编程之外的中英文生活文字、日常时间分配图表和网站说明；项目资料集中在 Projects 页面，联系方式仅保留已核实的 GitHub 账号。
@@ -138,7 +138,9 @@
 
 # 当前任务与下一步
 
-- ACM-OS 发布信息更新（2026-10-13）：核对用户提供的 GitHub v0.1.0 发布页 https://github.com/Mxiaocao/acm-os/releases/tag/v0.1.0 ，确认首个 Windows 产品版及 x64 安装包、免安装 ZIP、SHA-256 校验文件。移除旧 M0–B0.3 描述，状态改为 released；新增可选 release（version/url）数据，首页和项目卡片显示“已发布 v0.1.0”及下载入口，详情展示版本、安装说明与比赛书架、题库导入/搜索/LaTeX 预览、学习月历功能。保留源码入口和 AI 生成标注，未把初次发布视为整个项目完成；统计增加 released 数量。依据 Astro 官方内容集合文档扩展现有 schema。构建 81 页、Astro Check 357 文件零错误/警告/提示、样式/字体/Pagefind（47 页）及生成 HTML 状态/链接/旧文案核对通过。首次并行运行 build/check 遇到 Astro 缓存写入竞争，构建完成后串行重跑 check 通过。未进行浏览器视觉验收；用户随后授权提交并推送本次改动，线上部署状态待确认。
+- ACM-OS v0.1.1 内容更新（2026-10-15）：按用户提供的 Releases 页面核对最新正式版本 https://github.com/Mxiaocao/acm-os/releases/tag/v0.1.1 。仅更新 src/data/projects.ts 中 ACM-OS 的简介、release 版本与地址及详情 sections；首页、项目索引与详情继续使用共享数据。详情补充产品流程、主动入库与同题同日合并计数的学习月历、题解弹窗/刷新、可复制 Prompt 和 Windows x64 更新说明。Prompt 只供外部 AI 使用，未描述成内置模型调用或自动写回；保留 AI 生成标注、源码及其他项目。构建 81 页、样式/字体与 Pagefind（47 页）检查通过；生成 HTML 验证首页/索引卡片与详情正文/链接均为 v0.1.1，无旧 v0.1.0 文案。未进行浏览器视觉验收；用户随后明确授权提交并推送本次更新，线上部署状态待确认；保留其他无关改动。
+
+- ACM-OS 发布信息更新（2026-10-13）：核对用户提供的 GitHub v0.1.0 发布页 https://github.com/Mxiaocao/acm-os/releases/tag/v0.1.0 ，确认首个 Windows 产品版及 x64 安装包、免安装 ZIP、SHA-256 校验文件。移除旧 M0–B0.3 描述，状态改为 released；新增可选 release（version/url）数据，首页和项目卡片显示“已发布 v0.1.0”及下载入口，详情展示版本、安装说明与比赛书架、题库导入/搜索/LaTeX 预览、学习月历功能。保留源码入口和 AI 生成标注，未把初次发布视为整个项目完成；统计增加 released 数量。依据 Astro 官方内容集合文档扩展现有 schema。构建 81 页、Astro Check 357 文件零错误/警告/提示、样式/字体/Pagefind（47 页）及生成 HTML 状态/链接/旧文案核对通过。首次并行运行 build/check 遇到 Astro 缓存写入竞争，构建完成后串行重跑 check 通过。未进行浏览器视觉验收；用户随后授权提交并推送本次改动，提交 7acd67a 已推送 origin/main。用户截图反馈首页已更新而详情仍旧；后续直接 GET 线上首页、项目索引和 ACM-OS 详情均返回 200，详情含新简介、已发布状态、v0.1.0、安装说明、当前功能和发布链接，不含 M0–B0.3。线上当前已同步；截图旧内容可能来自部署时差或客户端缓存，具体原因未验证，未据此修改全站缓存策略。
 
 - 项目开发方式标注（2026-10-12）：用户确认目前四个项目的代码均由 AI 生成，并同意在页面明确标注。项目索引页头增加统一说明；ACM-OS、Dorm Hygiene、Ledgerly、交互式物理实验室均录入可选 development 数据（标签、说明，以及后续可填写的个人参与和工具字段），共享 ProjectCard 在简介与技术栈之间显示“AI 生成”，首页精选同步显示。四个详情页在实验入口前显示“开发方式”；个人贡献与具体工具未获逐项确认，暂不填写或显示，不虚构架构设计、代码审查等职责。沿用 Mizuki 组件与样式变量，参考 Astro 官方内容集合文档 https://docs.astro.build/en/guides/content-collections/ 扩展现有 schema。生产构建 81 页、Astro Check 357 文件零错误/警告/提示，样式、字体与 Pagefind（47 页）检查通过；生成 HTML 核对首页/项目页各四个标签、标签位于技术栈之前及四个详情说明通过。未进行浏览器视觉验收；用户随后授权提交并推送本次改动，线上部署状态待确认；保留原有无关改动。
 
