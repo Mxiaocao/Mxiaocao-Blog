@@ -147,6 +147,7 @@ const componentMap: Record<string, unknown> = {
 | `showFloatingPlayer` | boolean | 控制悬浮播放器 UI 是否显示。为 `false` 时仅侧栏可用 |
 | `mode` | "meting" \| "local" | 播放列表数据来源 |
 | `meting_api` | string | Meting API 地址 |
+| `meting_fallback_apis` | string[]（可选） | 主接口失败、返回无效歌单或 8 秒超时后依次尝试的备用地址 |
 | `id` | string | 歌单 ID |
 | `server` | string | 音乐源服务器 |
 | `type` | string | 播单类型 |

@@ -11,6 +11,7 @@ import {
 import type { RepeatMode, Song } from "@/components/widgets/music-player/types";
 import { musicPlayerConfig } from "@/config";
 import { resolveAssetUrl } from "@/utils/asset-url";
+import { fetchMetingTracks } from "@/utils/meting-playlist";
 
 export interface MusicPlayerState {
 	currentSong: Song;
@@ -251,7 +252,7 @@ class MusicPlayerStore {
 		const mode = musicPlayerConfig.mode ?? "meting";
 		const meting_api =
 			musicPlayerConfig.meting_api ??
-			"https://www.bilibili.uno/api?server=:server&type=:type&id=:id&auth=:auth&r=:r";
+			"https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&auth=:auth&r=:r";
 		const meting_id = musicPlayerConfig.id ?? "14164869977";
 		const meting_server = musicPlayerConfig.server ?? "netease";
 		const meting_type = musicPlayerConfig.type ?? "playlist";
@@ -281,19 +282,13 @@ class MusicPlayerStore {
 		this.state.isLoading = true;
 		this.broadcastState();
 
-		const apiUrl = api
-			.replace(":server", server)
-			.replace(":type", type)
-			.replace(":id", id)
-			.replace(":auth", "")
-			.replace(":r", Date.now().toString());
-
 		try {
-			const res = await fetch(apiUrl);
-			if (!res.ok) {
-				throw new Error("meting api error");
-			}
-			const list: Record<string, unknown>[] = await res.json();
+			const list = await fetchMetingTracks(
+				[api, ...(musicPlayerConfig.meting_fallback_apis ?? [])],
+				server,
+				type,
+				id,
+			);
 			this.state.playlist = list.map((song) => this.convertMetingSong(song));
 			this.state.isLoading = false;
 
