@@ -761,13 +761,13 @@ double b = 10.5;
 | 名称 | 含义 |
 | ---- | ---- |
 | bit（位） | 二进制信息的最小单位，只能是 `0` 或 `1` |
-| byte（字节） | 常见计算机中 `1 byte = 8 bit`，也是本实验观察内存时使用的基本单位 |
+| byte（字节） | 常见计算机中 `1 byte = 8 bit` |
 | word（字） | 计算机处理数据时使用的一个单位，具体宽度取决于体系结构 |
 | word size（字长） | 通常用来描述处理器内部整数运算通路、寄存器等的宽度，反映处理器一次处理数据的能力 |
 
 注意，“字”和“字长”不一定完全相同。比如，Intel x86 体系结构历史上把 16 位称为 word、32 位称为 double word、64 位称为 quad word；而 GDB 的内存查看命令中，`w` 固定表示 4 字节，不能直接把它理解成任何处理器上的“字长”
 
-下面列出常见的 32 位系统，以及采用 LP64 数据模型的 Linux x86-64 系统中的典型情况：
+下面列出常见的 32 位系统，以及采用LP64（Long Point 64）数据模型的 Linux x86-64 系统中的典型情况
 
 | C 数据类型 | 常见 32 位系统 | 常见 Linux x86-64（LP64） |
 | ---------- | -------------: | ------------------------: |
@@ -780,34 +780,35 @@ double b = 10.5;
 | `double` | 8 字节 | 8 字节 |
 | 对象指针，例如 `int *`、`void *` | 4 字节 | 8 字节 |
 
+这张图我们在课内也是见过好几次了
+
 当然，有两点需要注意：
 
 1. 这张表是常见平台的典型情况，不是说 C 语言规定所有平台都必须采用这些大小。尤其是 `long`、指针和 `long double`，会受到平台、编译器和 ABI 的影响
 2. C 语言规定 `sizeof(char)` 的结果一定是 `1`，但严格来说，一个 C 的 byte 不一定在所有特殊平台上都等于 8 bit；我们日常使用的 x86/Linux 环境中，一个 byte 通常就是 8 bit
 
-当然，我们也完全可以通过`sizeof`来检查当前环境
+不过，我们也完全可以通过`sizeof`来检查当前环境
 
 ```c
 #include <stdio.h>
 #include <limits.h>
 
-int main(void)
-{
-    printf("CHAR_BIT = %d\n", CHAR_BIT);
-    printf("sizeof(char) = %zu\n", sizeof(char));
-    printf("sizeof(short) = %zu\n", sizeof(short));
-    printf("sizeof(int) = %zu\n", sizeof(int));
-    printf("sizeof(long) = %zu\n", sizeof(long));
-    printf("sizeof(long long) = %zu\n", sizeof(long long));
-    printf("sizeof(float) = %zu\n", sizeof(float));
-    printf("sizeof(double) = %zu\n", sizeof(double));
-    printf("sizeof(void *) = %zu\n", sizeof(void *));
+int main(void){
+    printf("CHAR_BIT = %d\n",CHAR_BIT);
+    printf("sizeof(char) = %zu\n",sizeof(char));
+    printf("sizeof(short) = %zu\n",sizeof(short));
+    printf("sizeof(int) = %zu\n",sizeof(int));
+    printf("sizeof(long) = %zu\n",sizeof(long));
+    printf("sizeof(long long) = %zu\n",sizeof(long long));
+    printf("sizeof(float) = %zu\n",sizeof(float));
+    printf("sizeof(double) = %zu\n",sizeof(double));
+    printf("sizeof(void *) = %zu\n",sizeof(void *));
 
     return 0;
 }
 ```
 
-其中，`sizeof` 返回的是**字节数**，`%zu` 是用于输出 `size_t` 类型的格式说明符。`CHAR_BIT` 则表示一个 byte 包含多少个 bit
+其中，`sizeof` 返回的是**字节数**，`%zu` 是用于输出 `size_t` 类型的格式说明符，`CHAR_BIT` 则表示一个 byte 包含多少个 bit
 
 额外的，我们稍微补充一下存储容量单位的知识：
 
@@ -855,7 +856,8 @@ int main(void)
 - **小端方式**：最低有效字节 LSB 放在低地址，最高有效字节 MSB 放在高地址
 - **大端方式**：最高有效字节 MSB 放在低地址，最低有效字节 LSB 放在高地址
 
-  可以把它记成：小端“低位字节在低地址”，大端“高位字节在低地址”
+
+为了方便记忆，我们可以记“小端就是小对小大对大，大端正好相反”
 
 但是，此时就有人要问了，大小端会不会i改变变量的数值
 
@@ -866,7 +868,7 @@ int main(void)
 
 ### 6.5 用 C 程序检查大小端
 
-最直接的方法是把一个整数的地址转换为 `unsigned char *`，然后观察它的第一个字节，因为C 语言允许通过字符类型的指针查看对象表示中的字节
+对于用c语言查看大小端，最直接的方法是把一个整数的地址转换为 `unsigned char *`，然后观察它的第一个字节，因为C 语言允许通过字符类型的指针查看对象表示中的字节
 
 ```c
 #include <stdio.h>
@@ -876,9 +878,9 @@ int main(void)
     unsigned int value = 1;
     unsigned char *p = (unsigned char *)&value;
 
-    if (p[0] == 1)
+    if(p[0] == 1)
         printf("Little-endian\n");
-    else if (p[0] == 0)
+    else if(p[0] == 0)
         printf("Big-endian\n");
     else
         printf("Unknown byte order\n");
@@ -900,20 +902,18 @@ int main(void)
 ```c
 #include <stdio.h>
 
-union ByteOrder
-{
+union ByteOrder{
     unsigned int value;
     unsigned char bytes[sizeof(unsigned int)];
 };
 
-int main(void)
-{
+int main(void){
     union ByteOrder data;
     data.value = 1;
 
-    if (data.bytes[0] == 1)
+    if(data.bytes[0] == 1)
         printf("Little-endian\n");
-    else if (data.bytes[0] == 0)
+    else if(data.bytes[0] == 0)
         printf("Big-endian\n");
     else
         printf("Unknown byte order\n");
@@ -952,12 +952,11 @@ int main(void)
 `show_bytes` 的核心逻辑如下。这里给 `start[i]` 显式转换为 `unsigned int`，是为了让它与 `%x` 的参数类型相匹配，写法更严谨
 
 ```c
-void show_bytes(byte_pointer start, int len)
-{
+void show_bytes(byte_pointer start,int len){
     int i;
 
-    for (i = 0; i < len; i++)
-        printf(" %.2x", (unsigned int)start[i]);
+    for(i = 0;i < len;++i)
+        printf(" %.2x",(unsigned int)start[i]);
 
     printf("\n");
 }
@@ -989,7 +988,7 @@ void show_bytes(byte_pointer start, int len)
 
 
 
-#### 6.6.3 `show_pointer()` 为什么会输出地址字节
+#### 6.6.3 `show_pointer()`
 
 `test_show_bytes` 中也有类似这样的代码
 
@@ -1011,7 +1010,9 @@ show_pointer(pval);
 
 
 
-#### 6.6.4 字符串为什么不受大小端影响
+#### 6.6.4 字符串
+
+当然，也有人会疑惑，为什么字符串不受大小端影响
 
 假设，现在我们有
 
@@ -1046,17 +1047,17 @@ show_bytes((byte_pointer)s, strlen(s));
 | `int` | 地址是 4 的倍数 |
 | `long`（典型 32 位环境） | 地址是 4 的倍数 |
 | `float` | 地址是 4 的倍数 |
-| `double` | 讲义示例中地址是 8 的倍数 |
+| `double` | 地址是 8 的倍数 |
 
-这里的对齐要求会受到具体体系结构、编译器和 ABI 的影响，不要把这张表当作所有平台的硬性规则
+这里的对齐要求会受到具体体系结构、编译器和 ABI 的影响，所以不要把这张表当作所有平台的硬性规则
 
 
 
-#### 6.7.2 `struct` 为什么会有填充字节
+#### 6.7.2 `struct`
 
-结构体的成员按照声明顺序排列，但编译器可能在成员之间插入填充字节（padding），使后面的成员满足对齐要求。结构体末尾也可能有尾部填充，以保证数组中下一个结构体对象仍然满足对齐要求。
+前面我们讲了union，下面我们讲struct
 
-看讲义中的例子
+结构体的成员按照声明顺序排列，但编译器可能在成员之间插入填充字节（padding），使后面的成员满足对齐要求。结构体末尾也可能有尾部填充，以保证数组中下一个结构体对象仍然满足对齐要求
 
 ```c
 struct StructData
@@ -1076,7 +1077,7 @@ struct StructData2
 };
 ```
 
-在 `char` 按 1 字节、`short` 按 2 字节、`int` 按 4 字节对齐的常见环境中，第一个结构体的布局如下
+这里，在 `char` 按 1 字节、`short` 按 2 字节、`int` 按 4 字节对齐的常见环境中，第一个结构体的布局如下
 
 | 偏移量 | 内容 | 占用字节 | 原因 |
 | ------ | ---- | -------: | ---- |
@@ -1102,16 +1103,16 @@ struct StructData2
 
 因此，在相同的典型对齐规则下`sizeof(struct StructData2) = 8`
 
-这说明成员顺序可能影响结构体大小。一般来说，在不影响程序语义的前提下，把对齐要求较大的成员放在前面，有时可以减少填充空间；但具体布局仍应以当前编译器和平台为准
+这说明成员顺序可能影响结构体大小。一般来说，在不影响程序语义的前提下，把对齐要求较大的成员放在前面，有时可以减少填充空间，不过具体布局最好还是以当前编译器和平台为准
 
 
 
-#### 6.7.3 `union` 为什么通常只占最大成员的空间
+#### 6.7.3 `union` 与`struct`的区别
 
-`union` 中文常叫联合体或共用体。它和 `struct` 最大的区别是：
+`union` 中文常叫联合体或共用体。它和 `struct` 最大的区别是
 
-- `struct` 的成员各自占有自己的存储空间，成员同时存在。
-- `union` 的所有成员共享同一段存储空间，成员的起始地址相同。
+- `struct` 的成员各自占有自己的存储空间，成员同时存在
+- `union` 的所有成员共享同一段存储空间，成员的起始地址相同
 
 
 例如
@@ -1128,11 +1129,11 @@ union UnionData
 
 在 `int` 占 4 字节、对齐要求为 4 的常见环境中，最大的成员是 `int b`，因此`sizeof(union UnionData) = 4`
 
-所有成员都从联合体起始地址开始；写入 `b` 后，再查看 `a`，实际上就是把同一段内存的第一个字节按 `char` 类型解释。在小端机器上，如果 `b = 100`，`int` 的机器数是 `0x00000064`，内存低地址处通常是 `0x64`，它对应 ASCII 字符 `'d'`。这正是讲义示例中出现字符 `'d'` 的原因
+所有成员都从联合体起始地址开始，写入 `b` 后，再查看 `a`，实际上就是把同一段内存的第一个字节按 `char` 类型解释。在小端机器上，如果 `b = 100`，`int` 的机器数是 `0x00000064`，内存低地址处通常是 `0x64`，它对应 ASCII 字符 `'d'`
 
-不过，`union` 不应被当成通用的数值类型转换工具。通过不同成员解释同一段内存时，结果会受到数据表示、字节序和平台规则影响；这个实验主要是为了观察底层存储
+不过，`union` 不应被当成通用的数值类型转换工具。通过不同成员解释同一段内存时，结果会受到数据表示、字节序和平台规则影响
 
-可以简单记成
+我们可以简单整理下
 
 | 对比项 | `struct` | `union` |
 | ------ | -------- | ------- |
@@ -1141,76 +1142,11 @@ union UnionData
 | 大小 | 成员大小之和再加上必要的填充 | 至少能容纳最大成员，并满足整体对齐要求 |
 | 典型用途 | 同时保存一个对象的多个字段 | 在不同表示之间共享一段存储空间 |
 
-严格来说，联合体大小不一定永远等于最大成员大小；编译器还要满足联合体的整体对齐要求。在这个实验例子中，最大成员 `int` 是 4 字节，整体对齐也是 4 字节，所以最终大小是 4
+严格来说，联合体大小不一定永远等于最大成员大小；编译器还要满足联合体的整体对齐要求
 
 
 
-### 6.8 用 GDB 查看地址、内容与填充字节
-
-前面第 5 节已经介绍了 GDB 的 `x/nfu` 命令，这里直接把它用于实验代码。先用带调试信息的方式编译，例如
-
-```bash
-gcc -g exercise.c -o exercise
-gdb ./exercise
-```
-
-进入 GDB 后，在 `main` 中设置断点并运行。要等 `value_A` 和 `value_B` 完成初始化后，再查看它们的内容。然后可以执行：
-
-```text
-(gdb) p/x &value_A
-(gdb) p sizeof(value_A)
-(gdb) p/x &value_A.a
-(gdb) p/x &value_A.b
-(gdb) p/x &value_A.c
-(gdb) p/x &value_A.d
-(gdb) x/12xb &value_A
-
-(gdb) p/x &value_B
-(gdb) p sizeof(value_B)
-(gdb) p/x &value_B.a
-(gdb) p/x &value_B.b
-(gdb) p/x &value_B.c
-(gdb) p/x &value_B.d
-(gdb) x/4xb &value_B
-```
-
-这些命令分别用于：
-
-- `p/x &value_A`：查看结构体对象的起始地址。
-- `p sizeof(value_A)`：查看结构体总大小，典型结果为 `12`。
-- `p/x &value_A.b` 等：查看各成员地址。
-- `x/12xb &value_A`：从结构体起始地址开始，按地址递增读取 12 个单字节单元。
-- `x/4xb &value_B`：查看联合体的 4 个字节。
-
-还可以计算成员相对结构体起始地址的偏移量，例如：
-
-```text
-(gdb) p/d (char*)&value_A.b - (char*)&value_A
-(gdb) p/d (char*)&value_A.c - (char*)&value_A
-(gdb) p/d (char*)&value_A.d - (char*)&value_A
-```
-
-在讲义对应的常见布局中，这三个偏移量分别是 `4`、`8`、`10`。`value_B` 的所有成员则从同一个起始地址开始。
-
-再次提醒：不要假定填充字节一定是 `00`。C 语言并不保证填充字节的具体内容；实验时重点观察成员偏移、对象总大小和字节序，而不是给填充字节赋予含义。对象的具体地址也会随运行、编译选项和系统变化，不需要和其他人的地址完全一致
-
-
-
-### 6.9 什么时候需要关心大小端
-
-对普通 C 语言算术运算来说，通常不需要程序员手动处理大小端，因为编译器和处理器会按照当前平台的规则读取变量。但遇到以下情况，就需要明确考虑字节序：
-
-1. **网络协议**：网络协议通常规定网络字节序为大端序。Linux 中常见的 `htons`、`htonl`、`ntohs`、`ntohl` 等函数用于在主机字节序和网络字节序之间转换。
-2. **二进制文件格式**：如果文件格式规定某个整数必须按固定字节序保存，读写文件时就不能假定当前机器的字节序与文件格式一致。
-3. **不同平台之间传递原始数据**：直接把结构体内存写入文件或通过网络发送，可能同时遇到字节序、填充字节和类型宽度差异等问题。
-4. **驱动、嵌入式开发和硬件寄存器**：硬件手册可能明确规定寄存器或数据包的字节排列顺序。
-5. **调试和逆向分析**：用 GDB、十六进制编辑器或内存转储查看多字节数据时，需要知道当前字节序，才能把字节序列还原为正确的数值。
-
-  《Chapter02》讲义列举的典型或历史例子包括：Intel 80x86、DEC VAX 采用小端方式；IBM 360/370、Motorola 68k、SPARC、HP PA 等列为大端方式。需要注意，这些是讲义中的典型或历史实现示例，不能据此断言同一架构家族的所有型号和所有运行模式都采用完全相同的字节序。现代常见的 x86/x86-64 系统一般采用小端方式，实际环境仍然可以用前面的 C 程序验证。
-
-
-
-### 6.10 这一部分最容易混淆的点
+### 6.8 混淆点整理
 
 | 容易混淆的内容 | 正确理解 |
 | -------------- | -------- |
@@ -1220,11 +1156,3 @@ gdb ./exercise
 | `struct` 与 `union` | `struct` 的成员分别占用空间，可能产生填充；`union` 的成员共享同一段存储空间。 |
 | `sizeof` 与 `strlen` | `sizeof` 计算对象或类型的大小；`strlen` 计算 C 字符串中 `\0` 之前的字节数。 |
 | 变量值与变量地址 | `x` 是变量的值，`&x` 是变量地址；GDB 的 `p/x &x` 看地址，`x/4xb &x` 看该地址开始的 4 个字节。 |
-
-最后把这部分和前面的内容连起来：
-
-- **整数编码、浮点数编码**：回答一个数应该用怎样的二进制位表示。
-- **数据宽度**：回答一个对象占多少字节。
-- **大小端**：回答一个多字节对象的各字节按什么顺序放进内存。
-- **内存对齐**：回答对象和结构体成员从什么地址开始存放，以及为什么会出现填充字节。
-- **GDB 的内存查看命令**：帮助我们把手工计算的机器数和实际内存中的字节逐一对照。
